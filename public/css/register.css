@@ -1,0 +1,689 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap");
+
+:root {
+  --bg: #f0f8ff;
+  --bg-soft: #e3eef9;
+  --surface: #ffffff;
+
+  --ink: #0d1117;
+  --ink-soft: #4b5663;
+  --placeholder: #8c99a6;
+
+  --line: #cad8e6;
+  --line-dark: #aebdca;
+
+  --accent: #ff8c00;
+  --accent-hover: #df7800;
+  --accent-deep: #b96100;
+  --accent-soft: rgba(255, 140, 0, 0.18);
+
+  --success-bg: #e9f8ee;
+  --success-text: #176b39;
+  --success-line: #abdcbc;
+
+  --error-bg: #fff0eb;
+  --error-text: #a53b26;
+  --error-line: #efb6a9;
+
+  --dark: #06080c;
+
+  --font-display: "Space Grotesk", Arial, Helvetica, sans-serif;
+
+  --font-body: "Inter", Arial, Helvetica, sans-serif;
+
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
+
+  --shadow-soft: 0 12px 35px rgba(13, 17, 23, 0.09);
+
+  --shadow-strong: 0 24px 65px rgba(13, 17, 23, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+
+  background:
+    radial-gradient(
+      circle at 12% 15%,
+      rgba(255, 140, 0, 0.11),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 88% 85%,
+      rgba(33, 105, 178, 0.09),
+      transparent 36%
+    ),
+    var(--bg);
+
+  color: var(--ink);
+
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+main {
+  min-height: 100vh;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+/* =========================================================
+   PAGE CONTAINERS
+   ========================================================= */
+
+#registration-section,
+#login-form {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 3rem 1.25rem;
+}
+
+/* =========================================================
+   FORM CARDS
+   ========================================================= */
+
+#registration-form,
+#login-form-element {
+  width: min(680px, 100%);
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 2.5rem;
+
+  background-color: var(--surface);
+
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-soft);
+
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+#login-form-element {
+  width: min(440px, 100%);
+}
+
+#registration-form:hover,
+#login-form-element:hover {
+  box-shadow: var(--shadow-strong);
+}
+
+/* =========================================================
+   BRAND AREA
+   ========================================================= */
+
+.form-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+
+  margin-bottom: 1.75rem;
+}
+
+.brand-mark {
+  width: 48px;
+  height: 48px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  padding: 4px;
+
+  background-color: var(--dark);
+
+  border-radius: 50%;
+}
+
+.brand-mark img {
+  display: block;
+
+  width: 40px;
+  height: 40px;
+
+  object-fit: contain;
+
+  border-radius: 50%;
+}
+
+.brand-name {
+  color: var(--ink);
+
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+#registration-form h1,
+#login-form-element h1 {
+  margin: 0 0 0.5rem;
+
+  color: var(--ink);
+
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+
+  letter-spacing: -0.035em;
+}
+
+.form-sub {
+  max-width: 600px;
+
+  margin: 0 0 1.75rem;
+
+  color: var(--ink-soft);
+
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+/* =========================================================
+   FORM FEEDBACK
+   ========================================================= */
+
+.form-feedback {
+  margin: 0 0 1.4rem;
+
+  padding: 0.9rem 1rem;
+
+  border: 1px solid var(--error-line);
+  border-radius: var(--radius-sm);
+
+  background-color: var(--error-bg);
+  color: var(--error-text);
+
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-feedback.error {
+  border-color: var(--error-line);
+
+  background-color: var(--error-bg);
+  color: var(--error-text);
+}
+
+.form-feedback.success {
+  border-color: var(--success-line);
+
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+
+/* =========================================================
+   GRID AND FIELDS
+   ========================================================= */
+
+.field-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 0 1.25rem;
+}
+
+.field {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 1.15rem;
+}
+
+#registration-form label,
+#login-form-element label {
+  display: inline-block;
+
+  margin-bottom: 0.45rem;
+
+  color: var(--accent-deep);
+
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   INPUTS AND SELECTS
+   ========================================================= */
+
+#registration-form input[type="text"],
+#registration-form input[type="email"],
+#registration-form input[type="tel"],
+#registration-form input[type="number"],
+#registration-form input[type="password"],
+#registration-form select,
+#login-form-element input[type="text"],
+#login-form-element input[type="email"],
+#login-form-element input[type="tel"],
+#login-form-element input[type="number"],
+#login-form-element input[type="password"],
+#login-form-element select {
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+
+  padding: 0 0.95rem;
+
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+
+  outline: none;
+
+  background-color: #f8fbfe;
+  color: var(--ink);
+
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+#registration-form input::placeholder,
+#login-form-element input::placeholder {
+  color: var(--placeholder);
+
+  opacity: 1;
+}
+
+#registration-form select,
+#login-form-element select {
+  cursor: pointer;
+}
+
+#registration-form input:hover,
+#registration-form select:hover,
+#login-form-element input:hover,
+#login-form-element select:hover {
+  border-color: var(--line-dark);
+}
+
+#registration-form input:focus,
+#registration-form select:focus,
+#login-form-element input:focus,
+#login-form-element select:focus {
+  border-color: var(--accent);
+
+  background-color: #ffffff;
+
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+#registration-form input:disabled,
+#registration-form select:disabled,
+#registration-form button:disabled,
+#login-form-element input:disabled,
+#login-form-element select:disabled,
+#login-form-element button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.65;
+}
+
+/* =========================================================
+   FIELD ERRORS
+   ========================================================= */
+
+.field-error {
+  min-height: 1.15rem;
+
+  display: block;
+
+  margin-top: 0.35rem;
+
+  color: #bd3626;
+
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+/* =========================================================
+   RADIO GROUP
+   ========================================================= */
+
+fieldset.radio-group {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 1rem 1.75rem;
+
+  margin: 0;
+  padding: 1rem 1.1rem 1.05rem;
+
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+
+  background-color: #f8fbfe;
+}
+
+fieldset.radio-group legend {
+  padding: 0 0.45rem;
+
+  color: var(--accent-deep);
+
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+#registration-form .radio-option {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.55rem;
+
+  margin: 0;
+
+  color: var(--ink);
+
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+
+  letter-spacing: 0;
+  text-transform: none;
+
+  cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+
+  margin: 0;
+
+  accent-color: var(--accent);
+
+  cursor: pointer;
+}
+
+/* =========================================================
+   MEMBERSHIP NOTICE
+   ========================================================= */
+
+.membership-notice {
+  margin-top: 1.25rem;
+
+  padding: 1rem 1.1rem;
+
+  border: 1px solid #f0c583;
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+
+  background-color: #fff8ec;
+}
+
+.membership-notice p {
+  margin: 0;
+
+  color: #704514;
+
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.membership-notice strong {
+  color: var(--accent-deep);
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.form-actions {
+  display: grid;
+
+  grid-template-columns: minmax(0, 1fr) auto;
+
+  align-items: center;
+
+  gap: 0.8rem;
+
+  margin-top: 1.4rem;
+}
+
+.btn-submit,
+.btn-reset {
+  min-height: 50px;
+
+  border-radius: 999px;
+
+  font-family: var(--font-display);
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-submit {
+  width: 100%;
+
+  padding: 0 1.5rem;
+
+  border: none;
+
+  background-color: var(--accent);
+  color: var(--dark);
+
+  cursor: pointer;
+
+  font-size: 1rem;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+  color: #ffffff;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 22px rgba(199, 106, 0, 0.24);
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-reset {
+  padding: 0 1.35rem;
+
+  border: 1.5px solid var(--line);
+
+  background-color: transparent;
+  color: var(--ink-soft);
+
+  cursor: pointer;
+
+  font-size: 0.95rem;
+}
+
+.btn-reset:hover:not(:disabled) {
+  border-color: var(--accent-deep);
+
+  background-color: #fff8ed;
+  color: var(--accent-deep);
+}
+
+#login-form-element > .btn-submit {
+  width: 100%;
+
+  margin-top: 0.35rem;
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+.reset-link {
+  display: block;
+
+  margin-top: 1rem;
+
+  color: var(--ink-soft);
+
+  text-align: center;
+  font-size: 0.86rem;
+  text-decoration: none;
+}
+
+.reset-link:hover {
+  color: var(--accent-deep);
+
+  text-decoration: underline;
+}
+
+.switch-link {
+  margin: 1.6rem 0 0;
+  padding-top: 1.35rem;
+
+  border-top: 1px solid var(--line);
+
+  color: var(--ink-soft);
+
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.switch-link a {
+  color: var(--accent-deep);
+
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.switch-link a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 700px) {
+  #registration-section,
+  #login-form {
+    padding: 2rem 1rem;
+  }
+
+  #registration-form,
+  #login-form-element {
+    padding: 2rem 1.5rem;
+
+    border-radius: 22px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+
+    gap: 0;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  #registration-section,
+  #login-form {
+    align-items: flex-start;
+
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  #registration-form,
+  #login-form-element {
+    padding: 1.5rem 1.1rem;
+
+    border-radius: 18px;
+  }
+
+  .form-brand {
+    margin-bottom: 1.35rem;
+  }
+
+  .brand-mark {
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand-mark img {
+    width: 36px;
+    height: 36px;
+  }
+
+  #registration-form h1,
+  #login-form-element h1 {
+    font-size: 1.75rem;
+  }
+
+  .form-sub {
+    margin-bottom: 1.35rem;
+
+    font-size: 0.92rem;
+  }
+
+  fieldset.radio-group {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 0.75rem;
+  }
+
+  .form-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-reset {
+    width: 100%;
+  }
+}

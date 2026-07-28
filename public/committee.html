@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Meet the CoSISS Executive Committee and departmental leaders."
+    />
+
+    <title>Committee</title>
+
+    <link rel="stylesheet" href="css/committee.css" />
+
+    <script src="js/committee.js" defer></script>
+  </head>
+
+  <body>
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="site-header">
+      <div class="header-container">
+        <a href="index.html" class="brand" aria-label="CoSISS homepage">
+          <img
+            src="images/cosiss_logo.png"
+            alt="CoSISS logo"
+            class="brand-logo"
+          />
+
+          <div class="brand-text">
+            <span class="brand-name">CoSISS</span>
+            <span class="brand-subtitle">
+              Innovation. Technology. Leadership.
+            </span>
+          </div>
+        </a>
+
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="main-navigation"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="main-navigation" id="main-navigation">
+          <a href="index.html">Home</a>
+          <a href="calender.html">Events</a>
+
+          <a href="committee.html" class="active" aria-current="page">
+            Committee
+          </a>
+
+          <a href="register.html" class="nav-button"> Join Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main>
+      <!-- HERO SECTION -->
+
+      <section class="committee-hero">
+        <div class="hero-decoration hero-decoration-one"></div>
+        <div class="hero-decoration hero-decoration-two"></div>
+
+        <div class="hero-container">
+          <div class="hero-content">
+            <span class="section-label"> CoSISS Leadership </span>
+
+            <h1>Meet the committee shaping our community.</h1>
+
+            <p>
+              Our executive committee works together to promote innovation,
+              academic excellence, professional development and student
+              participation within the School of Science and Technology.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#committee-members" class="primary-button">
+                View Committee
+              </a>
+
+              <a href="mailto:cosiss@mubas.ac.mw" class="secondary-button">
+                Contact Leadership
+              </a>
+            </div>
+          </div>
+
+          <aside class="term-card">
+            <span class="term-label"> Current Leadership Term </span>
+
+            <strong class="term-year"> 2026–2027 </strong>
+
+            <p>
+              Serving CoSISS members through accountable, inclusive and
+              innovation-driven leadership.
+            </p>
+
+            <div class="term-statistics">
+              <div class="term-stat">
+                <strong id="committee-count">10</strong>
+                <span>Committee Members</span>
+              </div>
+
+              <div class="term-stat">
+                <strong>7</strong>
+                <span>Leadership Areas</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- COMMITTEE SECTION -->
+
+      <section class="committee-section" id="committee-members">
+        <div class="section-container">
+          <div class="section-heading">
+            <div>
+              <span class="section-label"> Executive Team </span>
+
+              <h2>Our committee members</h2>
+            </div>
+
+            <p>
+              Select a leadership area to view members responsible for each part
+              of the society.
+            </p>
+          </div>
+
+          <!-- FILTER BUTTONS -->
+
+          <div
+            class="committee-filters"
+            role="group"
+            aria-label="Filter committee members"
+          >
+            <button
+              type="button"
+              class="filter-button active"
+              data-filter="all"
+            >
+              All Members
+            </button>
+
+            <button type="button" class="filter-button" data-filter="executive">
+              Executive
+            </button>
+
+            <button
+              type="button"
+              class="filter-button"
+              data-filter="innovation"
+            >
+              Innovation
+            </button>
+
+            <button
+              type="button"
+              class="filter-button"
+              data-filter="communications"
+            >
+              Communications
+            </button>
+          </div>
+
+          <!-- COMMITTEE CARDS -->
+
+          <div class="committee-grid" id="committee-grid">
+            <!-- PRESIDENT -->
+
+            <article
+              class="committee-card featured-card"
+              data-category="executive"
+            >
+              <div class="member-image-container">
+                <img
+                  src="images\chingeni.jpeg"
+                  alt="CoSISS President"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Executive </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> President </span>
+
+                <h3>Tadala Chingeni</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science in Information Technology
+                </p>
+
+                <p class="member-description">
+                  Provides strategic leadership, represents CoSISS and
+                  coordinates all society programmes and executive activities.
+                </p>
+
+                <div class="member-links">
+                  <a
+                    href="mailto:president@cosiss.org"
+                    aria-label="Email the CoSISS President"
+                  >
+                    Email
+                  </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- VICE PRESIDENT -->
+
+            <article class="committee-card" data-category="executive">
+              <div class="member-image-container">
+                <img
+                  src="images\gulure.jpeg"
+                  alt="CoSISS Vice President"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Executive </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> Vice President </span>
+
+                <h3>Lauren Gulure</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science in Information Systems
+                </p>
+
+                <p class="member-description">
+                  Supports the president and supervises the implementation of
+                  committee decisions and society activities.
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:vicepresident@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- GENERAL SECRETARY -->
+
+            <article class="committee-card" data-category="executive">
+              <div class="member-image-container">
+                <img
+                  src="images\Lauryn Mwase.jpg.jpeg"
+                  alt="CoSISS General Secretary"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Executive </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> General Secretary </span>
+
+                <h3>Lauryn Mwase</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science in Information Systems
+                </p>
+
+                <p class="member-description">
+                  Manages official communication, meeting records,
+                  correspondence and administrative documentation.
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:secretary@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- TREASURER -->
+
+            <article class="committee-card" data-category="executive">
+              <div class="member-image-container">
+                <img
+                  src="images\sandra.jpeg"
+                  alt="CoSISS Treasurer"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Executive </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> Treasurer </span>
+
+                <h3>Sandra Chewaya</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science Information Technology
+                </p>
+
+                <p class="member-description">
+                  Oversees membership payments, budgets, financial reports and
+                  accountable use of society resources.
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:treasurer@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- INNOVATIONS DIRECTOR -->
+
+            <article class="committee-card" data-category="innovation">
+              <div class="member-image-container">
+                <img
+                  src="images/innovationsD.jpg"
+                  alt="CoSISS Innovations Director"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Innovation </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> Innovations Director </span>
+
+                <h3>Pachalo Kibombwe</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science in Information Technology
+                </p>
+
+                <p class="member-description">
+                  Leads hackathons, technology projects, innovation programmes
+                  and partnerships that support student-led solutions.
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:innovation@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- EVENTS COORDINATOR -->
+
+            <article class="committee-card" data-category="communications">
+              <div class="member-image-container">
+                <img
+                  src="images\Huka.jpeg"
+                  alt="CoSISS Events Coordinator"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Events </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> Events Coordinator </span>
+
+                <h3>Rexious Huka</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science Information Technology
+                </p>
+
+                <p class="member-description">
+                  Plans and coordinates society events, competitions, networking
+                  sessions and student engagement programmes.
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:events@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Publicity Secritary -->
+
+            <article class="committee-card" data-category="communications">
+              <div class="member-image-container">
+                <img
+                  src="images\Msamira.jpeg"
+                  alt="CoSISS Events Coordinator"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Events </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> Publicity Secritary </span>
+
+                <h3>Danielle Msamira</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science Information Technology
+                </p>
+
+                <p class="member-description">
+                  Produces posters, publications and manages social medea
+                  accounts related to our society
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:events@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Committee Member -->
+
+            <article class="committee-card" data-category="communications">
+              <div class="member-image-container">
+                <img
+                  src="images\Glory.jpeg"
+                  alt="CoSISS Events Coordinator"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Member </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> Commitee Member </span>
+
+                <h3>Glory Masina</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science Information Technology
+                </p>
+
+                <p class="member-description">
+                  Assist in making the dicisions on running the community
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:events@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Committee Member -->
+
+            <article class="committee-card" data-category="communications">
+              <div class="member-image-container">
+                <img
+                  src="images\kire.jpeg"
+                  alt="CoSISS Events Coordinator"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Member </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> Commitee Member </span>
+
+                <h3>Clement</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science Information Systems
+                </p>
+
+                <p class="member-description">
+                  Assist in making the dicisions on running the community
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:events@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Committee Member -->
+
+            <article class="committee-card" data-category="communications">
+              <div class="member-image-container">
+                <img
+                  src="images\bester.jpeg"
+                  alt="CoSISS Events Coordinator"
+                  class="member-image"
+                  loading="lazy"
+                />
+
+                <span class="member-badge"> Member </span>
+              </div>
+
+              <div class="member-content">
+                <span class="member-position"> Commitee Member </span>
+
+                <h3>Beater Lemson</h3>
+
+                <p class="member-programme">
+                  Bachelor of Science Information Technology
+                </p>
+
+                <p class="member-description">
+                  Assist in making the dicisions on running the community
+                </p>
+
+                <div class="member-links">
+                  <a href="mailto:events@cosiss.org"> Email </a>
+
+                  <a href="#" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- EMPTY FILTER MESSAGE -->
+
+          <div class="empty-state" id="empty-state" hidden>
+            <h3>No committee members found</h3>
+
+            <p>There are currently no members under this category.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- LEADERSHIP VALUES -->
+
+      <section class="values-section">
+        <div class="section-container">
+          <div class="section-heading centered-heading">
+            <div>
+              <span class="section-label"> Our Responsibility </span>
+
+              <h2>Leadership guided by service</h2>
+            </div>
+
+            <p>
+              The committee is committed to transparent, responsible and
+              student-centred leadership.
+            </p>
+          </div>
+
+          <div class="values-grid">
+            <article class="value-card">
+              <span class="value-number">01</span>
+
+              <h3>Accountability</h3>
+
+              <p>
+                We take responsibility for our decisions, resources and
+                commitments to members.
+              </p>
+            </article>
+
+            <article class="value-card">
+              <span class="value-number">02</span>
+
+              <h3>Innovation</h3>
+
+              <p>
+                We promote practical technology, creative thinking and
+                student-led problem solving.
+              </p>
+            </article>
+
+            <article class="value-card">
+              <span class="value-number">03</span>
+
+              <h3>Inclusivity</h3>
+
+              <p>
+                We create opportunities for students from every programme,
+                background and skill level.
+              </p>
+            </article>
+
+            <a href="vote.html" class="vote-link">
+              Vote for the New Committee
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT CTA -->
+
+      <section class="contact-section">
+        <div class="contact-container">
+          <div>
+            <span class="section-label light-label">
+              Speak to the Committee
+            </span>
+
+            <h2>Have an idea, concern or partnership proposal?</h2>
+
+            <p>
+              Contact the CoSISS leadership team and help us build a stronger
+              technology and innovation community.
+            </p>
+          </div>
+
+          <a href="mailto:cosiss@mubas.ac.mw" class="contact-button">
+            Contact CoSISS
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="images/CoSISS-LOGO.png" alt="CoSISS logo" />
+
+          <div>
+            <strong>CoSISS</strong>
+
+            <p>Computer Science and Information Systems Students Society.</p>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="events.html">Events</a>
+          <a href="committee.html">Committee</a>
+          <a href="register.html">Membership</a>
+        </div>
+
+        <p class="copyright">
+          &copy;
+          <span id="current-year"></span>
+          CoSISS. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

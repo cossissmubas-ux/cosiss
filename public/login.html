@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+
+  <body>
+    <main>
+      <section id="login-form">
+        <form id="login-form-element" novalidate>
+          <div class="form-brand">
+            <span class="brand-mark">
+              <img
+                src="images\CoSISS-LOGO.png"
+                alt="CoSISS logo"
+                width="40"
+                height="40"
+              />
+            </span>
+
+            <span class="brand-name">CoSISS</span>
+          </div>
+
+          <h1>Welcome back</h1>
+
+          <p class="form-sub">Log in to access the administration dashboard.</p>
+
+          <p
+            class="form-feedback"
+            id="form-feedback"
+            role="alert"
+            aria-live="polite"
+            hidden
+          ></p>
+
+          <div class="field">
+            <label for="email"> Email address </label>
+
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="admin@example.com"
+              autocomplete="email"
+              required
+            />
+
+            <span
+              class="field-error"
+              id="email-error"
+              aria-live="polite"
+            ></span>
+          </div>
+
+          <div class="field">
+            <label for="password"> Password </label>
+
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+
+            <span
+              class="field-error"
+              id="password-error"
+              aria-live="polite"
+            ></span>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submit-button">
+            Log in
+          </button>
+
+          <a href="resetLink.html" class="reset-link">
+            Forgot your password?
+          </a>
+
+          <p class="switch-link">
+            Interested in joining CoSISS?
+            <a href="register.html"> Register as a member </a>
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      const loginForm = document.getElementById("login-form-element");
+
+      const emailInput = document.getElementById("email");
+
+      const passwordInput = document.getElementById("password");
+
+      const submitButton = document.getElementById("submit-button");
+
+      const feedbackElement = document.getElementById("form-feedback");
+
+      const emailErrorElement = document.getElementById("email-error");
+
+      const passwordErrorElement = document.getElementById("password-error");
+
+      loginForm.addEventListener("submit", handleLogin);
+
+      async function handleLogin(event) {
+        event.preventDefault();
+
+        clearMessages();
+
+        const loginData = {
+          email: emailInput.value.trim().toLowerCase(),
+          password: passwordInput.value,
+        };
+
+        const validationErrors = validateLogin(loginData);
+
+        if (validationErrors) {
+          displayValidationErrors(validationErrors);
+          return;
+        }
+
+        await sendLoginRequest(loginData);
+      }
+
+      function validateLogin(data) {
+        const errors = {};
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!data.email) {
+          errors.email = "Email address is required.";
+        } else if (!emailPattern.test(data.email)) {
+          errors.email = "Please enter a valid email address.";
+        }
+
+        if (!data.password) {
+          errors.password = "Password is required.";
+        }
+
+        return Object.keys(errors).length ? errors : null;
+      }
+
+      function displayValidationErrors(errors) {
+        if (errors.email) {
+          emailErrorElement.textContent = errors.email;
+        }
+
+        if (errors.password) {
+          passwordErrorElement.textContent = errors.password;
+        }
+      }
+
+      function clearMessages() {
+        feedbackElement.hidden = true;
+        feedbackElement.textContent = "";
+
+        emailErrorElement.textContent = "";
+        passwordErrorElement.textContent = "";
+      }
+
+      function showFeedback(message) {
+        feedbackElement.textContent = message;
+        feedbackElement.hidden = false;
+      }
+
+      function setLoadingState(isLoading) {
+        submitButton.disabled = isLoading;
+
+        submitButton.textContent = isLoading ? "Logging in..." : "Log in";
+
+        emailInput.disabled = isLoading;
+        passwordInput.disabled = isLoading;
+      }
+
+      async function sendLoginRequest(data) {
+        setLoadingState(true);
+
+        try {
+          const response = await fetch("/api/login", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify(data),
+          });
+
+          let result;
+
+          try {
+            result = await response.json();
+          } catch {
+            result = {};
+          }
+
+          if (!response.ok) {
+            showFeedback(
+              result.error || "Login failed. Check your email and password.",
+            );
+
+            return;
+          }
+
+          window.location.replace("/dashboard.html");
+        } catch (error) {
+          console.error("Login request failed:", error);
+
+          showFeedback(
+            "The server could not be reached. " +
+              "Make sure it is running and try again.",
+          );
+        } finally {
+          setLoadingState(false);
+        }
+      }
+
+      async function redirectAuthenticatedAdmin() {
+        try {
+          const response = await fetch("/api/me");
+
+          if (response.ok) {
+            window.location.replace("/dashboard.html");
+          }
+        } catch (error) {
+          console.log("No active administrator session.");
+        }
+      }
+
+      redirectAuthenticatedAdmin();
+    </script>
+  </body>
+</html>

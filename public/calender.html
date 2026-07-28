@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="View upcoming CoSISS events, workshops, meetings and competitions."
+    />
+
+    <title>Calendar</title>
+
+    <link rel="stylesheet" href="css\calendar.css" />
+
+    <script src="js/calendar.js" defer></script>
+  </head>
+
+  <body>
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="site-header">
+      <div class="header-container">
+        <a href="/index.html" class="brand" aria-label="CoSISS homepage">
+          <img
+            src="images/cosiss_logo.png"
+            alt="CoSISS logo"
+            class="brand-logo"
+          />
+
+          <div class="brand-text">
+            <span class="brand-name">CoSISS</span>
+
+            <span class="brand-subtitle">
+              Innovation. Technology. Leadership.
+            </span>
+          </div>
+        </a>
+
+        <button
+          type="button"
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-label="Open navigation menu"
+          aria-controls="main-navigation"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="main-navigation" id="main-navigation">
+          <a href="index.html">Home</a>
+          <a href="calendar.html" class="active" aria-current="page">
+            Events
+          </a>
+          <a href="committee.html">Committee</a>
+
+          <a href="register.html" class="nav-button"> Join Us</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main>
+      <!-- HERO -->
+
+      <section class="calendar-hero">
+        <div class="hero-circle hero-circle-one"></div>
+        <div class="hero-circle hero-circle-two"></div>
+
+        <div class="hero-container">
+          <div class="hero-content">
+            <span class="section-label">Schedule </span>
+
+            <h1>Events, workshops and opportunities in one place.</h1>
+
+            <p>
+              Explore upcoming CoSISS activities, including innovation
+              challenges, technical workshops, executive meetings, academic
+              sessions and networking events.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#events-calendar" class="primary-button">
+                View Calendar
+              </a>
+
+              <a href="#upcoming-events" class="secondary-button">
+                Upcoming Events
+              </a>
+            </div>
+          </div>
+
+          <aside class="next-event-card">
+            <span class="next-event-label"> Next Event </span>
+
+            <div id="next-event-content">
+              <h2 id="next-event-title">Loading event...</h2>
+
+              <p id="next-event-date"></p>
+              <p id="next-event-location"></p>
+            </div>
+
+            <a href="#upcoming-events" class="next-event-link">
+              View event details
+            </a>
+          </aside>
+        </div>
+      </section>
+
+      <!-- CALENDAR SECTION -->
+
+      <section class="calendar-section" id="events-calendar">
+        <div class="page-container">
+          <div class="section-heading">
+            <div>
+              <span class="section-label"> Monthly Schedule </span>
+
+              <h2>Calendar</h2>
+            </div>
+
+            <p>
+              Select a highlighted date to view the activities scheduled for
+              that day.
+            </p>
+          </div>
+
+          <div class="calendar-layout">
+            <!-- MAIN CALENDAR -->
+
+            <div class="calendar-card">
+              <div class="calendar-toolbar">
+                <button
+                  type="button"
+                  class="calendar-navigation-button"
+                  id="previous-month"
+                  aria-label="View previous month"
+                >
+                  &#8592;
+                </button>
+
+                <div class="current-month-heading">
+                  <h3 id="calendar-month">Month</h3>
+
+                  <span id="calendar-year"> Year </span>
+                </div>
+
+                <button
+                  type="button"
+                  class="calendar-navigation-button"
+                  id="next-month"
+                  aria-label="View next month"
+                >
+                  &#8594;
+                </button>
+              </div>
+
+              <div class="calendar-weekdays">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+              </div>
+
+              <div
+                class="calendar-grid"
+                id="calendar-grid"
+                aria-live="polite"
+              ></div>
+
+            </div>
+
+            <!-- SELECTED DAY PANEL -->
+
+            <aside class="day-events-panel">
+              <div class="day-panel-heading">
+                <span class="section-label"> Selected Date </span>
+
+                <h3 id="selected-date-title">Select a date</h3>
+
+                <p id="selected-date-summary">
+                  Event information will appear here.
+                </p>
+              </div>
+
+              <div class="selected-events-list" id="selected-events-list">
+                <div class="no-selected-event">
+                  <span class="empty-calendar-icon"> 00 </span>
+
+                  <p>Select a highlighted date from the calendar.</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- UPCOMING EVENTS -->
+
+      <section class="upcoming-events-section" id="upcoming-events">
+        <div class="page-container">
+          <div class="section-heading">
+            <div>
+              <span class="section-label"> What Is Coming </span>
+
+              <h2>Upcoming events</h2>
+            </div>
+
+            <div class="event-controls">
+              <label for="event-category-filter" class="visually-hidden">
+                Filter events by category
+              </label>
+
+              <select id="event-category-filter">
+                <option value="all">All Categories</option>
+
+                <option value="workshop">Workshops</option>
+
+                <option value="meeting">Meetings</option>
+
+                <option value="competition">Competitions</option>
+
+                <option value="social">Social Events</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="events-grid" id="events-grid"></div>
+
+          <div class="empty-events-state" id="empty-events-state" hidden>
+            <h3>No events found</h3>
+
+            <p>There are currently no events under this category.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+
+      <section class="calendar-cta">
+        <div class="cta-container">
+          <div>
+            <span class="section-label light-label"> Stay Connected </span>
+
+            <h2>Never miss a CoSISS opportunity.</h2>
+
+            <p>
+              Register as a member to receive announcements about workshops,
+              competitions, meetings and innovation programmes.
+            </p>
+          </div>
+
+          <a href="/register.html" class="cta-button"> Become a Member </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- EVENT DETAILS MODAL -->
+
+    <div class="modal-overlay" id="event-modal" hidden>
+      <div
+        class="event-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-event-title"
+      >
+        <button
+          type="button"
+          class="modal-close-button"
+          id="modal-close-button"
+          aria-label="Close event details"
+        >
+          &times;
+        </button>
+
+        <span class="modal-category" id="modal-event-category"> Event </span>
+
+        <h2 id="modal-event-title">Event title</h2>
+
+        <div class="modal-event-information">
+          <p>
+            <strong>Date:</strong>
+            <span id="modal-event-date"></span>
+          </p>
+
+          <p>
+            <strong>Time:</strong>
+            <span id="modal-event-time"></span>
+          </p>
+
+          <p>
+            <strong>Location:</strong>
+            <span id="modal-event-location"></span>
+          </p>
+        </div>
+
+        <p class="modal-event-description" id="modal-event-description"></p>
+
+        <a href="#" class="modal-register-button" id="modal-register-button">
+          Register for Event
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="images/CoSISS-LOGO.png" alt="CoSISS logo" />
+
+          <div>
+            <strong>CoSISS</strong>
+
+            <p>Computer Science and Information Systems Students Society.</p>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="committee.html">Committee</a>
+          <a href="calendar.html">Calendar</a>
+          <a href="register.html">Membership</a>
+        </div>
+
+        <p class="copyright">
+          &copy;
+          <span id="current-year"></span>
+          CoSISS. All rights reserved.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

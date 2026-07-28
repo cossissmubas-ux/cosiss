@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — CoSISS</title>
+    <link rel="stylesheet" href="css\dashboard.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <aside id="side-section">
+        <div class="brand">
+          <span class="brand-mark"
+            ><img
+              src="images\CoSISS-LOGO.png"
+              alt="CoSISS logo"
+              width="36"
+              height="36"
+          /></span>
+          <span class="brand-name">CoSISS</span>
+        </div>
+
+        <section id="manage">
+          <p class="nav-eyebrow">Manage</p>
+          <ul id="manage-list">
+            <li data-icon="news">
+              <svg viewBox="0 0 24 24">
+                <path d="M4 4h16v16H4z M4 9h16 M9 4v16" />
+              </svg>
+              News
+            </li>
+            <li data-icon="calendar">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="5" width="18" height="16" rx="2" />
+                <path d="M3 10h18 M8 3v4 M16 3v4" />
+              </svg>
+              Calendar
+            </li>
+            <li data-icon="votes">
+              <svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg>
+              Votes
+            </li>
+            <li data-icon="forms">
+              <svg viewBox="0 0 24 24">
+                <path d="M6 3h9l5 5v13H6z M14 3v5h5 M9 13h7 M9 17h7" />
+              </svg>
+              Forms
+            </li>
+            <li data-icon="members">
+              <svg viewBox="0 0 24 24">
+                <circle cx="9" cy="8" r="3.2" />
+                <path
+                  d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6 M16 8.5a3 3 0 1 0 0-6 M15 14c2.8.2 5 2.7 5 6"
+                />
+              </svg>
+              Members
+            </li>
+          </ul>
+        </section>
+
+        <section id="logout">
+          <button type="button" class="side-btn">Profile</button>
+          <button type="button" class="side-btn">Mode</button>
+          <button type="button" class="side-btn side-btn-logout">Logout</button>
+        </section>
+      </aside>
+
+      <main id="display-content">
+        <div class="empty-state" id="empty-state">
+          <h2>Nothing selected yet</h2>
+          <p>Choose an item from Manage to view its tools here.</p>
+        </div>
+      </main>
+    </div>
+
+    <!-- Source panels: hidden, cloned into #display-content on click -->
+    <section id="news" class="panel-source">
+      <h2>News</h2>
+      <p class="panel-sub">Upload and manage what appears in the news feed.</p>
+
+      <form
+        class="upload-container"
+        action="/upload"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="upload-box">
+          <input
+            type="file"
+            id="image-input"
+            accept="image/*"
+            onchange="previewImage(event)"
+          />
+          <label for="image-input" id="upload-label">
+            <div class="upload-content">
+              <svg
+                class="upload-icon"
+                viewBox="0 0 24 24"
+                width="40"
+                height="40"
+              >
+                <path
+                  d="M12 16V4 M7 9l5-5 5 5 M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"
+                />
+              </svg>
+              <p>Click or drag an image here to upload</p>
+            </div>
+            <img
+              id="image-preview"
+              src=""
+              alt="Preview"
+              style="display: none"
+            />
+          </label>
+        </div>
+        <div class="field-group">
+          <label for="upload-title" class="label-title">Title</label>
+          <input
+            type="text"
+            id="upload-title"
+            name="title"
+            maxlength="100"
+            placeholder="news title"
+            required
+          />
+          <label for="upload-desc" class="label-title">Description</label>
+          <textarea
+            id="upload-desc"
+            name="description"
+            rows="4"
+            maxlength="500"
+            placeholder="Write a caption or description for your file (max 500 characters)..."
+            required
+          ></textarea>
+          <small class="help-text"
+            >Please provide a clear context for your uploaded file.</small
+          >
+        </div>
+        <button type="submit" class="submit-btn">Upload content</button>
+      </form>
+
+      <div class="button-row">
+        <button type="button" class="btn-danger-ghost">Remove content</button>
+      </div>
+    </section>
+
+    <section id="calendar" class="panel-source">
+      <h2>Calendar</h2>
+      <p class="panel-sub">Keep upcoming CoSISS events up to date.</p>
+      <div class="button-row">
+        <button type="button" class="btn-secondary">Update calendar</button>
+      </div>
+    </section>
+
+    <section id="votes" class="panel-source">
+      <h2>Votes</h2>
+      <p class="panel-sub">Manage contenders and see how voting is going.</p>
+      <div class="button-row">
+        <button type="button" class="btn-secondary">Add contenders</button>
+        <button type="button" class="btn-danger-ghost">
+          Remove contenders
+        </button>
+        <button type="button" class="btn-secondary">View counts</button>
+      </div>
+    </section>
+
+    <section id="forms" class="panel-source">
+      <h2>Forms</h2>
+      <p class="panel-sub">Create and maintain the forms members fill in.</p>
+      <div class="button-row">
+        <button type="button" class="btn-secondary">Create form</button>
+        <button type="button" class="btn-danger-ghost">Discard form</button>
+        <button type="button" class="btn-secondary">Update form</button>
+      </div>
+    </section>
+
+    <section id="members" class="panel-source">
+      <h2>Members</h2>
+      <p class="panel-sub">See who's part of CoSISS and manage the roster.</p>
+      <div class="button-row">
+        <button type="button" class="btn-secondary">View members</button>
+        <button type="button" class="btn-danger-ghost">Remove members</button>
+      </div>
+    </section>
+
+    <script>
+      const listContainer = document.querySelector("#manage-list");
+      const displayContainer = document.querySelector("#display-content");
+
+      listContainer.addEventListener("click", (event) => {
+        const item = event.target.closest("li");
+        if (!item) return;
+
+        // Get text (e.g., "News"), convert to lowercase ("news") to match the ID
+        const targetId = item.textContent.toLowerCase().trim();
+        const selectedSection = document.getElementById(targetId);
+
+        if (selectedSection) {
+          displayContent(selectedSection);
+          highlightActive(item);
+        }
+      });
+
+      function displayContent(section) {
+        displayContainer.innerHTML = "";
+        const clone = section.cloneNode(true);
+        clone.style.display = "block";
+        displayContainer.appendChild(clone);
+      }
+
+      function highlightActive(activeItem) {
+        listContainer
+          .querySelectorAll("li")
+          .forEach((li) => li.classList.remove("active"));
+        activeItem.classList.add("active");
+      }
+
+      function previewImage(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function () {
+          const output = document.getElementById("image-preview");
+          const content = document.querySelector(".upload-content");
+          output.src = reader.result;
+          output.style.display = "block";
+          content.style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      }
+    </script>
+  </body>
+</html>

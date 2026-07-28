@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Register</title>
+
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+
+  <body>
+    <main>
+      <section id="registration-section">
+        <form id="registration-form" class="form-wide" novalidate>
+          <div class="form-brand">
+            <span class="brand-mark">
+              <img
+                src="images\CoSISS-LOGO.png"
+                alt="CoSISS logo"
+                width="40"
+                height="40"
+              />
+            </span>
+
+            <span class="brand-name"> CoSISS </span>
+          </div>
+
+          <h1>Become a member</h1>
+
+          <p class="form-sub">
+            Register to join the CoSISS community and access mentorship, events,
+            innovation programmes and other membership opportunities.
+          </p>
+
+          <p
+            class="form-feedback"
+            id="form-feedback"
+            role="alert"
+            aria-live="polite"
+            hidden
+          ></p>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="name"> First name </label>
+
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Thandiwe"
+                autocomplete="given-name"
+                required
+              />
+
+              <span
+                class="field-error"
+                id="name-error"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="field">
+              <label for="sname"> Surname </label>
+
+              <input
+                type="text"
+                name="sname"
+                id="sname"
+                placeholder="Banda"
+                autocomplete="family-name"
+                required
+              />
+
+              <span
+                class="field-error"
+                id="sname-error"
+                aria-live="polite"
+              ></span>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="email"> Email address </label>
+
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+
+              <span
+                class="field-error"
+                id="email-error"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="field">
+              <label for="phone"> Phone number </label>
+
+              <input
+                type="tel"
+                name="phone"
+                id="phone"
+                placeholder="0991234567"
+                autocomplete="tel"
+                required
+              />
+
+              <span
+                class="field-error"
+                id="phone-error"
+                aria-live="polite"
+              ></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="studentId"> Student ID </label>
+
+            <input
+              type="text"
+              name="studentId"
+              id="studentId"
+              placeholder="Enter your student ID"
+              autocomplete="off"
+              required
+            />
+
+            <span
+              class="field-error"
+              id="studentId-error"
+              aria-live="polite"
+            ></span>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="program"> Programme of study </label>
+
+              <input
+                type="text"
+                name="program"
+                id="program"
+                placeholder="Bachelor of Science in Computer Science"
+                required
+              />
+
+              <span
+                class="field-error"
+                id="program-error"
+                aria-live="polite"
+              ></span>
+            </div>
+
+            <div class="field">
+              <label for="year"> Year of study </label>
+
+              <select name="year" id="year" required>
+                <option value="">Select year</option>
+
+                <option value="1">Year 1</option>
+
+                <option value="2">Year 2</option>
+
+                <option value="3">Year 3</option>
+
+                <option value="4">Year 4</option>
+
+                <option value="5">Year 5</option>
+
+                <option value="6">Year 6</option>
+              </select>
+
+              <span
+                class="field-error"
+                id="year-error"
+                aria-live="polite"
+              ></span>
+            </div>
+          </div>
+
+          <fieldset class="radio-group">
+            <legend>Gender</legend>
+
+            <label class="radio-option">
+              <input type="radio" name="gender" value="m" required />
+
+              <span>Male</span>
+            </label>
+
+            <label class="radio-option">
+              <input type="radio" name="gender" value="f" />
+
+              <span>Female</span>
+            </label>
+          </fieldset>
+
+          <span class="field-error" id="gender-error" aria-live="polite"></span>
+
+          <div class="membership-notice">
+            <p>
+              A membership fee of
+              <strong>MK5,000</strong>
+              is required to activate your membership.
+            </p>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-submit" id="submit-button">
+              Continue to payment
+            </button>
+
+            <button type="reset" class="btn-reset" id="reset-button">
+              Clear form
+            </button>
+          </div>
+
+          <p class="switch-link">
+            CoSISS administrator?
+            <a href="login.html"> Log in to the dashboard </a>
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      const registrationForm = document.getElementById("registration-form");
+
+      const submitButton = document.getElementById("submit-button");
+
+      const feedbackElement = document.getElementById("form-feedback");
+
+      const fieldNames = [
+        "name",
+        "sname",
+        "email",
+        "phone",
+        "studentId",
+        "program",
+        "year",
+        "gender",
+      ];
+
+      registrationForm.addEventListener("submit", handleRegistration);
+
+      registrationForm.addEventListener("reset", () => {
+        window.setTimeout(clearMessages, 0);
+      });
+
+      async function handleRegistration(event) {
+        event.preventDefault();
+
+        clearMessages();
+
+        const formData = new FormData(registrationForm);
+
+        const registrationData = {
+          name: String(formData.get("name") || "").trim(),
+
+          sname: String(formData.get("sname") || "").trim(),
+
+          email: String(formData.get("email") || "")
+            .trim()
+            .toLowerCase(),
+
+          phone: String(formData.get("phone") || "").trim(),
+
+          studentId: String(formData.get("studentId") || "").trim(),
+
+          program: String(formData.get("program") || "").trim(),
+
+          year: String(formData.get("year") || "").trim(),
+
+          gender: String(formData.get("gender") || "").trim(),
+        };
+
+        const validationErrors = validateRegistration(registrationData);
+
+        if (validationErrors) {
+          displayValidationErrors(validationErrors);
+
+          focusFirstInvalidField(validationErrors);
+
+          return;
+        }
+
+        await sendRegistrationRequest(registrationData);
+      }
+
+      function validateRegistration(data) {
+        const errors = {};
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const phonePattern = /^(?:\+265|0)?[789]\d{8}$/;
+
+        if (!data.name) {
+          errors.name = "Enter your first name.";
+        } else if (data.name.length < 2) {
+          errors.name = "First name must contain at least 2 characters.";
+        }
+
+        if (!data.sname) {
+          errors.sname = "Enter your surname.";
+        } else if (data.sname.length < 2) {
+          errors.sname = "Surname must contain at least 2 characters.";
+        }
+
+        if (!data.email) {
+          errors.email = "Email address is required.";
+        } else if (!emailPattern.test(data.email)) {
+          errors.email = "Enter a valid email address.";
+        }
+
+        if (!data.phone) {
+          errors.phone = "Phone number is required.";
+        } else {
+          const compactPhone = data.phone.replace(/[\s-]/g, "");
+
+          if (!phonePattern.test(compactPhone)) {
+            errors.phone = "Enter a valid Malawi phone number.";
+          }
+        }
+
+        if (!data.studentId) {
+          errors.studentId = "Student ID is required.";
+        }
+
+        if (!data.program) {
+          errors.program = "Enter your programme of study.";
+        }
+
+        const yearNumber = Number(data.year);
+
+        if (!Number.isInteger(yearNumber) || yearNumber < 1 || yearNumber > 6) {
+          errors.year = "Select a valid year of study.";
+        }
+
+        if (!data.gender) {
+          errors.gender = "Please select your gender.";
+        }
+
+        return Object.keys(errors).length ? errors : null;
+      }
+
+      function displayValidationErrors(errors) {
+        fieldNames.forEach((fieldName) => {
+          if (!errors[fieldName]) {
+            return;
+          }
+
+          const errorElement = document.getElementById(`${fieldName}-error`);
+
+          if (errorElement) {
+            errorElement.textContent = errors[fieldName];
+          }
+        });
+      }
+
+      function focusFirstInvalidField(errors) {
+        const firstInvalidField = fieldNames.find(
+          (fieldName) => errors[fieldName],
+        );
+
+        if (!firstInvalidField) {
+          return;
+        }
+
+        if (firstInvalidField === "gender") {
+          const genderInput = registrationForm.querySelector(
+            'input[name="gender"]',
+          );
+
+          if (genderInput) {
+            genderInput.focus();
+          }
+
+          return;
+        }
+
+        const input = document.getElementById(firstInvalidField);
+
+        if (input) {
+          input.focus();
+        }
+      }
+
+      function clearMessages() {
+        feedbackElement.hidden = true;
+        feedbackElement.textContent = "";
+
+        feedbackElement.classList.remove("success", "error");
+
+        fieldNames.forEach((fieldName) => {
+          const errorElement = document.getElementById(`${fieldName}-error`);
+
+          if (errorElement) {
+            errorElement.textContent = "";
+          }
+        });
+      }
+
+      function showFeedback(message, type = "error") {
+        feedbackElement.textContent = message;
+
+        feedbackElement.hidden = false;
+
+        feedbackElement.classList.remove("success", "error");
+
+        feedbackElement.classList.add(type);
+
+        feedbackElement.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+
+      function setLoadingState(isLoading) {
+        const formControls = registrationForm.querySelectorAll(
+          "input, select, button",
+        );
+
+        formControls.forEach((control) => {
+          control.disabled = isLoading;
+        });
+
+        submitButton.textContent = isLoading
+          ? "Preparing payment..."
+          : "Continue to payment";
+      }
+
+      async function sendRegistrationRequest(data) {
+        setLoadingState(true);
+
+        try {
+          const response = await fetch("/api/register", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+
+              Accept: "application/json",
+            },
+
+            body: JSON.stringify(data),
+          });
+
+          let result = {};
+
+          try {
+            result = await response.json();
+          } catch (jsonError) {
+            console.error("The server returned invalid JSON:", jsonError);
+
+            showFeedback(
+              "The server returned an invalid response. Please try again.",
+            );
+
+            return;
+          }
+
+          console.log("Registration response:", result);
+
+          if (!response.ok) {
+            showFeedback(
+              result.error ||
+                result.message ||
+                "Registration could not be completed. Please try again.",
+            );
+
+            return;
+          }
+
+          const checkoutUrl =
+            result.checkoutUrl ||
+            result.checkout_url ||
+            result.data?.checkout_url ||
+            result.data?.checkoutUrl;
+
+          if (!checkoutUrl) {
+            console.error(
+              "Checkout URL missing from registration response:",
+              result,
+            );
+
+            showFeedback(
+              "The payment service did not return a checkout link. Please check the backend payment initialization.",
+            );
+
+            return;
+          }
+
+          if (!isValidCheckoutUrl(checkoutUrl)) {
+            console.error("Invalid checkout URL:", checkoutUrl);
+
+            showFeedback(
+              "The payment service returned an invalid checkout link.",
+            );
+
+            return;
+          }
+
+          sessionStorage.setItem(
+            "cosissPayment",
+            JSON.stringify({
+              txRef: result.txRef || null,
+
+              amount: result.amount || null,
+
+              currency: result.currency || null,
+
+              checkoutUrl,
+            }),
+          );
+
+          showFeedback(
+            "Your details have been saved. Redirecting to the secure PayChangu checkout...",
+            "success",
+          );
+
+          window.setTimeout(() => {
+            window.location.assign(checkoutUrl);
+          }, 700);
+        } catch (error) {
+          console.error("Registration request failed:", error);
+
+          showFeedback(
+            "The server could not be reached. Make sure the Express server and Cloudflare tunnel are running.",
+          );
+        } finally {
+          setLoadingState(false);
+        }
+      }
+
+      function isValidCheckoutUrl(url) {
+        try {
+          const parsedUrl = new URL(url);
+
+          return (
+            parsedUrl.protocol === "https:" || parsedUrl.protocol === "http:"
+          );
+        } catch {
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
