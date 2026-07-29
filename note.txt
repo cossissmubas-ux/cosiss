@@ -1,0 +1,42 @@
+"/c/Program Files/MySQL/MySQL Server 8.4/bin/mysql.exe" \
+-h sakura.proxy.rlwy.net\
+-P 29751 \
+-u root \
+-p \
+railway < sql/cosiss-schema.sql
+
+2026-07-29T06:23:05.313956425Z ==> Cloning from https://github.com/cossissmubas-ux/cosiss
+2026-07-29T06:23:06.255231762Z ==> Checking out commit a91efdbc4a197b6bb91c51e155a3d1279740c815 in branch main
+2026-07-29T06:23:07.176699173Z ==> Requesting Node.js version >=20
+2026-07-29T06:23:07.31706893Z ==> Using Node.js version 26.5.0 via /opt/render/project/src/package.json
+2026-07-29T06:23:07.317081552Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-07-29T06:23:07.317082903Z ==> Installing Node.js version 26.5.0...
+2026-07-29T06:23:08.21637152Z ==> Running build command 'npm install'...
+2026-07-29T06:23:09.084988469Z 
+2026-07-29T06:23:09.085002441Z added 141 packages, and audited 142 packages in 818ms
+2026-07-29T06:23:09.085008787Z 
+2026-07-29T06:23:09.085069201Z 38 packages are looking for funding
+2026-07-29T06:23:09.085110519Z   run `npm fund` for details
+2026-07-29T06:23:09.085936112Z 
+2026-07-29T06:23:09.085940934Z found 0 vulnerabilities
+2026-07-29T06:23:10.205348718Z ==> Uploading build...
+2026-07-29T06:23:13.307526626Z ==> Uploaded in 2.6s. Compression took 0.5s
+2026-07-29T06:23:13.309392907Z ==> Build successful 🎉
+2026-07-29T06:23:17.497531758Z ==> Deploying...
+2026-07-29T06:23:17.560559659Z ==> Setting WEB_CONCURRENCY=1 by default, based on available CPUs in the instance
+2026-07-29T06:23:26.33076693Z ==> Running 'node app.js'
+2026-07-29T06:23:26.63421962Z ◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+2026-07-29T06:23:28.524299548Z Warning: connect.session() MemoryStore is not
+2026-07-29T06:23:28.524325199Z designed for a production environment, as it will leak
+2026-07-29T06:23:28.524327768Z memory, and will not scale past a single process.
+2026-07-29T06:23:28.886770554Z [CoSISS] Connected to MySQL database: railway
+2026-07-29T06:23:28.886920779Z [CoSISS] MySQL server time: Wed Jul 29 2026 06:23:28 GMT+0000 (Coordinated Universal Time)
+2026-07-29T06:23:28.936763482Z [CoSISS] Server running at https://cosiss.onrender.com
+2026-07-29T06:23:28.936810064Z [CoSISS] Public directory: /opt/render/project/src/public
+2026-07-29T06:23:38.421621376Z ==> Your service is live 🎉
+2026-07-29T06:23:38.509631902Z ==> 
+2026-07-29T06:23:38.512541947Z ==> ///////////////////////////////////////////////////////////
+2026-07-29T06:23:38.51486044Z ==> 
+2026-07-29T06:23:38.517273056Z ==> Available at your primary URL https://cosiss.onrender.com
+2026-07-29T06:23:38.519562258Z ==> 
+2026-07-29T06:23:38.523188866Z ==> ///////////////////////////////////////////////////////////
