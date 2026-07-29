@@ -34,6 +34,12 @@ if (process.env.NODE_ENV === "production") {
     app.set("trust proxy", 1);
 }
 
+if (!process.env.SESSION_SECRET) {
+    throw new Error(
+        "SESSION_SECRET environment variable is required"
+    );
+}
+
 const PORT =
     Number(process.env.PORT) || 3002;
 
@@ -87,6 +93,11 @@ const sessionStore = new MySQLStore({
     database: process.env.DB_NAME,
 
     createDatabaseTable: true,
+    clearExpired: true,
+    checkExpirationInterval:
+        1000 * 60 * 15,
+    expiration:
+        1000 * 60 * 60 * 8,
 
     schema: {
         tableName: "sessions",
@@ -101,19 +112,13 @@ const sessionStore = new MySQLStore({
 app.use(
     session({
         name: "cosiss.sid",
-
-        secret:
-            process.env.SESSION_SECRET ||
-            "dev-only-secret-change-me",
+        secret: process.env.SESSION_SECRET,
         store: sessionStore,
-
         resave: false,
-
         saveUninitialized: false,
 
         cookie: {
             httpOnly: true,
-
             sameSite: "lax",
 
             secure:
