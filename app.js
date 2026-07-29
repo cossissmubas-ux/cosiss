@@ -9,6 +9,8 @@ const crypto = require("crypto");
 
 const express = require("express");
 const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
+
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
 
@@ -77,6 +79,25 @@ app.use(
     })
 );
 
+const sessionStore = new MySQLStore({
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT || 3306),
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+
+    createDatabaseTable: true,
+
+    schema: {
+        tableName: "sessions",
+        columnNames: {
+            session_id: "session_id",
+            expires: "expires",
+            data: "data"
+        }
+    }
+});
+
 app.use(
     session({
         name: "cosiss.sid",
@@ -84,6 +105,7 @@ app.use(
         secret:
             process.env.SESSION_SECRET ||
             "dev-only-secret-change-me",
+        store: sessionStore,
 
         resave: false,
 
