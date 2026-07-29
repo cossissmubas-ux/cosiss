@@ -1234,7 +1234,7 @@ app.get(
 
             if (
                 payment.payment_status ===
-                    "Successful" &&
+                    "Paid" &&
                 payment.member_status ===
                     "Active"
             ) {
@@ -1337,7 +1337,7 @@ app.get(
                             )
                      WHERE payment_id = ?`,
                     [
-                        "Successful",
+                        "Paid",
 
                         gatewayTransactionId,
 
