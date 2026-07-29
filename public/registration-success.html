@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Registration Successful | CoSISS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #162033;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 520px;
+            padding: 40px;
+            text-align: center;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.09);
+        }
+
+        .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #dcfce7;
+            color: #16a34a;
+            font-size: 36px;
+        }
+
+        h1 {
+            margin-bottom: 12px;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #5c6678;
+        }
+
+        .reference {
+            margin: 20px 0;
+            padding: 14px;
+            overflow-wrap: anywhere;
+            background: #f2f5fa;
+            border-radius: 8px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            color: white;
+            background: #003074;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <div class="icon">✓</div>
+
+        <h1>Registration Successful</h1>
+
+        <p>
+            Your payment has been confirmed and your CoSISS
+            membership has been activated.
+        </p>
+
+        <div class="reference">
+            Payment reference:
+            <strong id="paymentReference">Loading...</strong>
+        </div>
+
+        <a href="/">Return to homepage</a>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const reference = params.get("ref");
+
+        document.getElementById("paymentReference").textContent =
+            reference || "Not available";
+    </script>
+</body>
+</html>

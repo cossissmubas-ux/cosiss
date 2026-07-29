@@ -1409,10 +1409,7 @@ app.get(
     "/api/payment/return",
     (req, res) => {
         const txRef =
-            String(
-                req.query.tx_ref ||
-                ""
-            ).trim();
+            String(req.query.tx_ref || "").trim();
 
         if (!txRef) {
             return res.redirect(
@@ -1422,10 +1419,8 @@ app.get(
         }
 
         return res.redirect(
-            "/registration-success.html" +
-            `?ref=${encodeURIComponent(
-                txRef
-            )}`
+            "/api/payment/callback" +
+            `?tx_ref=${encodeURIComponent(txRef)}`
         );
     }
 );

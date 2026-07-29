@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Payment Verification | CoSISS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #162033;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 540px;
+            padding: 40px;
+            text-align: center;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.09);
+        }
+
+        .icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #fee2e2;
+            color: #dc2626;
+            font-size: 34px;
+        }
+
+        p {
+            color: #5c6678;
+            line-height: 1.6;
+        }
+
+        .message {
+            margin: 20px 0;
+            padding: 14px;
+            background: #fff7ed;
+            border-radius: 8px;
+        }
+
+        a {
+            display: inline-block;
+            margin: 6px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        .primary {
+            color: white;
+            background: #003074;
+        }
+
+        .secondary {
+            color: #003074;
+            border: 1px solid #003074;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <div class="icon">!</div>
+
+        <h1>Payment Verification Pending</h1>
+
+        <p>
+            We could not automatically confirm your payment.
+            Do not make another payment until the transaction
+            has been checked.
+        </p>
+
+        <div class="message" id="failureMessage">
+            Checking the payment status failed.
+        </div>
+
+        <a class="primary" href="/">Return home</a>
+        <a class="secondary" href="register.html">
+            Registration page
+        </a>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const reason = params.get("reason");
+
+        const messages = {
+            missing_reference:
+                "The payment reference was not returned.",
+
+            unknown_reference:
+                "The transaction could not be matched to a registration.",
+
+            not_confirmed:
+                "The payment gateway has not confirmed the payment yet.",
+
+            verification_unavailable:
+                "The payment was received, but automatic verification is temporarily unavailable."
+        };
+
+        document.getElementById("failureMessage").textContent =
+            messages[reason] ||
+            "The transaction could not be verified.";
+    </script>
+</body>
+</html>
