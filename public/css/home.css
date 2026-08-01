@@ -1083,18 +1083,35 @@ footer {
     grid-row: span 1;
   }
   .moments-grid {
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 190px;
-}
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 190px;
+  }
 
-.moment-large,
-.moment-wide {
-  grid-column: span 2;
-}
+  .moment-large,
+  .moment-wide {
+    grid-column: span 2;
+  }
 
-.moment-tall {
-  grid-row: span 2;
-}
+  .moment-tall {
+    grid-row: span 2;
+  }
+  .work-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+    max-width: 650px;
+    margin-inline: auto;
+  }
+
+  .work-card {
+    width: 100%;
+    min-width: 0;
+    min-height: auto;
+  }
+
+  .work-cta {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 
 @media (max-width: 760px) {
@@ -1165,40 +1182,71 @@ footer {
     width: 235px;
     font-size: 0.78rem;
   }
-
   .work-section {
-    padding: 4rem 5%;
+    padding: 3.5rem 1rem;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: none;
   }
 
   .work-card {
+    width: 100%;
+    min-width: 0;
     padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .work-card h3 {
+    font-size: 1.25rem;
+    overflow-wrap: anywhere;
+  }
+
+  .work-card > p:not(.work-number) {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+  }
+
+  .work-link {
+    flex-wrap: wrap;
+    overflow-wrap: anywhere;
   }
 
   .work-cta {
-    padding: 1.75rem 1.25rem;
+    align-items: stretch;
+    padding: 1.5rem;
+  }
+
+  .work-cta .btn {
+    justify-content: center;
+    width: 100%;
   }
   .moments-section {
-  padding: 4.5rem 5%;
-}
+    padding: 4.5rem 5%;
+  }
 
-.moments-grid {
-  grid-template-columns: 1fr;
-  grid-auto-rows: 240px;
-}
+  .moments-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 240px;
+  }
 
-.moment-card,
-.moment-large,
-.moment-wide,
-.moment-tall {
-  grid-column: span 1;
-  grid-row: span 1;
-}
+  .moment-card,
+  .moment-large,
+  .moment-wide,
+  .moment-tall {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
 
-.moment-card figcaption {
-  left: 1rem;
-  right: 1rem;
-  bottom: 1rem;
-}
+  .moment-card figcaption {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
 }
 
 .social-links {
