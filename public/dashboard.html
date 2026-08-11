@@ -1,234 +1,2981 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard — CoSISS</title>
-    <link rel="stylesheet" href="css\dashboard.css" />
-  </head>
-  <body>
-    <div class="dashboard">
-      <aside id="side-section">
-        <div class="brand">
-          <span class="brand-mark"
-            ><img
-              src="images\CoSISS-LOGO.png"
-              alt="CoSISS logo"
-              width="36"
-              height="36"
-          /></span>
-          <span class="brand-name">CoSISS</span>
-        </div>
 
-        <section id="manage">
-          <p class="nav-eyebrow">Manage</p>
-          <ul id="manage-list">
-            <li data-icon="news">
-              <svg viewBox="0 0 24 24">
-                <path d="M4 4h16v16H4z M4 9h16 M9 4v16" />
-              </svg>
-              News
-            </li>
-            <li data-icon="calendar">
-              <svg viewBox="0 0 24 24">
-                <rect x="3" y="5" width="18" height="16" rx="2" />
-                <path d="M3 10h18 M8 3v4 M16 3v4" />
-              </svg>
-              Calendar
-            </li>
-            <li data-icon="votes">
-              <svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg>
-              Votes
-            </li>
-            <li data-icon="forms">
-              <svg viewBox="0 0 24 24">
-                <path d="M6 3h9l5 5v13H6z M14 3v5h5 M9 13h7 M9 17h7" />
-              </svg>
-              Forms
-            </li>
-            <li data-icon="members">
-              <svg viewBox="0 0 24 24">
-                <circle cx="9" cy="8" r="3.2" />
-                <path
-                  d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6 M16 8.5a3 3 0 1 0 0-6 M15 14c2.8.2 5 2.7 5 6"
-                />
-              </svg>
-              Members
-            </li>
-          </ul>
-        </section>
+<head>
+  <meta charset="UTF-8" />
 
-        <section id="logout">
-          <button type="button" class="side-btn">Profile</button>
-          <button type="button" class="side-btn">Mode</button>
-          <button type="button" class="side-btn side-btn-logout">Logout</button>
-        </section>
-      </aside>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-      <main id="display-content">
-        <div class="empty-state" id="empty-state">
-          <h2>Nothing selected yet</h2>
-          <p>Choose an item from Manage to view its tools here.</p>
-        </div>
-      </main>
-    </div>
+  <title>Admin Dashboard — CoSISS</title>
 
-    <!-- Source panels: hidden, cloned into #display-content on click -->
-    <section id="news" class="panel-source">
-      <h2>News</h2>
-      <p class="panel-sub">Upload and manage what appears in the news feed.</p>
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  />
 
-      <form
-        class="upload-container"
-        action="/upload"
-        method="POST"
-        enctype="multipart/form-data"
-      >
-        <div class="upload-box">
-          <input
-            type="file"
-            id="image-input"
-            accept="image/*"
-            onchange="previewImage(event)"
+  <link
+    rel="icon"
+    type="image/png"
+    href="/images/cosiss_logo.png"
+  />
+
+  <link
+    rel="stylesheet"
+    href="/css/dashboard.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  />
+</head>
+
+<body>
+
+  <div class="dashboard">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+      id="side-section"
+      class="sidebar"
+    >
+
+      <div class="brand">
+
+        <span class="brand-mark">
+
+          <img
+            src="/images/cosiss_logo.png"
+            alt="CoSISS logo"
+            width="42"
+            height="42"
           />
-          <label for="image-input" id="upload-label">
-            <div class="upload-content">
-              <svg
-                class="upload-icon"
-                viewBox="0 0 24 24"
-                width="40"
-                height="40"
-              >
-                <path
-                  d="M12 16V4 M7 9l5-5 5 5 M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"
-                />
-              </svg>
-              <p>Click or drag an image here to upload</p>
-            </div>
-            <img
-              id="image-preview"
-              src=""
-              alt="Preview"
-              style="display: none"
-            />
-          </label>
+
+        </span>
+
+        <div class="brand-copy">
+
+          <span class="brand-name">
+            CoSISS
+          </span>
+
+          <span class="brand-sub">
+            Administration
+          </span>
+
         </div>
-        <div class="field-group">
-          <label for="upload-title" class="label-title">Title</label>
-          <input
-            type="text"
-            id="upload-title"
-            name="title"
-            maxlength="100"
-            placeholder="news title"
-            required
-          />
-          <label for="upload-desc" class="label-title">Description</label>
-          <textarea
-            id="upload-desc"
-            name="description"
-            rows="4"
-            maxlength="500"
-            placeholder="Write a caption or description for your file (max 500 characters)..."
-            required
-          ></textarea>
-          <small class="help-text"
-            >Please provide a clear context for your uploaded file.</small
-          >
+
+      </div>
+
+
+      <nav class="dashboard-nav">
+
+        <p class="nav-eyebrow">
+          Overview
+        </p>
+
+        <ul>
+
+          <li>
+            <button
+              type="button"
+              class="nav-item active"
+              data-panel="overview"
+            >
+
+              <i class="fa-solid fa-chart-line"></i>
+
+              <span>
+                Dashboard
+              </span>
+
+            </button>
+          </li>
+
+        </ul>
+
+
+        <p class="nav-eyebrow">
+          Manage
+        </p>
+
+        <ul id="manage-list">
+
+          <li>
+
+            <button
+              type="button"
+              class="nav-item"
+              data-panel="news"
+            >
+
+              <i class="fa-regular fa-newspaper"></i>
+
+              <span>
+                News
+              </span>
+
+            </button>
+
+          </li>
+
+
+          <li>
+
+            <button
+              type="button"
+              class="nav-item"
+              data-panel="calendar"
+            >
+
+              <i class="fa-regular fa-calendar-days"></i>
+
+              <span>
+                Calendar
+              </span>
+
+            </button>
+
+          </li>
+
+
+          <li>
+
+            <button
+              type="button"
+              class="nav-item"
+              data-panel="tshirt"
+            >
+
+              <i class="fa-solid fa-shirt"></i>
+
+              <span>
+                T-Shirt Competition
+              </span>
+
+            </button>
+
+          </li>
+
+
+          <li>
+
+            <button
+              type="button"
+              class="nav-item"
+              data-panel="votes"
+            >
+
+              <i class="fa-solid fa-check-to-slot"></i>
+
+              <span>
+                Voting
+              </span>
+
+            </button>
+
+          </li>
+
+
+          <li>
+
+            <button
+              type="button"
+              class="nav-item"
+              data-panel="forms"
+            >
+
+              <i class="fa-regular fa-rectangle-list"></i>
+
+              <span>
+                Forms
+              </span>
+
+            </button>
+
+          </li>
+
+
+          <li>
+
+            <button
+              type="button"
+              class="nav-item"
+              data-panel="members"
+            >
+
+              <i class="fa-solid fa-users"></i>
+
+              <span>
+                Members
+              </span>
+
+            </button>
+
+          </li>
+
+        </ul>
+
+      </nav>
+
+
+      <section class="sidebar-footer">
+
+        <div class="admin-mini-profile">
+
+          <div class="admin-avatar">
+
+            <i class="fa-solid fa-user-shield"></i>
+
+          </div>
+
+          <div>
+
+            <strong id="sidebar-admin-name">
+              Administrator
+            </strong>
+
+            <span id="sidebar-admin-role">
+              Loading...
+            </span>
+
+          </div>
+
         </div>
-        <button type="submit" class="submit-btn">Upload content</button>
-      </form>
 
-      <div class="button-row">
-        <button type="button" class="btn-danger-ghost">Remove content</button>
-      </div>
-    </section>
 
-    <section id="calendar" class="panel-source">
-      <h2>Calendar</h2>
-      <p class="panel-sub">Keep upcoming CoSISS events up to date.</p>
-      <div class="button-row">
-        <button type="button" class="btn-secondary">Update calendar</button>
-      </div>
-    </section>
+        <button
+          type="button"
+          class="side-btn"
+          id="profile-button"
+        >
 
-    <section id="votes" class="panel-source">
-      <h2>Votes</h2>
-      <p class="panel-sub">Manage contenders and see how voting is going.</p>
-      <div class="button-row">
-        <button type="button" class="btn-secondary">Add contenders</button>
-        <button type="button" class="btn-danger-ghost">
-          Remove contenders
+          <i class="fa-regular fa-user"></i>
+
+          Profile
+
         </button>
-        <button type="button" class="btn-secondary">View counts</button>
-      </div>
-    </section>
 
-    <section id="forms" class="panel-source">
-      <h2>Forms</h2>
-      <p class="panel-sub">Create and maintain the forms members fill in.</p>
-      <div class="button-row">
-        <button type="button" class="btn-secondary">Create form</button>
-        <button type="button" class="btn-danger-ghost">Discard form</button>
-        <button type="button" class="btn-secondary">Update form</button>
-      </div>
-    </section>
 
-    <section id="members" class="panel-source">
-      <h2>Members</h2>
-      <p class="panel-sub">See who's part of CoSISS and manage the roster.</p>
-      <div class="button-row">
-        <button type="button" class="btn-secondary">View members</button>
-        <button type="button" class="btn-danger-ghost">Remove members</button>
-      </div>
-    </section>
+        <button
+          type="button"
+          class="side-btn"
+          id="mode-button"
+        >
 
-    <script>
-      const listContainer = document.querySelector("#manage-list");
-      const displayContainer = document.querySelector("#display-content");
+          <i class="fa-regular fa-moon"></i>
 
-      listContainer.addEventListener("click", (event) => {
-        const item = event.target.closest("li");
-        if (!item) return;
+          Mode
 
-        // Get text (e.g., "News"), convert to lowercase ("news") to match the ID
-        const targetId = item.textContent.toLowerCase().trim();
-        const selectedSection = document.getElementById(targetId);
+        </button>
 
-        if (selectedSection) {
-          displayContent(selectedSection);
-          highlightActive(item);
+
+        <button
+          type="button"
+          class="side-btn side-btn-logout"
+          id="logout-button"
+        >
+
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+          Logout
+
+        </button>
+
+      </section>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main
+      id="display-content"
+      class="dashboard-main"
+    >
+
+      <!-- ===================================================
+           TOP BAR
+      ==================================================== -->
+
+      <header class="dashboard-topbar">
+
+        <div>
+
+          <p class="page-eyebrow">
+            CoSISS Administration
+          </p>
+
+          <h1 id="page-title">
+            Dashboard
+          </h1>
+
+        </div>
+
+
+        <div class="topbar-actions">
+
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="view-site-link"
+          >
+
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+            View website
+
+          </a>
+
+
+          <button
+            type="button"
+            class="mobile-menu-button"
+            id="mobile-menu-button"
+            aria-label="Open dashboard menu"
+          >
+
+            <i class="fa-solid fa-bars"></i>
+
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- ===================================================
+           GLOBAL MESSAGE
+      ==================================================== -->
+
+      <div
+        id="dashboard-message"
+        class="dashboard-message"
+        role="alert"
+        aria-live="polite"
+        hidden
+      ></div>
+
+
+      <!-- ===================================================
+           OVERVIEW
+      ==================================================== -->
+
+      <section
+        id="panel-overview"
+        class="dashboard-panel active"
+        data-title="Dashboard"
+      >
+
+        <div class="welcome-card">
+
+          <div>
+
+            <p class="panel-eyebrow">
+              Welcome back
+            </p>
+
+            <h2 id="welcome-admin-name">
+              Administrator
+            </h2>
+
+            <p>
+              Manage CoSISS members, news, competitions,
+              events and voting from one place.
+            </p>
+
+          </div>
+
+
+          <div class="welcome-icon">
+
+            <i class="fa-solid fa-bolt"></i>
+
+          </div>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+          <article class="stat-card">
+
+            <div class="stat-icon">
+
+              <i class="fa-solid fa-users"></i>
+
+            </div>
+
+            <div>
+
+              <span class="stat-label">
+                Members
+              </span>
+
+              <strong
+                class="stat-value"
+                id="stat-members"
+              >
+                —
+              </strong>
+
+              <span class="stat-helper">
+                Registered records
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-icon">
+
+              <i class="fa-solid fa-user-check"></i>
+
+            </div>
+
+            <div>
+
+              <span class="stat-label">
+                Active Members
+              </span>
+
+              <strong
+                class="stat-value"
+                id="stat-active-members"
+              >
+                —
+              </strong>
+
+              <span class="stat-helper">
+                Paid memberships
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-icon">
+
+              <i class="fa-solid fa-shirt"></i>
+
+            </div>
+
+            <div>
+
+              <span class="stat-label">
+                T-Shirt Designs
+              </span>
+
+              <strong
+                class="stat-value"
+                id="stat-tshirt"
+              >
+                —
+              </strong>
+
+              <span class="stat-helper">
+                Maximum 10
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-icon">
+
+              <i class="fa-regular fa-newspaper"></i>
+
+            </div>
+
+            <div>
+
+              <span class="stat-label">
+                News Posts
+              </span>
+
+              <strong
+                class="stat-value"
+                id="stat-news"
+              >
+                —
+              </strong>
+
+              <span class="stat-helper">
+                Published content
+              </span>
+
+            </div>
+
+          </article>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+          <article class="dashboard-card">
+
+            <div class="card-heading">
+
+              <div>
+
+                <p class="panel-eyebrow">
+                  Membership
+                </p>
+
+                <h3>
+                  Recent registrations
+                </h3>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="text-action"
+                data-go-to="members"
+              >
+                View all →
+              </button>
+
+            </div>
+
+
+            <div
+              id="recent-members"
+              class="mini-list"
+            >
+
+              <div class="loading-state">
+                Loading members...
+              </div>
+
+            </div>
+
+          </article>
+
+
+          <article class="dashboard-card">
+
+            <div class="card-heading">
+
+              <div>
+
+                <p class="panel-eyebrow">
+                  Competition
+                </p>
+
+                <h3>
+                  T-Shirt submissions
+                </h3>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="text-action"
+                data-go-to="tshirt"
+              >
+                Manage →
+              </button>
+
+            </div>
+
+
+            <div class="competition-summary">
+
+              <div class="competition-progress-head">
+
+                <span>
+                  Submission slots
+                </span>
+
+                <strong id="overview-tshirt-count">
+                  — / 10
+                </strong>
+
+              </div>
+
+
+              <div class="progress-track">
+
+                <div
+                  class="progress-bar"
+                  id="overview-tshirt-progress"
+                ></div>
+
+              </div>
+
+
+              <p id="overview-tshirt-message">
+                Loading competition status...
+              </p>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           NEWS
+      ==================================================== -->
+
+      <section
+        id="panel-news"
+        class="dashboard-panel"
+        data-title="News"
+        hidden
+      >
+
+        <div class="panel-header">
+
+          <div>
+
+            <p class="panel-eyebrow">
+              Content management
+            </p>
+
+            <h2>
+              News
+            </h2>
+
+            <p>
+              Publish and manage content appearing on
+              the CoSISS website.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="content-layout">
+
+          <form
+            id="news-upload-form"
+            class="dashboard-card upload-container"
+            enctype="multipart/form-data"
+          >
+
+            <div>
+
+              <p class="panel-eyebrow">
+                New publication
+              </p>
+
+              <h3>
+                Upload news
+              </h3>
+
+            </div>
+
+
+            <div class="upload-box">
+
+              <input
+                type="file"
+                id="news-image-input"
+                name="image"
+                accept="image/*"
+                hidden
+                required
+              />
+
+
+              <label
+                for="news-image-input"
+                id="news-upload-label"
+              >
+
+                <div
+                  class="upload-content"
+                  id="news-upload-content"
+                >
+
+                  <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                  <strong>
+                    Upload image
+                  </strong>
+
+                  <span>
+                    Click to choose an image
+                  </span>
+
+                </div>
+
+
+                <img
+                  id="news-image-preview"
+                  src=""
+                  alt="News image preview"
+                  hidden
+                />
+
+              </label>
+
+            </div>
+
+
+            <div class="field-group">
+
+              <label for="upload-title">
+                Title
+              </label>
+
+              <input
+                type="text"
+                id="upload-title"
+                name="title"
+                maxlength="100"
+                placeholder="News title"
+                required
+              />
+
+
+              <label for="upload-desc">
+                Description
+              </label>
+
+              <textarea
+                id="upload-desc"
+                name="description"
+                rows="5"
+                maxlength="500"
+                placeholder="Write the news description..."
+                required
+              ></textarea>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="submit-btn"
+              id="news-submit-button"
+            >
+              Publish news
+            </button>
+
+          </form>
+
+
+          <div class="dashboard-card">
+
+            <div class="card-heading">
+
+              <div>
+
+                <p class="panel-eyebrow">
+                  Published
+                </p>
+
+                <h3>
+                  News feed
+                </h3>
+
+              </div>
+
+
+              <button
+                type="button"
+                class="refresh-button"
+                id="refresh-news"
+              >
+                <i class="fa-solid fa-rotate"></i>
+              </button>
+
+            </div>
+
+
+            <div
+              id="news-list"
+              class="resource-list"
+            >
+
+              <div class="loading-state">
+                Select News to load content.
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           CALENDAR
+      ==================================================== -->
+
+      <section
+        id="panel-calendar"
+        class="dashboard-panel"
+        data-title="Calendar"
+        hidden
+      >
+
+        <div class="panel-header">
+
+          <div>
+
+            <p class="panel-eyebrow">
+              Events
+            </p>
+
+            <h2>
+              Calendar
+            </h2>
+
+            <p>
+              Manage upcoming CoSISS events and activities.
+            </p>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="btn-primary"
+            id="create-event-button"
+          >
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add event
+
+          </button>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+          <div
+            id="events-list"
+            class="resource-list"
+          >
+
+            <div class="empty-data-state">
+
+              <i class="fa-regular fa-calendar"></i>
+
+              <h3>
+                Calendar endpoint awaiting implementation
+              </h3>
+
+              <p>
+                This panel is prepared to receive event
+                records from
+                <code>/api/events</code>.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           T-SHIRT COMPETITION
+      ==================================================== -->
+
+      <section
+        id="panel-tshirt"
+        class="dashboard-panel"
+        data-title="T-Shirt Competition"
+        hidden
+      >
+
+        <div class="panel-header">
+
+          <div>
+
+            <p class="panel-eyebrow">
+              Competition management
+            </p>
+
+            <h2>
+              T-Shirt Design Competition
+            </h2>
+
+            <p>
+              Monitor the ten competition submission slots
+              and prepare accepted designs for voting.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="competition-admin-grid">
+
+          <article class="dashboard-card tshirt-status-card">
+
+            <p class="panel-eyebrow">
+              Current status
+            </p>
+
+            <div class="big-counter">
+
+              <strong id="tshirt-submitted-count">
+                —
+              </strong>
+
+              <span>
+                / 10
+              </span>
+
+            </div>
+
+
+            <div class="progress-track">
+
+              <div
+                class="progress-bar"
+                id="tshirt-progress"
+              ></div>
+
+            </div>
+
+
+            <p id="tshirt-status-message">
+              Loading status...
+            </p>
+
+          </article>
+
+
+          <article class="dashboard-card">
+
+            <p class="panel-eyebrow">
+              Submission control
+            </p>
+
+            <h3 id="tshirt-form-state">
+              Checking...
+            </h3>
+
+            <p>
+              The public submission form automatically closes
+              after the tenth accepted design.
+            </p>
+
+
+            <a
+              href="/tshirt-submission.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-secondary"
+            >
+              Open submission page
+            </a>
+
+          </article>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+          <div class="card-heading">
+
+            <div>
+
+              <p class="panel-eyebrow">
+                Entries
+              </p>
+
+              <h3>
+                Submitted designs
+              </h3>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="refresh-button"
+              id="refresh-tshirt"
+            >
+              <i class="fa-solid fa-rotate"></i>
+            </button>
+
+          </div>
+
+
+          <div
+            id="tshirt-design-list"
+            class="resource-list"
+          >
+
+            <div class="empty-data-state">
+
+              <i class="fa-solid fa-shirt"></i>
+
+              <h3>
+                Submission listing endpoint required
+              </h3>
+
+              <p>
+                We will connect this section to
+                <code>/api/tshirt-designs</code>
+                when the admin GET endpoint is added.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           VOTING
+      ==================================================== -->
+
+      <section
+        id="panel-votes"
+        class="dashboard-panel"
+        data-title="Voting"
+        hidden
+      >
+
+        <div class="panel-header">
+
+          <div>
+
+            <p class="panel-eyebrow">
+              Elections & competitions
+            </p>
+
+            <h2>
+              Voting
+            </h2>
+
+            <p>
+              Configure voting rounds and monitor results.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+          <div class="empty-data-state">
+
+            <i class="fa-solid fa-check-to-slot"></i>
+
+            <h3>
+              Voting system ready for integration
+            </h3>
+
+            <p>
+              This area will later connect to the voting
+              endpoints for T-shirt designs and committee
+              elections.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           FORMS
+      ==================================================== -->
+
+      <section
+        id="panel-forms"
+        class="dashboard-panel"
+        data-title="Forms"
+        hidden
+      >
+
+        <div class="panel-header">
+
+          <div>
+
+            <p class="panel-eyebrow">
+              Data collection
+            </p>
+
+            <h2>
+              Forms
+            </h2>
+
+            <p>
+              Manage future CoSISS registration and activity forms.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-card">
+
+          <div class="empty-data-state">
+
+            <i class="fa-regular fa-rectangle-list"></i>
+
+            <h3>
+              Forms endpoint awaiting implementation
+            </h3>
+
+            <p>
+              This dashboard panel is ready for a future
+              <code>/api/forms</code> endpoint.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           MEMBERS
+      ==================================================== -->
+
+      <section
+        id="panel-members"
+        class="dashboard-panel"
+        data-title="Members"
+        hidden
+      >
+
+        <div class="panel-header members-header">
+
+          <div>
+
+            <p class="panel-eyebrow">
+              Membership management
+            </p>
+
+            <h2>
+              Members
+            </h2>
+
+            <p>
+              View registrations, payment status and active
+              membership records.
+            </p>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="refresh-button refresh-members-button"
+            id="refresh-members"
+          >
+
+            <i class="fa-solid fa-rotate"></i>
+
+            Refresh
+
+          </button>
+
+        </div>
+
+
+        <div class="member-stats">
+
+          <article>
+
+            <span>
+              Total
+            </span>
+
+            <strong id="members-total">
+              —
+            </strong>
+
+          </article>
+
+
+          <article>
+
+            <span>
+              Active
+            </span>
+
+            <strong id="members-active">
+              —
+            </strong>
+
+          </article>
+
+
+          <article>
+
+            <span>
+              Pending
+            </span>
+
+            <strong id="members-pending">
+              —
+            </strong>
+
+          </article>
+
+        </div>
+
+
+        <div class="dashboard-card members-card">
+
+          <div class="members-toolbar">
+
+            <div class="search-box">
+
+              <i class="fa-solid fa-magnifying-glass"></i>
+
+              <input
+                type="search"
+                id="member-search"
+                placeholder="Search name, email or student ID..."
+              />
+
+            </div>
+
+
+            <select id="member-status-filter">
+
+              <option value="">
+                All statuses
+              </option>
+
+              <option value="Active">
+                Active
+              </option>
+
+              <option value="Pending Payment">
+                Pending Payment
+              </option>
+
+              <option value="Inactive">
+                Inactive
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="table-wrapper">
+
+            <table class="members-table">
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Member
+                  </th>
+
+                  <th>
+                    Student ID
+                  </th>
+
+                  <th>
+                    Programme
+                  </th>
+
+                  <th>
+                    Year
+                  </th>
+
+                  <th>
+                    Membership
+                  </th>
+
+                  <th>
+                    Payment
+                  </th>
+
+                  <th>
+                    Joined
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="members-table-body">
+
+                <tr>
+
+                  <td colspan="7">
+
+                    <div class="loading-state">
+                      Members will load here.
+                    </div>
+
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <script>
+
+    /* =======================================================
+       DOM
+    ======================================================== */
+
+    const navItems =
+      document.querySelectorAll(
+        ".nav-item"
+      );
+
+    const panels =
+      document.querySelectorAll(
+        ".dashboard-panel"
+      );
+
+    const pageTitle =
+      document.getElementById(
+        "page-title"
+      );
+
+    const dashboardMessage =
+      document.getElementById(
+        "dashboard-message"
+      );
+
+    const sidebar =
+      document.getElementById(
+        "side-section"
+      );
+
+
+    /* =======================================================
+       STATE
+    ======================================================== */
+
+    let membersCache = [];
+
+    let currentAdmin = null;
+
+
+    /* =======================================================
+       API HELPER
+    ======================================================== */
+
+    async function apiRequest(
+      url,
+      options = {}
+    ) {
+
+      const response =
+        await fetch(
+          url,
+          {
+            credentials:
+              "same-origin",
+
+            ...options
+          }
+        );
+
+      let result = null;
+
+      try {
+
+        result =
+          await response.json();
+
+      } catch (_) {}
+
+
+      if (!response.ok) {
+
+        const error =
+          new Error(
+            result?.error ||
+            "The request could not be completed."
+          );
+
+        error.status =
+          response.status;
+
+        error.data =
+          result;
+
+        throw error;
+
+      }
+
+
+      return result;
+
+    }
+
+
+    /* =======================================================
+       DASHBOARD INITIALIZATION
+    ======================================================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initializeDashboard
+    );
+
+
+    async function initializeDashboard() {
+
+      try {
+
+        await loadAdmin();
+
+        await Promise.allSettled([
+          loadMembers(),
+          loadNews(),
+          loadTshirtStatus()
+        ]);
+
+      } catch (error) {
+
+        console.error(
+          "Dashboard initialization failed:",
+          error
+        );
+
+      }
+
+    }
+
+
+    /* =======================================================
+       ADMIN AUTHENTICATION
+    ======================================================== */
+
+    async function loadAdmin() {
+
+      try {
+
+        const result =
+          await apiRequest(
+            "/api/me"
+          );
+
+        currentAdmin =
+          result.admin;
+
+
+        const fullName =
+          [
+            currentAdmin.firstName,
+            currentAdmin.surname
+          ]
+            .filter(Boolean)
+            .join(" ");
+
+
+        document.getElementById(
+          "sidebar-admin-name"
+        ).textContent =
+          fullName ||
+          "Administrator";
+
+
+        document.getElementById(
+          "sidebar-admin-role"
+        ).textContent =
+          currentAdmin.role ||
+          "Admin";
+
+
+        document.getElementById(
+          "welcome-admin-name"
+        ).textContent =
+          fullName
+            ? `Welcome, ${currentAdmin.firstName}`
+            : "Welcome back";
+
+      } catch (error) {
+
+        if (
+          error.status === 401
+        ) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+
         }
-      });
 
-      function displayContent(section) {
-        displayContainer.innerHTML = "";
-        const clone = section.cloneNode(true);
-        clone.style.display = "block";
-        displayContainer.appendChild(clone);
+        showMessage(
+          "The administrator session could not be verified.",
+          "error"
+        );
+
       }
 
-      function highlightActive(activeItem) {
-        listContainer
-          .querySelectorAll("li")
-          .forEach((li) => li.classList.remove("active"));
-        activeItem.classList.add("active");
+    }
+
+
+    /* =======================================================
+       NAVIGATION
+    ======================================================== */
+
+    navItems.forEach(
+      item => {
+
+        item.addEventListener(
+          "click",
+          () => {
+
+            const panelName =
+              item.dataset.panel;
+
+            openPanel(
+              panelName
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+    function openPanel(
+      panelName
+    ) {
+
+      navItems.forEach(
+        item => {
+
+          item.classList.toggle(
+            "active",
+            item.dataset.panel ===
+              panelName
+          );
+
+        }
+      );
+
+
+      panels.forEach(
+        panel => {
+
+          const active =
+            panel.id ===
+            `panel-${panelName}`;
+
+          panel.hidden =
+            !active;
+
+          panel.classList.toggle(
+            "active",
+            active
+          );
+
+
+          if (active) {
+
+            pageTitle.textContent =
+              panel.dataset.title ||
+              "Dashboard";
+
+          }
+
+        }
+      );
+
+
+      if (
+        window.innerWidth <= 900
+      ) {
+
+        sidebar.classList.remove(
+          "open"
+        );
+
       }
 
-      function previewImage(event) {
-        const file = event.target.files[0];
+
+      handlePanelLoad(
+        panelName
+      );
+
+    }
+
+
+    async function handlePanelLoad(
+      panelName
+    ) {
+
+      if (
+        panelName === "members"
+      ) {
+
+        await loadMembers();
+
+      }
+
+
+      if (
+        panelName === "news"
+      ) {
+
+        await loadNews();
+
+      }
+
+
+      if (
+        panelName === "tshirt"
+      ) {
+
+        await loadTshirtStatus();
+
+      }
+
+    }
+
+
+    document
+      .querySelectorAll(
+        "[data-go-to]"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              openPanel(
+                button.dataset.goTo
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    /* =======================================================
+       MEMBERS
+    ======================================================== */
+
+    async function loadMembers() {
+
+      const tableBody =
+        document.getElementById(
+          "members-table-body"
+        );
+
+
+      try {
+
+        const members =
+          await apiRequest(
+            "/api/members"
+          );
+
+        membersCache =
+          Array.isArray(members)
+            ? members
+            : [];
+
+
+        updateMemberStatistics(
+          membersCache
+        );
+
+
+        renderMembers(
+          membersCache
+        );
+
+
+        renderRecentMembers(
+          membersCache
+        );
+
+
+      } catch (error) {
+
+        if (
+          error.status === 401
+        ) {
+
+          window.location.href =
+            "/login.html";
+
+          return;
+
+        }
+
+
+        if (tableBody) {
+
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="7">
+                <div class="error-state">
+                  Could not load members.
+                </div>
+              </td>
+            </tr>
+          `;
+
+        }
+
+      }
+
+    }
+
+
+    function updateMemberStatistics(
+      members
+    ) {
+
+      const total =
+        members.length;
+
+
+      const active =
+        members.filter(
+          member =>
+            member.status ===
+            "Active"
+        ).length;
+
+
+      const pending =
+        members.filter(
+          member =>
+            member.status ===
+            "Pending Payment"
+        ).length;
+
+
+      setText(
+        "members-total",
+        total
+      );
+
+      setText(
+        "members-active",
+        active
+      );
+
+      setText(
+        "members-pending",
+        pending
+      );
+
+      setText(
+        "stat-members",
+        total
+      );
+
+      setText(
+        "stat-active-members",
+        active
+      );
+
+    }
+
+
+    function renderMembers(
+      members
+    ) {
+
+      const body =
+        document.getElementById(
+          "members-table-body"
+        );
+
+      if (!body) return;
+
+
+      if (
+        members.length === 0
+      ) {
+
+        body.innerHTML = `
+          <tr>
+            <td colspan="7">
+
+              <div class="empty-data-state">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3>
+                  No members found
+                </h3>
+
+                <p>
+                  Member registrations will appear here.
+                </p>
+
+              </div>
+
+            </td>
+          </tr>
+        `;
+
+        return;
+
+      }
+
+
+      body.innerHTML =
+        members
+          .map(
+            member => {
+
+              const name =
+                `${escapeHtml(
+                  member.name || ""
+                )} ${escapeHtml(
+                  member.sname || ""
+                )}`.trim();
+
+
+              return `
+
+                <tr>
+
+                  <td>
+
+                    <div class="member-cell">
+
+                      <div class="member-avatar">
+
+                        ${getInitials(
+                          member.name,
+                          member.sname
+                        )}
+
+                      </div>
+
+                      <div>
+
+                        <strong>
+                          ${name}
+                        </strong>
+
+                        <span>
+                          ${escapeHtml(
+                            member.email || ""
+                          )}
+                        </span>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <td>
+                    ${escapeHtml(
+                      member.studentId ||
+                      "—"
+                    )}
+                  </td>
+
+
+                  <td>
+                    ${escapeHtml(
+                      member.program ||
+                      "—"
+                    )}
+                  </td>
+
+
+                  <td>
+                    ${escapeHtml(
+                      String(
+                        member.year ??
+                        "—"
+                      )
+                    )}
+                  </td>
+
+
+                  <td>
+
+                    <span
+                      class="status-badge ${getStatusClass(
+                        member.status
+                      )}"
+                    >
+
+                      ${escapeHtml(
+                        member.status ||
+                        "Unknown"
+                      )}
+
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    <span
+                      class="status-badge ${getStatusClass(
+                        member.paymentStatus
+                      )}"
+                    >
+
+                      ${escapeHtml(
+                        member.paymentStatus ||
+                        "Pending"
+                      )}
+
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    ${formatDate(
+                      member.createdAt
+                    )}
+
+                  </td>
+
+                </tr>
+
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+    function renderRecentMembers(
+      members
+    ) {
+
+      const container =
+        document.getElementById(
+          "recent-members"
+        );
+
+      if (!container) return;
+
+
+      const recent =
+        members.slice(
+          0,
+          5
+        );
+
+
+      if (
+        recent.length === 0
+      ) {
+
+        container.innerHTML = `
+          <div class="empty-small">
+            No registrations yet.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        recent
+          .map(
+            member => `
+
+              <div class="mini-list-item">
+
+                <div class="member-avatar">
+
+                  ${getInitials(
+                    member.name,
+                    member.sname
+                  )}
+
+                </div>
+
+                <div class="mini-list-copy">
+
+                  <strong>
+
+                    ${escapeHtml(
+                      `${member.name || ""} ${member.sname || ""}`
+                    )}
+
+                  </strong>
+
+                  <span>
+
+                    ${escapeHtml(
+                      member.studentId ||
+                      member.email ||
+                      ""
+                    )}
+
+                  </span>
+
+                </div>
+
+
+                <span
+                  class="status-badge ${getStatusClass(
+                    member.status
+                  )}"
+                >
+
+                  ${escapeHtml(
+                    member.status ||
+                    ""
+                  )}
+
+                </span>
+
+              </div>
+
+            `
+          )
+          .join("");
+
+    }
+
+
+    function filterMembers() {
+
+      const query =
+        document
+          .getElementById(
+            "member-search"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const status =
+        document
+          .getElementById(
+            "member-status-filter"
+          )
+          .value;
+
+
+      const filtered =
+        membersCache.filter(
+          member => {
+
+            const haystack =
+              [
+                member.name,
+                member.sname,
+                member.email,
+                member.studentId,
+                member.program
+              ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase();
+
+
+            const matchesSearch =
+              !query ||
+              haystack.includes(
+                query
+              );
+
+
+            const matchesStatus =
+              !status ||
+              member.status ===
+                status;
+
+
+            return (
+              matchesSearch &&
+              matchesStatus
+            );
+
+          }
+        );
+
+
+      renderMembers(
+        filtered
+      );
+
+    }
+
+
+    document
+      .getElementById(
+        "member-search"
+      )
+      .addEventListener(
+        "input",
+        filterMembers
+      );
+
+
+    document
+      .getElementById(
+        "member-status-filter"
+      )
+      .addEventListener(
+        "change",
+        filterMembers
+      );
+
+
+    document
+      .getElementById(
+        "refresh-members"
+      )
+      .addEventListener(
+        "click",
+        loadMembers
+      );
+
+
+    /* =======================================================
+       T-SHIRT COMPETITION
+    ======================================================== */
+
+    async function loadTshirtStatus() {
+
+      try {
+
+        const status =
+          await apiRequest(
+            "/api/tshirt-designs/status"
+          );
+
+
+        const submitted =
+          Number(
+            status.submitted || 0
+          );
+
+        const limit =
+          Number(
+            status.limit || 10
+          );
+
+
+        const remaining =
+          Math.max(
+            limit - submitted,
+            0
+          );
+
+
+        const percentage =
+          limit > 0
+            ? (
+                submitted /
+                limit
+              ) * 100
+            : 0;
+
+
+        setText(
+          "stat-tshirt",
+          submitted
+        );
+
+
+        setText(
+          "tshirt-submitted-count",
+          submitted
+        );
+
+
+        setText(
+          "overview-tshirt-count",
+          `${submitted} / ${limit}`
+        );
+
+
+        document.getElementById(
+          "tshirt-progress"
+        ).style.width =
+          `${percentage}%`;
+
+
+        document.getElementById(
+          "overview-tshirt-progress"
+        ).style.width =
+          `${percentage}%`;
+
+
+        const message =
+          status.closed
+            ? "All design slots are filled."
+            : `${remaining} submission ${
+                remaining === 1
+                  ? "slot remains"
+                  : "slots remain"
+              }.`;
+
+
+        setText(
+          "tshirt-status-message",
+          message
+        );
+
+
+        setText(
+          "overview-tshirt-message",
+          message
+        );
+
+
+        setText(
+          "tshirt-form-state",
+          status.closed
+            ? "Submissions closed"
+            : "Submissions open"
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "T-shirt status error:",
+          error
+        );
+
+
+        setText(
+          "tshirt-status-message",
+          "Unable to retrieve competition status."
+        );
+
+      }
+
+    }
+
+
+    document
+      .getElementById(
+        "refresh-tshirt"
+      )
+      .addEventListener(
+        "click",
+        loadTshirtStatus
+      );
+
+
+    /* =======================================================
+       NEWS
+    ======================================================== */
+
+    async function loadNews() {
+
+      const container =
+        document.getElementById(
+          "news-list"
+        );
+
+
+      try {
+
+        const news =
+          await apiRequest(
+            "/api/news"
+          );
+
+
+        const newsItems =
+          Array.isArray(news)
+            ? news
+            : [];
+
+
+        setText(
+          "stat-news",
+          newsItems.length
+        );
+
+
+        if (
+          newsItems.length === 0
+        ) {
+
+          container.innerHTML = `
+            <div class="empty-data-state">
+
+              <i class="fa-regular fa-newspaper"></i>
+
+              <h3>
+                No news published
+              </h3>
+
+              <p>
+                Published news will appear here.
+              </p>
+
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        container.innerHTML =
+          newsItems
+            .map(
+              item => `
+
+                <article class="admin-news-item">
+
+                  <img
+                    src="${escapeAttribute(
+                      item.image || ""
+                    )}"
+                    alt=""
+                  />
+
+
+                  <div>
+
+                    <strong>
+                      ${escapeHtml(
+                        item.title ||
+                        "Untitled"
+                      )}
+                    </strong>
+
+                    <p>
+                      ${escapeHtml(
+                        item.description ||
+                        ""
+                      )}
+                    </p>
+
+                    <small>
+                      ${formatDate(
+                        item.createdAt
+                      )}
+                    </small>
+
+                  </div>
+
+
+                  <button
+                    type="button"
+                    class="delete-news-button"
+                    data-news-id="${Number(
+                      item.id
+                    )}"
+                    aria-label="Delete news"
+                  >
+
+                    <i class="fa-regular fa-trash-can"></i>
+
+                  </button>
+
+                </article>
+
+              `
+            )
+            .join("");
+
+
+      } catch (error) {
+
+        container.innerHTML = `
+          <div class="error-state">
+            News could not be loaded.
+          </div>
+        `;
+
+      }
+
+    }
+
+
+    document
+      .getElementById(
+        "refresh-news"
+      )
+      .addEventListener(
+        "click",
+        loadNews
+      );
+
+
+    /* =======================================================
+       NEWS IMAGE PREVIEW
+    ======================================================== */
+
+    const newsImageInput =
+      document.getElementById(
+        "news-image-input"
+      );
+
+
+    newsImageInput.addEventListener(
+      "change",
+      () => {
+
+        const file =
+          newsImageInput.files[0];
+
+
         if (!file) return;
 
-        const reader = new FileReader();
-        reader.onload = function () {
-          const output = document.getElementById("image-preview");
-          const content = document.querySelector(".upload-content");
-          output.src = reader.result;
-          output.style.display = "block";
-          content.style.display = "none";
-        };
-        reader.readAsDataURL(file);
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          event => {
+
+            const preview =
+              document.getElementById(
+                "news-image-preview"
+              );
+
+
+            const content =
+              document.getElementById(
+                "news-upload-content"
+              );
+
+
+            preview.src =
+              event.target.result;
+
+
+            preview.hidden =
+              false;
+
+
+            content.hidden =
+              true;
+
+          };
+
+
+        reader.readAsDataURL(
+          file
+        );
+
       }
-    </script>
-  </body>
+    );
+
+
+    /* =======================================================
+       NEWS UPLOAD
+    ======================================================== */
+
+    document
+      .getElementById(
+        "news-upload-form"
+      )
+      .addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+
+          const form =
+            event.currentTarget;
+
+
+          const button =
+            document.getElementById(
+              "news-submit-button"
+            );
+
+
+          button.disabled =
+            true;
+
+
+          button.textContent =
+            "Publishing...";
+
+
+          try {
+
+            const formData =
+              new FormData(
+                form
+              );
+
+
+            await apiRequest(
+              "/api/news",
+              {
+                method:
+                  "POST",
+
+                body:
+                  formData
+              }
+            );
+
+
+            showMessage(
+              "News published successfully.",
+              "success"
+            );
+
+
+            form.reset();
+
+
+            document.getElementById(
+              "news-image-preview"
+            ).hidden =
+              true;
+
+
+            document.getElementById(
+              "news-upload-content"
+            ).hidden =
+              false;
+
+
+            await loadNews();
+
+
+          } catch (error) {
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          } finally {
+
+            button.disabled =
+              false;
+
+
+            button.textContent =
+              "Publish news";
+
+          }
+
+        }
+      );
+
+
+    /* =======================================================
+       NEWS DELETE
+    ======================================================== */
+
+    document
+      .getElementById(
+        "news-list"
+      )
+      .addEventListener(
+        "click",
+        async event => {
+
+          const button =
+            event.target.closest(
+              ".delete-news-button"
+            );
+
+
+          if (!button) return;
+
+
+          const newsId =
+            button.dataset.newsId;
+
+
+          const confirmed =
+            window.confirm(
+              "Remove this news post?"
+            );
+
+
+          if (!confirmed) return;
+
+
+          try {
+
+            await apiRequest(
+              `/api/news/${newsId}`,
+              {
+                method:
+                  "DELETE"
+              }
+            );
+
+
+            showMessage(
+              "News removed.",
+              "success"
+            );
+
+
+            await loadNews();
+
+
+          } catch (error) {
+
+            showMessage(
+              error.message,
+              "error"
+            );
+
+          }
+
+        }
+      );
+
+
+    /* =======================================================
+       LOGOUT
+    ======================================================== */
+
+    document
+      .getElementById(
+        "logout-button"
+      )
+      .addEventListener(
+        "click",
+        async () => {
+
+          try {
+
+            await apiRequest(
+              "/api/logout",
+              {
+                method:
+                  "POST"
+              }
+            );
+
+          } catch (error) {
+
+            console.error(
+              "Logout error:",
+              error
+            );
+
+          } finally {
+
+            window.location.href =
+              "/login.html";
+
+          }
+
+        }
+      );
+
+
+    /* =======================================================
+       MOBILE SIDEBAR
+    ======================================================== */
+
+    document
+      .getElementById(
+        "mobile-menu-button"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          sidebar.classList.toggle(
+            "open"
+          );
+
+        }
+      );
+
+
+    /* =======================================================
+       UI HELPERS
+    ======================================================== */
+
+    function showMessage(
+      message,
+      type = "success"
+    ) {
+
+      dashboardMessage.textContent =
+        message;
+
+
+      dashboardMessage.className =
+        `dashboard-message ${type}`;
+
+
+      dashboardMessage.hidden =
+        false;
+
+
+      window.setTimeout(
+        () => {
+
+          dashboardMessage.hidden =
+            true;
+
+        },
+        5000
+      );
+
+    }
+
+
+    function setText(
+      id,
+      value
+    ) {
+
+      const element =
+        document.getElementById(
+          id
+        );
+
+
+      if (element) {
+
+        element.textContent =
+          value;
+
+      }
+
+    }
+
+
+    function formatDate(
+      dateValue
+    ) {
+
+      if (!dateValue) {
+
+        return "—";
+
+      }
+
+
+      const date =
+        new Date(
+          dateValue
+        );
+
+
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return "—";
+
+      }
+
+
+      return date.toLocaleDateString(
+        "en-GB",
+        {
+          day:
+            "2-digit",
+
+          month:
+            "short",
+
+          year:
+            "numeric"
+        }
+      );
+
+    }
+
+
+    function getInitials(
+      firstName,
+      surname
+    ) {
+
+      return (
+        `${firstName?.[0] || ""}${surname?.[0] || ""}`
+          .toUpperCase() ||
+        "M"
+      );
+
+    }
+
+
+    function getStatusClass(
+      status
+    ) {
+
+      const value =
+        String(
+          status || ""
+        )
+          .trim()
+          .toLowerCase();
+
+
+      if (
+        [
+          "active",
+          "paid",
+          "successful",
+          "approved"
+        ].includes(
+          value
+        )
+      ) {
+
+        return "status-success";
+
+      }
+
+
+      if (
+        [
+          "pending",
+          "pending payment"
+        ].includes(
+          value
+        )
+      ) {
+
+        return "status-warning";
+
+      }
+
+
+      if (
+        [
+          "failed",
+          "inactive",
+          "rejected"
+        ].includes(
+          value
+        )
+      ) {
+
+        return "status-danger";
+
+      }
+
+
+      return "status-neutral";
+
+    }
+
+
+    function escapeHtml(
+      value
+    ) {
+
+      return String(
+        value ?? ""
+      )
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
+
+    }
+
+
+    function escapeAttribute(
+      value
+    ) {
+
+      return escapeHtml(
+        value
+      );
+
+    }
+
+  </script>
+
+</body>
+
 </html>

@@ -22,6 +22,102 @@ const {
     verifyTransaction
 } = require("./lib/paychangu");
 
+const TSHIRT_UPLOADS_DIR =
+    path.join(
+        "uploads",
+        "tshirt-designs"
+    );
+
+if (!fs.existsSync(TSHIRT_UPLOADS_DIR)) {
+    fs.mkdirSync(
+        TSHIRT_UPLOADS_DIR,
+        {
+            recursive: true
+        }
+    );
+}
+
+const tshirtUpload = multer({
+    storage: multer.diskStorage({
+        destination: (
+            req,
+            file,
+            callback
+        ) => {
+            callback(
+                null,
+                TSHIRT_UPLOADS_DIR
+            );
+        },
+
+        filename: (
+            req,
+            file,
+            callback
+        ) => {
+            const extension =
+                path.extname(
+                    file.originalname
+                ).toLowerCase();
+
+            const fileName =
+                `tshirt-${crypto.randomUUID()}${extension}`;
+
+            callback(
+                null,
+                fileName
+            );
+        }
+    }),
+
+    limits: {
+        fileSize:
+            10 * 1024 * 1024
+    },
+
+    fileFilter: (
+        req,
+        file,
+        callback
+    ) => {
+        const allowedTypes = [
+            "image/png",
+            "image/jpeg"
+        ];
+
+        const allowedExtensions = [
+            ".png",
+            ".jpg",
+            ".jpeg"
+        ];
+
+        const extension =
+            path.extname(
+                file.originalname
+            ).toLowerCase();
+
+        if (
+            !allowedTypes.includes(
+                file.mimetype
+            ) ||
+            !allowedExtensions.includes(
+                extension
+            )
+        ) {
+            return callback(
+                new Error(
+                    "Only PNG, JPG and JPEG images are allowed."
+                )
+            );
+        }
+
+        callback(
+            null,
+            true
+        );
+    }
+});
+
 const app = express();
 const db = pool;
 
@@ -1449,6 +1545,351 @@ app.get(
             "/api/payment/callback" +
             `?tx_ref=${encodeURIComponent(txRef)}`
         );
+    }
+);
+
+/* =========================================================
+   tshirt design submission end point status check
+   ========================================================= */
+
+app.get(
+    "/api/tshirt-designs/status",
+    async (req, res, next) => {
+        try {
+            const [rows] =
+                await db.execute(
+                    `SELECT COUNT(*) AS total
+                     FROM tshirt_designs
+                     WHERE status = 'Approved'`
+                );
+
+            const submitted =
+                Number(
+                    rows[0].total
+                );
+
+            const limit = 10;
+
+            const remaining =
+                Math.max(
+                    limit - submitted,
+                    0
+                );
+
+            return res.json({
+                submitted,
+                limit,
+                remaining,
+                closed:
+                    submitted >= limit
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+
+/* =========================================================
+   tshirt design submission end point 
+   ========================================================= */
+
+app.post(
+    "/api/tshirt-designs",
+    tshirtUpload.single("designImage"),
+    async (req, res, next) => {
+        let connection;
+        let transactionStarted = false;
+
+        try {
+            const {
+                firstName,
+                surname,
+                studentId,
+                phone,
+                email,
+                designTitle,
+                designDescription,
+                originalWork
+            } = req.body;
+
+            const normalizedFirstName =
+                String(
+                    firstName || ""
+                ).trim();
+
+            const normalizedSurname =
+                String(
+                    surname || ""
+                ).trim();
+
+            const normalizedStudentId =
+                String(
+                    studentId || ""
+                ).trim();
+
+            const normalizedPhone =
+                String(
+                    phone || ""
+                )
+                    .trim()
+                    .replace(
+                        /[\s-]/g,
+                        ""
+                    );
+
+            const normalizedEmail =
+                String(
+                    email || ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+            const normalizedTitle =
+                String(
+                    designTitle || ""
+                ).trim();
+
+            const normalizedDescription =
+                String(
+                    designDescription || ""
+                ).trim();
+
+            if (
+                !normalizedFirstName ||
+                !normalizedSurname ||
+                !normalizedStudentId ||
+                !normalizedPhone ||
+                !normalizedEmail ||
+                !normalizedTitle ||
+                !normalizedDescription ||
+                originalWork !== "yes" ||
+                !req.file
+            ) {
+                if (req.file) {
+                    fs.unlink(
+                        req.file.path,
+                        () => {}
+                    );
+                }
+
+                return res.status(400).json({
+                    error:
+                        "All required fields and the design image must be provided."
+                });
+            }
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (
+                !emailPattern.test(
+                    normalizedEmail
+                )
+            ) {
+                fs.unlink(
+                    req.file.path,
+                    () => {}
+                );
+
+                return res.status(400).json({
+                    error:
+                        "Please provide a valid email address."
+                });
+            }
+
+            const phonePattern =
+                /^(?:\+265|0)?[789]\d{8}$/;
+
+            if (
+                !phonePattern.test(
+                    normalizedPhone
+                )
+            ) {
+                fs.unlink(
+                    req.file.path,
+                    () => {}
+                );
+
+                return res.status(400).json({
+                    error:
+                        "Please provide a valid Malawi phone number."
+                });
+            }
+
+            connection =
+                await db.getConnection();
+
+            await connection
+                .beginTransaction();
+
+            transactionStarted = true;
+
+            /*
+             * Lock the existing rows while checking the current
+             * number of accepted designs.
+             */
+            const [currentDesigns] =
+                await connection.execute(
+                    `SELECT design_id
+                     FROM tshirt_designs
+                     WHERE status = 'Approved'
+                     FOR UPDATE`
+                );
+
+            const currentTotal =
+                currentDesigns.length;
+
+            if (currentTotal >= 10) {
+                await connection
+                    .rollback();
+
+                transactionStarted = false;
+
+                fs.unlink(
+                    req.file.path,
+                    () => {}
+                );
+
+                return res.status(409).json({
+                    error:
+                        "All 10 T-shirt design submission slots have already been filled.",
+                    closed: true,
+                    submitted: 10,
+                    limit: 10,
+                    remainingSlots: 0
+                });
+            }
+
+            const [duplicates] =
+                await connection.execute(
+                    `SELECT design_id
+                     FROM tshirt_designs
+                     WHERE student_id = ?
+                        OR email = ?
+                     LIMIT 1`,
+                    [
+                        normalizedStudentId,
+                        normalizedEmail
+                    ]
+                );
+
+            if (
+                duplicates.length > 0
+            ) {
+                await connection
+                    .rollback();
+
+                transactionStarted = false;
+
+                fs.unlink(
+                    req.file.path,
+                    () => {}
+                );
+
+                return res.status(409).json({
+                    error:
+                        "You have already submitted a T-shirt design."
+                });
+            }
+
+            const imagePath =
+                `/uploads/tshirt-designs/${req.file.filename}`;
+
+            const [result] =
+                await connection.execute(
+                    `INSERT INTO tshirt_designs
+                    (
+                        first_name,
+                        surname,
+                        student_id,
+                        phone,
+                        email,
+                        design_title,
+                        design_description,
+                        image_path,
+                        status
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                    [
+                        normalizedFirstName,
+                        normalizedSurname,
+                        normalizedStudentId,
+                        normalizedPhone,
+                        normalizedEmail,
+                        normalizedTitle,
+                        normalizedDescription,
+                        imagePath,
+                        "Approved"
+                    ]
+                );
+
+            await connection
+                .commit();
+
+            transactionStarted = false;
+
+            const submitted =
+                currentTotal + 1;
+
+            const remainingSlots =
+                Math.max(
+                    10 - submitted,
+                    0
+                );
+
+            return res
+                .status(201)
+                .json({
+                    message:
+                        "Your T-shirt design was submitted successfully.",
+
+                    designId:
+                        result.insertId,
+
+                    submitted,
+
+                    limit: 10,
+
+                    remainingSlots,
+
+                    closed:
+                        submitted >= 10
+                });
+        } catch (error) {
+            if (
+                connection &&
+                transactionStarted
+            ) {
+                try {
+                    await connection
+                        .rollback();
+                } catch (_) {}
+            }
+
+            if (req.file) {
+                fs.unlink(
+                    req.file.path,
+                    () => {}
+                );
+            }
+
+            if (
+                error.code ===
+                "ER_DUP_ENTRY"
+            ) {
+                return res.status(409).json({
+                    error:
+                        "You have already submitted a design."
+                });
+            }
+
+            next(error);
+        } finally {
+            if (connection) {
+                connection.release();
+            }
+        }
     }
 );
 

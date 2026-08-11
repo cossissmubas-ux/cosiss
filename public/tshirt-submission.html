@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CoSISS T-Shirt Design Competition | Submit Your Design</title>
+
+    <meta
+      name="description"
+      content="Submit your original CoSISS T-shirt design. Only the first 10 valid submissions will be accepted for the competition."
+    />
+
+    <link rel="icon" type="image/png" href="/images/cosiss_logo.png" />
+
+    <link rel="stylesheet" href="/css/tshirt-submission.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <main class="competition-page">
+      <!-- =========================
+             HEADER / BRAND
+        ========================== -->
+
+      <header class="competition-header">
+        <a href="/" class="brand" aria-label="Return to CoSISS homepage">
+          <img
+            src="/images/cosiss_logo.png"
+            alt="CoSISS logo"
+            width="52"
+            height="52"
+          />
+
+          <div>
+            <strong>CoSISS</strong>
+            <span>T-Shirt Design Competition</span>
+          </div>
+        </a>
+
+        <a href="/" class="back-link">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back home</span>
+        </a>
+      </header>
+
+      <!-- =========================
+             HERO
+        ========================== -->
+
+      <section class="competition-hero">
+        <div class="hero-content">
+          <p class="eyebrow">CREATIVITY · TECHNOLOGY · STUDENT IDENTITY</p>
+
+          <h1>Design the next official CoSISS T-shirt.</h1>
+
+          <p class="hero-description">
+            Show us what CoSISS looks like through your creativity. Submit an
+            original T-shirt concept that represents innovation, technology,
+            student excellence and the identity of our community.
+          </p>
+
+          <div class="competition-status">
+            <div class="status-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+
+            <div>
+              <strong> First 10 valid submissions only </strong>
+
+              <p>
+                Once 10 designs have been accepted, submissions will
+                automatically close.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="shirt-preview">
+            <i class="fa-solid fa-shirt"></i>
+
+            <span> Your design could be here </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+             COMPETITION DETAILS
+        ========================== -->
+
+      <section class="competition-details">
+        <div class="section-heading">
+          <p class="eyebrow">Before you submit</p>
+
+          <h2>Competition requirements</h2>
+
+          <p>Read the requirements carefully before uploading your design.</p>
+        </div>
+
+        <div class="requirements-grid">
+          <article class="requirement-card">
+            <div class="requirement-icon">
+              <i class="fa-solid fa-image"></i>
+            </div>
+
+            <h3>One design image</h3>
+
+            <p>
+              Submit one image containing the front, back and side views of your
+              T-shirt design.
+            </p>
+          </article>
+
+          <article class="requirement-card">
+            <div class="requirement-icon">
+              <i class="fa-solid fa-file-image"></i>
+            </div>
+
+            <h3>PNG, JPG or JPEG</h3>
+
+            <p>
+              Upload a clear, high-quality image. Maximum file size will be 10
+              MB.
+            </p>
+          </article>
+
+          <article class="requirement-card">
+            <div class="requirement-icon">
+              <i class="fa-solid fa-user-check"></i>
+            </div>
+
+            <h3>Original work only</h3>
+
+            <p>
+              The submitted design must be your own original work and must not
+              violate another creator's rights.
+            </p>
+          </article>
+
+          <article class="requirement-card">
+            <div class="requirement-icon">
+              <i class="fa-solid fa-ranking-star"></i>
+            </div>
+
+            <h3>Voting comes next</h3>
+
+            <p>
+              Once submissions close, selected designs will later be presented
+              on a separate public voting page.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- =========================
+             SUBMISSION AREA
+        ========================== -->
+
+      <section class="submission-section">
+        <div class="submission-layout">
+          <!-- LEFT SIDE -->
+
+          <aside class="submission-info">
+            <p class="eyebrow">Submit your entry</p>
+
+            <h2>Your idea could become the next CoSISS look.</h2>
+
+            <p>Complete the form and upload your final presentation image.</p>
+
+            <div class="submission-counter">
+              <div class="counter-top">
+                <span> Submission slots </span>
+
+                <strong id="slot-counter"> Loading... </strong>
+              </div>
+
+              <div class="counter-bar">
+                <div class="counter-progress" id="counter-progress"></div>
+              </div>
+
+              <small id="counter-message"> Checking available spaces... </small>
+            </div>
+
+            <div class="important-note">
+              <i class="fa-solid fa-circle-info"></i>
+
+              <p>
+                Submitting the form does not guarantee eligibility if the
+                maximum number of valid entries has already been reached. The
+                server will confirm whether your submission was accepted.
+              </p>
+            </div>
+          </aside>
+
+          <!-- RIGHT SIDE -->
+
+          <div class="form-wrapper">
+            <!-- OPEN FORM -->
+
+            <form
+              id="tshirt-submission-form"
+              enctype="multipart/form-data"
+              novalidate
+            >
+              <div class="form-heading">
+                <h2>Design submission</h2>
+
+                <p>
+                  Fields marked with
+                  <span aria-hidden="true">*</span>
+                  are required.
+                </p>
+              </div>
+
+              <div
+                id="form-feedback"
+                class="form-feedback"
+                role="alert"
+                aria-live="polite"
+                hidden
+              ></div>
+
+              <!-- PERSONAL DETAILS -->
+
+              <fieldset>
+                <legend>Designer information</legend>
+
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="firstName"> First name * </label>
+
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      autocomplete="given-name"
+                      required
+                    />
+
+                    <span class="field-error" id="firstName-error"></span>
+                  </div>
+
+                  <div class="field">
+                    <label for="surname"> Surname * </label>
+
+                    <input
+                      type="text"
+                      id="surname"
+                      name="surname"
+                      autocomplete="family-name"
+                      required
+                    />
+
+                    <span class="field-error" id="surname-error"></span>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div class="field">
+                    <label for="studentId"> Student ID * </label>
+
+                    <input
+                      type="text"
+                      id="studentId"
+                      name="studentId"
+                      placeholder="e.g. BIS-22-001"
+                      required
+                    />
+
+                    <span class="field-error" id="studentId-error"></span>
+                  </div>
+
+                  <div class="field">
+                    <label for="phone"> Phone number * </label>
+
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="e.g. 0994 000 000"
+                      autocomplete="tel"
+                      required
+                    />
+
+                    <span class="field-error" id="phone-error"></span>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="email"> Email address * </label>
+
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                  />
+
+                  <span class="field-error" id="email-error"></span>
+                </div>
+              </fieldset>
+
+              <!-- DESIGN DETAILS -->
+
+              <fieldset>
+                <legend>Design information</legend>
+
+                <div class="field">
+                  <label for="designTitle"> Design title * </label>
+
+                  <input
+                    type="text"
+                    id="designTitle"
+                    name="designTitle"
+                    maxlength="120"
+                    placeholder="Give your design a name"
+                    required
+                  />
+
+                  <span class="field-error" id="designTitle-error"></span>
+                </div>
+
+                <div class="field">
+                  <label for="designDescription"> Design concept * </label>
+
+                  <textarea
+                    id="designDescription"
+                    name="designDescription"
+                    rows="6"
+                    maxlength="800"
+                    placeholder="Briefly explain the idea, meaning, colours, symbols or inspiration behind your design."
+                    required
+                  ></textarea>
+
+                  <div class="field-helper-row">
+                    <small> Maximum 800 characters </small>
+
+                    <small id="description-count"> 0 / 800 </small>
+                  </div>
+
+                  <span class="field-error" id="designDescription-error"></span>
+                </div>
+              </fieldset>
+
+              <!-- FILE UPLOAD -->
+
+              <fieldset>
+                <legend>Upload your design</legend>
+
+                <div class="design-upload">
+                  <input
+                    type="file"
+                    id="designImage"
+                    name="designImage"
+                    accept=".png,.jpg,.jpeg,image/png,image/jpeg"
+                    required
+                  />
+
+                  <label for="designImage" class="upload-zone">
+                    <div class="upload-icon">
+                      <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+
+                    <strong> Upload your T-shirt design </strong>
+
+                    <span>
+                      One image containing front, back and side views
+                    </span>
+
+                    <small> PNG, JPG or JPEG · Maximum 10 MB </small>
+                  </label>
+
+                  <div class="file-preview" id="file-preview" hidden>
+                    <img
+                      id="design-preview-image"
+                      src=""
+                      alt="Preview of uploaded T-shirt design"
+                    />
+
+                    <div class="preview-details">
+                      <strong id="preview-file-name"></strong>
+
+                      <span id="preview-file-size"></span>
+
+                      <button
+                        type="button"
+                        id="remove-design-button"
+                        class="remove-file-button"
+                      >
+                        <i class="fa-solid fa-xmark"></i>
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+
+                  <span class="field-error" id="designImage-error"></span>
+                </div>
+              </fieldset>
+
+              <!-- AGREEMENT -->
+
+              <div class="agreement">
+                <label class="check-option">
+                  <input
+                    type="checkbox"
+                    id="originalWork"
+                    name="originalWork"
+                    value="yes"
+                    required
+                  />
+
+                  <span>
+                    I confirm that this design is my original work and I give
+                    CoSISS permission to display it for this competition.
+                  </span>
+                </label>
+
+                <span class="field-error" id="originalWork-error"></span>
+              </div>
+
+              <!-- ACTION -->
+
+              <div class="form-actions">
+                <button type="submit" id="submit-button" class="submit-button">
+                  <span> Submit my design </span>
+
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <button type="reset" class="reset-button">Clear form</button>
+              </div>
+            </form>
+
+            <!-- CLOSED STATE -->
+
+            <section id="submissions-closed" class="submissions-closed" hidden>
+              <div class="closed-icon">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+
+              <p class="eyebrow">Submissions closed</p>
+
+              <h2>All 10 design slots have been filled.</h2>
+
+              <p>
+                Thank you to everyone who submitted. The accepted designs will
+                soon be presented for voting.
+              </p>
+
+              <a href="/" class="home-button"> Return to homepage </a>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+             WHAT HAPPENS NEXT
+        ========================== -->
+
+      <section class="next-stage">
+        <div class="section-heading">
+          <p class="eyebrow">What happens next?</p>
+
+          <h2>From submission to the winning T-shirt.</h2>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card">
+            <span class="step-number"> 01 </span>
+
+            <h3>Submit</h3>
+
+            <p>The first 10 valid designers upload their final concepts.</p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number"> 02 </span>
+
+            <h3>Prepare voting</h3>
+
+            <p>
+              Once submissions close, the accepted designs are prepared for
+              public voting.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number"> 03 </span>
+
+            <h3>Vote</h3>
+
+            <p>
+              Members compare the submitted designs and vote for their preferred
+              concept.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number"> 04 </span>
+
+            <h3>Winner</h3>
+
+            <p>
+              The winning concept becomes the next official CoSISS T-shirt
+              design.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="competition-footer">
+      <img
+        src="/images/cosiss_logo.png"
+        alt="CoSISS logo"
+        width="55"
+        height="55"
+      />
+
+      <p>© 2026 CoSISS. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript comes next -->
+    <script src="/js/tshirt-submission.js"></script>
+  </body>
+</html>
