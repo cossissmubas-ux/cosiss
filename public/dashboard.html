@@ -1,1773 +1,1161 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+    <title>Admin Dashboard — CoSISS</title>
 
-  <title>Admin Dashboard — CoSISS</title>
+    <meta name="robots" content="noindex, nofollow" />
 
-  <meta
-    name="robots"
-    content="noindex, nofollow"
-  />
+    <link rel="icon" type="image/png" href="/images/cosiss_logo.png" />
 
-  <link
-    rel="icon"
-    type="image/png"
-    href="/images/cosiss_logo.png"
-  />
+    <link rel="stylesheet" href="/css/dashboard.css" />
 
-  <link
-    rel="stylesheet"
-    href="/css/dashboard.css"
-  />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-  />
-</head>
-
-<body>
-
-  <div class="dashboard">
-
-    <!-- =====================================================
+  <body>
+    <div class="dashboard">
+      <!-- =====================================================
          SIDEBAR
     ====================================================== -->
 
-    <aside
-      id="side-section"
-      class="sidebar"
-    >
-
-      <div class="brand">
-
-        <span class="brand-mark">
-
-          <img
-            src="/images/cosiss_logo.png"
-            alt="CoSISS logo"
-            width="42"
-            height="42"
-          />
-
-        </span>
-
-        <div class="brand-copy">
-
-          <span class="brand-name">
-            CoSISS
+      <aside id="side-section" class="sidebar">
+        <div class="brand">
+          <span class="brand-mark">
+            <img
+              src="/images/cosiss_logo.png"
+              alt="CoSISS logo"
+              width="42"
+              height="42"
+            />
           </span>
 
-          <span class="brand-sub">
-            Administration
-          </span>
+          <div class="brand-copy">
+            <span class="brand-name"> CoSISS </span>
 
+            <span class="brand-sub"> Administration </span>
+          </div>
         </div>
 
-      </div>
+        <nav class="dashboard-nav">
+          <p class="nav-eyebrow">Overview</p>
 
+          <ul>
+            <li>
+              <button
+                type="button"
+                class="nav-item active"
+                data-panel="overview"
+              >
+                <i class="fa-solid fa-chart-line"></i>
 
-      <nav class="dashboard-nav">
+                <span> Dashboard </span>
+              </button>
+            </li>
+          </ul>
 
-        <p class="nav-eyebrow">
-          Overview
-        </p>
+          <p class="nav-eyebrow">Manage</p>
 
-        <ul>
+          <ul id="manage-list">
+            <li>
+              <button type="button" class="nav-item" data-panel="news">
+                <i class="fa-regular fa-newspaper"></i>
 
-          <li>
-            <button
-              type="button"
-              class="nav-item active"
-              data-panel="overview"
-            >
+                <span> News </span>
+              </button>
+            </li>
 
-              <i class="fa-solid fa-chart-line"></i>
+            <li>
+              <button type="button" class="nav-item" data-panel="calendar">
+                <i class="fa-regular fa-calendar-days"></i>
 
-              <span>
-                Dashboard
-              </span>
+                <span> Calendar </span>
+              </button>
+            </li>
 
-            </button>
-          </li>
+            <li>
+              <button type="button" class="nav-item" data-panel="tshirt">
+                <i class="fa-solid fa-shirt"></i>
 
-        </ul>
+                <span> T-Shirt Competition </span>
+              </button>
+            </li>
 
+            <li>
+              <button type="button" class="nav-item" data-panel="votes">
+                <i class="fa-solid fa-check-to-slot"></i>
 
-        <p class="nav-eyebrow">
-          Manage
-        </p>
+                <span> Voting </span>
+              </button>
+            </li>
 
-        <ul id="manage-list">
+            <li>
+              <button type="button" class="nav-item" data-panel="forms">
+                <i class="fa-regular fa-rectangle-list"></i>
 
-          <li>
+                <span> Forms </span>
+              </button>
+            </li>
 
-            <button
-              type="button"
-              class="nav-item"
-              data-panel="news"
-            >
+            <li>
+              <button type="button" class="nav-item" data-panel="members">
+                <i class="fa-solid fa-users"></i>
 
-              <i class="fa-regular fa-newspaper"></i>
+                <span> Members </span>
+              </button>
+            </li>
+          </ul>
+        </nav>
 
-              <span>
-                News
-              </span>
+        <section class="sidebar-footer">
+          <div class="admin-mini-profile">
+            <div class="admin-avatar">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
 
-            </button>
+            <div>
+              <strong id="sidebar-admin-name"> Administrator </strong>
 
-          </li>
-
-
-          <li>
-
-            <button
-              type="button"
-              class="nav-item"
-              data-panel="calendar"
-            >
-
-              <i class="fa-regular fa-calendar-days"></i>
-
-              <span>
-                Calendar
-              </span>
-
-            </button>
-
-          </li>
-
-
-          <li>
-
-            <button
-              type="button"
-              class="nav-item"
-              data-panel="tshirt"
-            >
-
-              <i class="fa-solid fa-shirt"></i>
-
-              <span>
-                T-Shirt Competition
-              </span>
-
-            </button>
-
-          </li>
-
-
-          <li>
-
-            <button
-              type="button"
-              class="nav-item"
-              data-panel="votes"
-            >
-
-              <i class="fa-solid fa-check-to-slot"></i>
-
-              <span>
-                Voting
-              </span>
-
-            </button>
-
-          </li>
-
-
-          <li>
-
-            <button
-              type="button"
-              class="nav-item"
-              data-panel="forms"
-            >
-
-              <i class="fa-regular fa-rectangle-list"></i>
-
-              <span>
-                Forms
-              </span>
-
-            </button>
-
-          </li>
-
-
-          <li>
-
-            <button
-              type="button"
-              class="nav-item"
-              data-panel="members"
-            >
-
-              <i class="fa-solid fa-users"></i>
-
-              <span>
-                Members
-              </span>
-
-            </button>
-
-          </li>
-
-        </ul>
-
-      </nav>
-
-
-      <section class="sidebar-footer">
-
-        <div class="admin-mini-profile">
-
-          <div class="admin-avatar">
-
-            <i class="fa-solid fa-user-shield"></i>
-
+              <span id="sidebar-admin-role"> Loading... </span>
+            </div>
           </div>
 
-          <div>
+          <button type="button" class="side-btn" id="profile-button">
+            <i class="fa-regular fa-user"></i>
 
-            <strong id="sidebar-admin-name">
-              Administrator
-            </strong>
+            Profile
+          </button>
 
-            <span id="sidebar-admin-role">
-              Loading...
-            </span>
+          <button type="button" class="side-btn" id="mode-button">
+            <i class="fa-regular fa-moon"></i>
 
-          </div>
+            Mode
+          </button>
 
-        </div>
+          <button
+            type="button"
+            class="side-btn side-btn-logout"
+            id="logout-button"
+          >
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
 
+            Logout
+          </button>
+        </section>
+      </aside>
 
-        <button
-          type="button"
-          class="side-btn"
-          id="profile-button"
-        >
-
-          <i class="fa-regular fa-user"></i>
-
-          Profile
-
-        </button>
-
-
-        <button
-          type="button"
-          class="side-btn"
-          id="mode-button"
-        >
-
-          <i class="fa-regular fa-moon"></i>
-
-          Mode
-
-        </button>
-
-
-        <button
-          type="button"
-          class="side-btn side-btn-logout"
-          id="logout-button"
-        >
-
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-
-          Logout
-
-        </button>
-
-      </section>
-
-    </aside>
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          MAIN CONTENT
     ====================================================== -->
 
-    <main
-      id="display-content"
-      class="dashboard-main"
-    >
-
-      <!-- ===================================================
+      <main id="display-content" class="dashboard-main">
+        <!-- ===================================================
            TOP BAR
       ==================================================== -->
 
-      <header class="dashboard-topbar">
-
-        <div>
-
-          <p class="page-eyebrow">
-            CoSISS Administration
-          </p>
-
-          <h1 id="page-title">
-            Dashboard
-          </h1>
-
-        </div>
-
-
-        <div class="topbar-actions">
-
-          <a
-            href="/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="view-site-link"
-          >
-
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-            View website
-
-          </a>
-
-
-          <button
-            type="button"
-            class="mobile-menu-button"
-            id="mobile-menu-button"
-            aria-label="Open dashboard menu"
-          >
-
-            <i class="fa-solid fa-bars"></i>
-
-          </button>
-
-        </div>
-
-      </header>
-
-
-      <!-- ===================================================
-           GLOBAL MESSAGE
-      ==================================================== -->
-
-      <div
-        id="dashboard-message"
-        class="dashboard-message"
-        role="alert"
-        aria-live="polite"
-        hidden
-      ></div>
-
-
-      <!-- ===================================================
-           OVERVIEW
-      ==================================================== -->
-
-      <section
-        id="panel-overview"
-        class="dashboard-panel active"
-        data-title="Dashboard"
-      >
-
-        <div class="welcome-card">
-
+        <header class="dashboard-topbar">
           <div>
+            <p class="page-eyebrow">CoSISS Administration</p>
 
-            <p class="panel-eyebrow">
-              Welcome back
-            </p>
-
-            <h2 id="welcome-admin-name">
-              Administrator
-            </h2>
-
-            <p>
-              Manage CoSISS members, news, competitions,
-              events and voting from one place.
-            </p>
-
+            <h1 id="page-title">Dashboard</h1>
           </div>
 
-
-          <div class="welcome-icon">
-
-            <i class="fa-solid fa-bolt"></i>
-
-          </div>
-
-        </div>
-
-
-        <div class="stats-grid">
-
-          <article class="stat-card">
-
-            <div class="stat-icon">
-
-              <i class="fa-solid fa-users"></i>
-
-            </div>
-
-            <div>
-
-              <span class="stat-label">
-                Members
-              </span>
-
-              <strong
-                class="stat-value"
-                id="stat-members"
-              >
-                —
-              </strong>
-
-              <span class="stat-helper">
-                Registered records
-              </span>
-
-            </div>
-
-          </article>
-
-
-          <article class="stat-card">
-
-            <div class="stat-icon">
-
-              <i class="fa-solid fa-user-check"></i>
-
-            </div>
-
-            <div>
-
-              <span class="stat-label">
-                Active Members
-              </span>
-
-              <strong
-                class="stat-value"
-                id="stat-active-members"
-              >
-                —
-              </strong>
-
-              <span class="stat-helper">
-                Paid memberships
-              </span>
-
-            </div>
-
-          </article>
-
-
-          <article class="stat-card">
-
-            <div class="stat-icon">
-
-              <i class="fa-solid fa-shirt"></i>
-
-            </div>
-
-            <div>
-
-              <span class="stat-label">
-                T-Shirt Designs
-              </span>
-
-              <strong
-                class="stat-value"
-                id="stat-tshirt"
-              >
-                —
-              </strong>
-
-              <span class="stat-helper">
-                Maximum 10
-              </span>
-
-            </div>
-
-          </article>
-
-
-          <article class="stat-card">
-
-            <div class="stat-icon">
-
-              <i class="fa-regular fa-newspaper"></i>
-
-            </div>
-
-            <div>
-
-              <span class="stat-label">
-                News Posts
-              </span>
-
-              <strong
-                class="stat-value"
-                id="stat-news"
-              >
-                —
-              </strong>
-
-              <span class="stat-helper">
-                Published content
-              </span>
-
-            </div>
-
-          </article>
-
-        </div>
-
-
-        <div class="dashboard-grid">
-
-          <article class="dashboard-card">
-
-            <div class="card-heading">
-
-              <div>
-
-                <p class="panel-eyebrow">
-                  Membership
-                </p>
-
-                <h3>
-                  Recent registrations
-                </h3>
-
-              </div>
-
-
-              <button
-                type="button"
-                class="text-action"
-                data-go-to="members"
-              >
-                View all →
-              </button>
-
-            </div>
-
-
-            <div
-              id="recent-members"
-              class="mini-list"
-            >
-
-              <div class="loading-state">
-                Loading members...
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="dashboard-card">
-
-            <div class="card-heading">
-
-              <div>
-
-                <p class="panel-eyebrow">
-                  Competition
-                </p>
-
-                <h3>
-                  T-Shirt submissions
-                </h3>
-
-              </div>
-
-
-              <button
-                type="button"
-                class="text-action"
-                data-go-to="tshirt"
-              >
-                Manage →
-              </button>
-
-            </div>
-
-
-            <div class="competition-summary">
-
-              <div class="competition-progress-head">
-
-                <span>
-                  Submission slots
-                </span>
-
-                <strong id="overview-tshirt-count">
-                  — / 10
-                </strong>
-
-              </div>
-
-
-              <div class="progress-track">
-
-                <div
-                  class="progress-bar"
-                  id="overview-tshirt-progress"
-                ></div>
-
-              </div>
-
-
-              <p id="overview-tshirt-message">
-                Loading competition status...
-              </p>
-
-            </div>
-
-          </article>
-
-        </div>
-
-      </section>
-
-
-      <!-- ===================================================
-           NEWS
-      ==================================================== -->
-
-      <section
-        id="panel-news"
-        class="dashboard-panel"
-        data-title="News"
-        hidden
-      >
-
-        <div class="panel-header">
-
-          <div>
-
-            <p class="panel-eyebrow">
-              Content management
-            </p>
-
-            <h2>
-              News
-            </h2>
-
-            <p>
-              Publish and manage content appearing on
-              the CoSISS website.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="content-layout">
-
-          <form
-            id="news-upload-form"
-            class="dashboard-card upload-container"
-            enctype="multipart/form-data"
-          >
-
-            <div>
-
-              <p class="panel-eyebrow">
-                New publication
-              </p>
-
-              <h3>
-                Upload news
-              </h3>
-
-            </div>
-
-
-            <div class="upload-box">
-
-              <input
-                type="file"
-                id="news-image-input"
-                name="image"
-                accept="image/*"
-                hidden
-                required
-              />
-
-
-              <label
-                for="news-image-input"
-                id="news-upload-label"
-              >
-
-                <div
-                  class="upload-content"
-                  id="news-upload-content"
-                >
-
-                  <i class="fa-solid fa-cloud-arrow-up"></i>
-
-                  <strong>
-                    Upload image
-                  </strong>
-
-                  <span>
-                    Click to choose an image
-                  </span>
-
-                </div>
-
-
-                <img
-                  id="news-image-preview"
-                  src=""
-                  alt="News image preview"
-                  hidden
-                />
-
-              </label>
-
-            </div>
-
-
-            <div class="field-group">
-
-              <label for="upload-title">
-                Title
-              </label>
-
-              <input
-                type="text"
-                id="upload-title"
-                name="title"
-                maxlength="100"
-                placeholder="News title"
-                required
-              />
-
-
-              <label for="upload-desc">
-                Description
-              </label>
-
-              <textarea
-                id="upload-desc"
-                name="description"
-                rows="5"
-                maxlength="500"
-                placeholder="Write the news description..."
-                required
-              ></textarea>
-
-            </div>
-
-
-            <button
-              type="submit"
-              class="submit-btn"
-              id="news-submit-button"
-            >
-              Publish news
-            </button>
-
-          </form>
-
-
-          <div class="dashboard-card">
-
-            <div class="card-heading">
-
-              <div>
-
-                <p class="panel-eyebrow">
-                  Published
-                </p>
-
-                <h3>
-                  News feed
-                </h3>
-
-              </div>
-
-
-              <button
-                type="button"
-                class="refresh-button"
-                id="refresh-news"
-              >
-                <i class="fa-solid fa-rotate"></i>
-              </button>
-
-            </div>
-
-
-            <div
-              id="news-list"
-              class="resource-list"
-            >
-
-              <div class="loading-state">
-                Select News to load content.
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ===================================================
-           CALENDAR
-      ==================================================== -->
-
-      <section
-        id="panel-calendar"
-        class="dashboard-panel"
-        data-title="Calendar"
-        hidden
-      >
-
-        <div class="panel-header">
-
-          <div>
-
-            <p class="panel-eyebrow">
-              Events
-            </p>
-
-            <h2>
-              Calendar
-            </h2>
-
-            <p>
-              Manage upcoming CoSISS events and activities.
-            </p>
-
-          </div>
-
-
-          <button
-            type="button"
-            class="btn-primary"
-            id="create-event-button"
-          >
-
-            <i class="fa-solid fa-plus"></i>
-
-            Add event
-
-          </button>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-          <div
-            id="events-list"
-            class="resource-list"
-          >
-
-            <div class="empty-data-state">
-
-              <i class="fa-regular fa-calendar"></i>
-
-              <h3>
-                Calendar endpoint awaiting implementation
-              </h3>
-
-              <p>
-                This panel is prepared to receive event
-                records from
-                <code>/api/events</code>.
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- ===================================================
-           T-SHIRT COMPETITION
-      ==================================================== -->
-
-      <section
-        id="panel-tshirt"
-        class="dashboard-panel"
-        data-title="T-Shirt Competition"
-        hidden
-      >
-
-        <div class="panel-header">
-
-          <div>
-
-            <p class="panel-eyebrow">
-              Competition management
-            </p>
-
-            <h2>
-              T-Shirt Design Competition
-            </h2>
-
-            <p>
-              Monitor the ten competition submission slots
-              and prepare accepted designs for voting.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="competition-admin-grid">
-
-          <article class="dashboard-card tshirt-status-card">
-
-            <p class="panel-eyebrow">
-              Current status
-            </p>
-
-            <div class="big-counter">
-
-              <strong id="tshirt-submitted-count">
-                —
-              </strong>
-
-              <span>
-                / 10
-              </span>
-
-            </div>
-
-
-            <div class="progress-track">
-
-              <div
-                class="progress-bar"
-                id="tshirt-progress"
-              ></div>
-
-            </div>
-
-
-            <p id="tshirt-status-message">
-              Loading status...
-            </p>
-
-          </article>
-
-
-          <article class="dashboard-card">
-
-            <p class="panel-eyebrow">
-              Submission control
-            </p>
-
-            <h3 id="tshirt-form-state">
-              Checking...
-            </h3>
-
-            <p>
-              The public submission form automatically closes
-              after the tenth accepted design.
-            </p>
-
-
+          <div class="topbar-actions">
             <a
-              href="/tshirt-submission.html"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn-secondary"
+              class="view-site-link"
             >
-              Open submission page
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+              View website
             </a>
-
-          </article>
-
-        </div>
-
-
-        <div class="dashboard-card">
-
-          <div class="card-heading">
-
-            <div>
-
-              <p class="panel-eyebrow">
-                Entries
-              </p>
-
-              <h3>
-                Submitted designs
-              </h3>
-
-            </div>
-
 
             <button
               type="button"
-              class="refresh-button"
-              id="refresh-tshirt"
+              class="mobile-menu-button"
+              id="mobile-menu-button"
+              aria-label="Open dashboard menu"
             >
-              <i class="fa-solid fa-rotate"></i>
+              <i class="fa-solid fa-bars"></i>
             </button>
-
           </div>
+        </header>
 
+        <!-- ===================================================
+           GLOBAL MESSAGE
+      ==================================================== -->
 
-          <div
-            id="tshirt-design-list"
-            class="resource-list"
-          >
+        <div
+          id="dashboard-message"
+          class="dashboard-message"
+          role="alert"
+          aria-live="polite"
+          hidden
+        ></div>
 
-            <div class="empty-data-state">
+        <!-- ===================================================
+           OVERVIEW
+      ==================================================== -->
 
-              <i class="fa-solid fa-shirt"></i>
+        <section
+          id="panel-overview"
+          class="dashboard-panel active"
+          data-title="Dashboard"
+        >
+          <div class="welcome-card">
+            <div>
+              <p class="panel-eyebrow">Welcome back</p>
 
-              <h3>
-                Submission listing endpoint required
-              </h3>
+              <h2 id="welcome-admin-name">Administrator</h2>
 
               <p>
-                We will connect this section to
-                <code>/api/tshirt-designs</code>
-                when the admin GET endpoint is added.
+                Manage CoSISS members, news, competitions, events and voting
+                from one place.
               </p>
-
             </div>
 
+            <div class="welcome-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
           </div>
 
-        </div>
+          <div class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-icon">
+                <i class="fa-solid fa-users"></i>
+              </div>
 
-      </section>
+              <div>
+                <span class="stat-label"> Members </span>
 
+                <strong class="stat-value" id="stat-members"> — </strong>
 
-      <!-- ===================================================
+                <span class="stat-helper"> Registered records </span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon">
+                <i class="fa-solid fa-user-check"></i>
+              </div>
+
+              <div>
+                <span class="stat-label"> Active Members </span>
+
+                <strong class="stat-value" id="stat-active-members"> — </strong>
+
+                <span class="stat-helper"> Paid memberships </span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon">
+                <i class="fa-solid fa-shirt"></i>
+              </div>
+
+              <div>
+                <span class="stat-label"> T-Shirt Designs </span>
+
+                <strong class="stat-value" id="stat-tshirt"> — </strong>
+
+                <span class="stat-helper"> Maximum 10 </span>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon">
+                <i class="fa-regular fa-newspaper"></i>
+              </div>
+
+              <div>
+                <span class="stat-label"> News Posts </span>
+
+                <strong class="stat-value" id="stat-news"> — </strong>
+
+                <span class="stat-helper"> Published content </span>
+              </div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="dashboard-card">
+              <div class="card-heading">
+                <div>
+                  <p class="panel-eyebrow">Membership</p>
+
+                  <h3>Recent registrations</h3>
+                </div>
+
+                <button type="button" class="text-action" data-go-to="members">
+                  View all →
+                </button>
+              </div>
+
+              <div id="recent-members" class="mini-list">
+                <div class="loading-state">Loading members...</div>
+              </div>
+            </article>
+
+            <article class="dashboard-card">
+              <div class="card-heading">
+                <div>
+                  <p class="panel-eyebrow">Competition</p>
+
+                  <h3>T-Shirt submissions</h3>
+                </div>
+
+                <button type="button" class="text-action" data-go-to="tshirt">
+                  Manage →
+                </button>
+              </div>
+
+              <div class="competition-summary">
+                <div class="competition-progress-head">
+                  <span> Submission slots </span>
+
+                  <strong id="overview-tshirt-count"> — / 10 </strong>
+                </div>
+
+                <div class="progress-track">
+                  <div class="progress-bar" id="overview-tshirt-progress"></div>
+                </div>
+
+                <p id="overview-tshirt-message">
+                  Loading competition status...
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ===================================================
+           NEWS
+      ==================================================== -->
+
+        <section
+          id="panel-news"
+          class="dashboard-panel"
+          data-title="News"
+          hidden
+        >
+          <div class="panel-header">
+            <div>
+              <p class="panel-eyebrow">Content management</p>
+
+              <h2>News</h2>
+
+              <p>Publish and manage content appearing on the CoSISS website.</p>
+            </div>
+          </div>
+
+          <div class="content-layout">
+            <form
+              id="news-upload-form"
+              class="dashboard-card upload-container"
+              enctype="multipart/form-data"
+            >
+              <div>
+                <p class="panel-eyebrow">New publication</p>
+
+                <h3>Upload news</h3>
+              </div>
+
+              <div class="upload-box">
+                <input
+                  type="file"
+                  id="news-image-input"
+                  name="image"
+                  accept="image/*"
+                  hidden
+                  required
+                />
+
+                <label for="news-image-input" id="news-upload-label">
+                  <div class="upload-content" id="news-upload-content">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+
+                    <strong> Upload image </strong>
+
+                    <span> Click to choose an image </span>
+                  </div>
+
+                  <img
+                    id="news-image-preview"
+                    src=""
+                    alt="News image preview"
+                    hidden
+                  />
+                </label>
+              </div>
+
+              <div class="field-group">
+                <label for="upload-title"> Title </label>
+
+                <input
+                  type="text"
+                  id="upload-title"
+                  name="title"
+                  maxlength="100"
+                  placeholder="News title"
+                  required
+                />
+
+                <label for="upload-desc"> Description </label>
+
+                <textarea
+                  id="upload-desc"
+                  name="description"
+                  rows="5"
+                  maxlength="500"
+                  placeholder="Write the news description..."
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn" id="news-submit-button">
+                Publish news
+              </button>
+            </form>
+
+            <div class="dashboard-card">
+              <div class="card-heading">
+                <div>
+                  <p class="panel-eyebrow">Published</p>
+
+                  <h3>News feed</h3>
+                </div>
+
+                <button type="button" class="refresh-button" id="refresh-news">
+                  <i class="fa-solid fa-rotate"></i>
+                </button>
+              </div>
+
+              <div id="news-list" class="resource-list">
+                <div class="loading-state">Select News to load content.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================
+           CALENDAR
+      ==================================================== -->
+
+        <section
+          id="panel-calendar"
+          class="dashboard-panel"
+          data-title="Calendar"
+          hidden
+        >
+          <div class="panel-header">
+            <div>
+              <p class="panel-eyebrow">Events management</p>
+
+              <h2>Calendar</h2>
+
+              <p>
+                Create and manage upcoming CoSISS events, workshops,
+                competitions and activities.
+              </p>
+            </div>
+
+            <button type="button" class="btn-primary" id="create-event-button">
+              <i class="fa-solid fa-plus"></i>
+              Add event
+            </button>
+          </div>
+
+          <div class="calendar-summary">
+            <article class="calendar-summary-card">
+              <div class="calendar-summary-icon">
+                <i class="fa-regular fa-calendar-days"></i>
+              </div>
+
+              <div>
+                <span>Total events</span>
+                <strong id="events-total">—</strong>
+              </div>
+            </article>
+
+            <article class="calendar-summary-card">
+              <div class="calendar-summary-icon">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+
+              <div>
+                <span>Upcoming</span>
+                <strong id="events-upcoming">—</strong>
+              </div>
+            </article>
+
+            <article class="calendar-summary-card">
+              <div class="calendar-summary-icon">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+              </div>
+
+              <div>
+                <span>Past events</span>
+                <strong id="events-past">—</strong>
+              </div>
+            </article>
+          </div>
+
+          <div class="dashboard-card event-management-card">
+            <div class="card-heading">
+              <div>
+                <p class="panel-eyebrow">Event schedule</p>
+
+                <h3>CoSISS events</h3>
+              </div>
+
+              <button type="button" class="refresh-button" id="refresh-events">
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
+              </button>
+            </div>
+
+            <div id="events-list" class="events-list">
+              <div class="loading-state">Events will load here.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================
+           T-SHIRT COMPETITION
+      ==================================================== -->
+
+        <section
+          id="panel-tshirt"
+          class="dashboard-panel"
+          data-title="T-Shirt Competition"
+          hidden
+        >
+          <div class="panel-header">
+            <div>
+              <p class="panel-eyebrow">Competition management</p>
+
+              <h2>T-Shirt Design Competition</h2>
+
+              <p>
+                Monitor the ten competition submission slots and prepare
+                accepted designs for voting.
+              </p>
+            </div>
+          </div>
+
+          <div class="competition-admin-grid">
+            <article class="dashboard-card tshirt-status-card">
+              <p class="panel-eyebrow">Current status</p>
+
+              <div class="big-counter">
+                <strong id="tshirt-submitted-count"> — </strong>
+
+                <span> / 10 </span>
+              </div>
+
+              <div class="progress-track">
+                <div class="progress-bar" id="tshirt-progress"></div>
+              </div>
+
+              <p id="tshirt-status-message">Loading status...</p>
+            </article>
+
+            <article class="dashboard-card">
+              <p class="panel-eyebrow">Submission control</p>
+
+              <h3 id="tshirt-form-state">Checking...</h3>
+
+              <p>
+                The public submission form automatically closes after the tenth
+                accepted design.
+              </p>
+
+              <a
+                href="/tshirt-submission.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-secondary"
+              >
+                Open submission page
+              </a>
+            </article>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="card-heading">
+              <div>
+                <p class="panel-eyebrow">Entries</p>
+
+                <h3>Submitted designs</h3>
+              </div>
+
+              <button type="button" class="refresh-button" id="refresh-tshirt">
+                <i class="fa-solid fa-rotate"></i>
+              </button>
+            </div>
+
+            <div id="tshirt-design-list" class="resource-list">
+              <div class="empty-data-state">
+                <i class="fa-solid fa-shirt"></i>
+
+                <h3>Submission listing endpoint required</h3>
+
+                <p>
+                  We will connect this section to
+                  <code>/api/tshirt-designs</code>
+                  when the admin GET endpoint is added.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================
            VOTING
       ==================================================== -->
 
-      <section
-        id="panel-votes"
-        class="dashboard-panel"
-        data-title="Voting"
-        hidden
-      >
+        <section
+          id="panel-votes"
+          class="dashboard-panel"
+          data-title="Voting"
+          hidden
+        >
+          <div class="panel-header">
+            <div>
+              <p class="panel-eyebrow">Elections & competitions</p>
 
-        <div class="panel-header">
+              <h2>Voting</h2>
 
-          <div>
-
-            <p class="panel-eyebrow">
-              Elections & competitions
-            </p>
-
-            <h2>
-              Voting
-            </h2>
-
-            <p>
-              Configure voting rounds and monitor results.
-            </p>
-
+              <p>Configure voting rounds and monitor results.</p>
+            </div>
           </div>
 
-        </div>
+          <div class="dashboard-card">
+            <div class="empty-data-state">
+              <i class="fa-solid fa-check-to-slot"></i>
 
+              <h3>Voting system ready for integration</h3>
 
-        <div class="dashboard-card">
-
-          <div class="empty-data-state">
-
-            <i class="fa-solid fa-check-to-slot"></i>
-
-            <h3>
-              Voting system ready for integration
-            </h3>
-
-            <p>
-              This area will later connect to the voting
-              endpoints for T-shirt designs and committee
-              elections.
-            </p>
-
+              <p>
+                This area will later connect to the voting endpoints for T-shirt
+                designs and committee elections.
+              </p>
+            </div>
           </div>
+        </section>
 
-        </div>
-
-      </section>
-
-
-      <!-- ===================================================
+        <!-- ===================================================
            FORMS
       ==================================================== -->
 
-      <section
-        id="panel-forms"
-        class="dashboard-panel"
-        data-title="Forms"
-        hidden
-      >
+        <section
+          id="panel-forms"
+          class="dashboard-panel"
+          data-title="Forms"
+          hidden
+        >
+          <div class="panel-header">
+            <div>
+              <p class="panel-eyebrow">Data collection</p>
 
-        <div class="panel-header">
+              <h2>Forms</h2>
 
-          <div>
-
-            <p class="panel-eyebrow">
-              Data collection
-            </p>
-
-            <h2>
-              Forms
-            </h2>
-
-            <p>
-              Manage future CoSISS registration and activity forms.
-            </p>
-
+              <p>Manage future CoSISS registration and activity forms.</p>
+            </div>
           </div>
 
-        </div>
+          <div class="dashboard-card">
+            <div class="empty-data-state">
+              <i class="fa-regular fa-rectangle-list"></i>
 
+              <h3>Forms endpoint awaiting implementation</h3>
 
-        <div class="dashboard-card">
-
-          <div class="empty-data-state">
-
-            <i class="fa-regular fa-rectangle-list"></i>
-
-            <h3>
-              Forms endpoint awaiting implementation
-            </h3>
-
-            <p>
-              This dashboard panel is ready for a future
-              <code>/api/forms</code> endpoint.
-            </p>
-
+              <p>
+                This dashboard panel is ready for a future
+                <code>/api/forms</code> endpoint.
+              </p>
+            </div>
           </div>
+        </section>
 
-        </div>
-
-      </section>
-
-
-      <!-- ===================================================
+        <!-- ===================================================
            MEMBERS
       ==================================================== -->
 
-      <section
-        id="panel-members"
-        class="dashboard-panel"
-        data-title="Members"
-        hidden
-      >
+        <section
+          id="panel-members"
+          class="dashboard-panel"
+          data-title="Members"
+          hidden
+        >
+          <div class="panel-header members-header">
+            <div>
+              <p class="panel-eyebrow">Membership management</p>
 
-        <div class="panel-header members-header">
+              <h2>Members</h2>
 
-          <div>
+              <p>
+                View registrations, payment status and active membership
+                records.
+              </p>
+            </div>
 
-            <p class="panel-eyebrow">
-              Membership management
-            </p>
+            <button
+              type="button"
+              class="refresh-button refresh-members-button"
+              id="refresh-members"
+            >
+              <i class="fa-solid fa-rotate"></i>
 
-            <h2>
-              Members
-            </h2>
-
-            <p>
-              View registrations, payment status and active
-              membership records.
-            </p>
-
+              Refresh
+            </button>
           </div>
 
+          <div class="member-stats">
+            <article>
+              <span> Total </span>
+
+              <strong id="members-total"> — </strong>
+            </article>
+
+            <article>
+              <span> Active </span>
+
+              <strong id="members-active"> — </strong>
+            </article>
+
+            <article>
+              <span> Pending </span>
+
+              <strong id="members-pending"> — </strong>
+            </article>
+          </div>
+
+          <div class="dashboard-card members-card">
+            <div class="members-toolbar">
+              <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                  type="search"
+                  id="member-search"
+                  placeholder="Search name, email or student ID..."
+                />
+              </div>
+
+              <select id="member-status-filter">
+                <option value="">All statuses</option>
+
+                <option value="Active">Active</option>
+
+                <option value="Pending Payment">Pending Payment</option>
+
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+
+            <div class="table-wrapper">
+              <table class="members-table">
+                <thead>
+                  <tr>
+                    <th>Member</th>
+
+                    <th>Student ID</th>
+
+                    <th>Programme</th>
+
+                    <th>Year</th>
+
+                    <th>Membership</th>
+
+                    <th>Payment</th>
+
+                    <th>Joined</th>
+                  </tr>
+                </thead>
+
+                <tbody id="members-table-body">
+                  <tr>
+                    <td colspan="7">
+                      <div class="loading-state">Members will load here.</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="event-modal" class="modal" hidden aria-hidden="true">
+      <div class="modal-backdrop" id="event-modal-backdrop"></div>
+
+      <section
+        class="modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="event-modal-title"
+      >
+        <div class="modal-header">
+          <div>
+            <p class="panel-eyebrow">Calendar management</p>
+
+            <h2 id="event-modal-title">Add event</h2>
+          </div>
 
           <button
             type="button"
-            class="refresh-button refresh-members-button"
-            id="refresh-members"
+            class="modal-close"
+            id="close-event-modal"
+            aria-label="Close event form"
           >
-
-            <i class="fa-solid fa-rotate"></i>
-
-            Refresh
-
+            <i class="fa-solid fa-xmark"></i>
           </button>
-
         </div>
 
+        <form id="event-form" enctype="multipart/form-data">
+          <div id="event-form-message" class="form-message" hidden></div>
 
-        <div class="member-stats">
+          <div class="event-form-grid">
+            <div class="event-form-main">
+              <div class="form-field">
+                <label for="event-title"> Event title </label>
 
-          <article>
+                <input
+                  type="text"
+                  id="event-title"
+                  name="title"
+                  maxlength="200"
+                  placeholder="e.g. CoSISS Innovation Workshop"
+                  required
+                />
+              </div>
 
-            <span>
-              Total
-            </span>
+              <div class="event-form-row">
+                <div class="form-field">
+                  <label for="event-date"> Date </label>
 
-            <strong id="members-total">
-              —
-            </strong>
+                  <input
+                    type="date"
+                    id="event-date"
+                    name="eventDate"
+                    required
+                  />
+                </div>
 
-          </article>
+                <div class="form-field">
+                  <label for="event-time"> Time </label>
 
+                  <input
+                    type="time"
+                    id="event-time"
+                    name="eventTime"
+                    required
+                  />
+                </div>
+              </div>
 
-          <article>
+              <div class="form-field">
+                <label for="event-venue"> Venue </label>
 
-            <span>
-              Active
-            </span>
+                <input
+                  type="text"
+                  id="event-venue"
+                  name="venue"
+                  maxlength="200"
+                  placeholder="e.g. MUBAS ODeL Auditorium"
+                  required
+                />
+              </div>
 
-            <strong id="members-active">
-              —
-            </strong>
+              <div class="form-field">
+                <label for="event-description"> Description </label>
 
-          </article>
-
-
-          <article>
-
-            <span>
-              Pending
-            </span>
-
-            <strong id="members-pending">
-              —
-            </strong>
-
-          </article>
-
-        </div>
-
-
-        <div class="dashboard-card members-card">
-
-          <div class="members-toolbar">
-
-            <div class="search-box">
-
-              <i class="fa-solid fa-magnifying-glass"></i>
-
-              <input
-                type="search"
-                id="member-search"
-                placeholder="Search name, email or student ID..."
-              />
-
+                <textarea
+                  id="event-description"
+                  name="description"
+                  rows="6"
+                  maxlength="1000"
+                  placeholder="Describe the event..."
+                  required
+                ></textarea>
+              </div>
             </div>
 
+            <div class="event-poster-side">
+              <label for="event-poster" class="event-poster-upload">
+                <input
+                  type="file"
+                  id="event-poster"
+                  name="poster"
+                  accept="image/*"
+                />
 
-            <select id="member-status-filter">
+                <div
+                  id="event-poster-placeholder"
+                  class="event-poster-placeholder"
+                >
+                  <div class="poster-upload-icon">
+                    <i class="fa-solid fa-image"></i>
+                  </div>
 
-              <option value="">
-                All statuses
-              </option>
+                  <strong> Event poster </strong>
 
-              <option value="Active">
-                Active
-              </option>
+                  <span> Click to upload an image </span>
 
-              <option value="Pending Payment">
-                Pending Payment
-              </option>
+                  <small> JPG, PNG or other image format </small>
+                </div>
 
-              <option value="Inactive">
-                Inactive
-              </option>
+                <img
+                  id="event-poster-preview"
+                  src=""
+                  alt="Event poster preview"
+                  hidden
+                />
+              </label>
 
-            </select>
-
+              <button
+                type="button"
+                id="remove-event-poster"
+                class="remove-poster-button"
+                hidden
+              >
+                <i class="fa-solid fa-xmark"></i>
+                Remove new poster
+              </button>
+            </div>
           </div>
 
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="modal-cancel-button"
+              id="cancel-event-button"
+            >
+              Cancel
+            </button>
 
-          <div class="table-wrapper">
+            <button type="submit" class="btn-primary" id="save-event-button">
+              <i class="fa-solid fa-check"></i>
 
-            <table class="members-table">
-
-              <thead>
-
-                <tr>
-
-                  <th>
-                    Member
-                  </th>
-
-                  <th>
-                    Student ID
-                  </th>
-
-                  <th>
-                    Programme
-                  </th>
-
-                  <th>
-                    Year
-                  </th>
-
-                  <th>
-                    Membership
-                  </th>
-
-                  <th>
-                    Payment
-                  </th>
-
-                  <th>
-                    Joined
-                  </th>
-
-                </tr>
-
-              </thead>
-
-
-              <tbody id="members-table-body">
-
-                <tr>
-
-                  <td colspan="7">
-
-                    <div class="loading-state">
-                      Members will load here.
-                    </div>
-
-                  </td>
-
-                </tr>
-
-              </tbody>
-
-            </table>
-
+              <span> Create event </span>
+            </button>
           </div>
-
-        </div>
-
+        </form>
       </section>
+    </div>
 
-    </main>
-
-  </div>
-
-
-  <script>
-
-    /* =======================================================
+    <script>
+      /* =======================================================
        DOM
     ======================================================== */
 
-    const navItems =
-      document.querySelectorAll(
-        ".nav-item"
-      );
+      const navItems = document.querySelectorAll(".nav-item");
 
-    const panels =
-      document.querySelectorAll(
-        ".dashboard-panel"
-      );
+      const panels = document.querySelectorAll(".dashboard-panel");
 
-    const pageTitle =
-      document.getElementById(
-        "page-title"
-      );
+      const pageTitle = document.getElementById("page-title");
 
-    const dashboardMessage =
-      document.getElementById(
-        "dashboard-message"
-      );
+      const dashboardMessage = document.getElementById("dashboard-message");
 
-    const sidebar =
-      document.getElementById(
-        "side-section"
-      );
+      const sidebar = document.getElementById("side-section");
 
-
-    /* =======================================================
+      /* =======================================================
        STATE
     ======================================================== */
 
-    let membersCache = [];
+      let membersCache = [];
 
-    let currentAdmin = null;
+      let currentAdmin = null;
 
+      let eventsCache = [];
 
-    /* =======================================================
+      let editingEventId = null;
+
+      /* =======================================================
        API HELPER
     ======================================================== */
 
-    async function apiRequest(
-      url,
-      options = {}
-    ) {
+      async function apiRequest(url, options = {}) {
+        const response = await fetch(url, {
+          credentials: "same-origin",
 
-      const response =
-        await fetch(
-          url,
-          {
-            credentials:
-              "same-origin",
+          ...options,
+        });
 
-            ...options
-          }
-        );
+        let result = null;
 
-      let result = null;
+        try {
+          result = await response.json();
+        } catch (_) {}
 
-      try {
-
-        result =
-          await response.json();
-
-      } catch (_) {}
-
-
-      if (!response.ok) {
-
-        const error =
-          new Error(
-            result?.error ||
-            "The request could not be completed."
+        if (!response.ok) {
+          const error = new Error(
+            result?.error || "The request could not be completed.",
           );
 
-        error.status =
-          response.status;
+          error.status = response.status;
 
-        error.data =
-          result;
+          error.data = result;
 
-        throw error;
+          throw error;
+        }
 
+        return result;
       }
 
-
-      return result;
-
-    }
-
-
-    /* =======================================================
+      /* =======================================================
        DASHBOARD INITIALIZATION
     ======================================================== */
 
-    document.addEventListener(
-      "DOMContentLoaded",
-      initializeDashboard
-    );
+      document.addEventListener("DOMContentLoaded", initializeDashboard);
 
+      async function initializeDashboard() {
+        try {
+          await loadAdmin();
 
-    async function initializeDashboard() {
-
-      try {
-
-        await loadAdmin();
-
-        await Promise.allSettled([
-          loadMembers(),
-          loadNews(),
-          loadTshirtStatus()
-        ]);
-
-      } catch (error) {
-
-        console.error(
-          "Dashboard initialization failed:",
-          error
-        );
-
+          await Promise.allSettled([
+            loadMembers(),
+            loadNews(),
+            loadTshirtStatus(),
+          ]);
+        } catch (error) {
+          console.error("Dashboard initialization failed:", error);
+        }
       }
 
-    }
-
-
-    /* =======================================================
+      /* =======================================================
        ADMIN AUTHENTICATION
     ======================================================== */
 
-    async function loadAdmin() {
+      async function loadAdmin() {
+        try {
+          const result = await apiRequest("/api/me");
 
-      try {
+          currentAdmin = result.admin;
 
-        const result =
-          await apiRequest(
-            "/api/me"
-          );
-
-        currentAdmin =
-          result.admin;
-
-
-        const fullName =
-          [
-            currentAdmin.firstName,
-            currentAdmin.surname
-          ]
+          const fullName = [currentAdmin.firstName, currentAdmin.surname]
             .filter(Boolean)
             .join(" ");
 
+          document.getElementById("sidebar-admin-name").textContent =
+            fullName || "Administrator";
 
-        document.getElementById(
-          "sidebar-admin-name"
-        ).textContent =
-          fullName ||
-          "Administrator";
+          document.getElementById("sidebar-admin-role").textContent =
+            currentAdmin.role || "Admin";
 
-
-        document.getElementById(
-          "sidebar-admin-role"
-        ).textContent =
-          currentAdmin.role ||
-          "Admin";
-
-
-        document.getElementById(
-          "welcome-admin-name"
-        ).textContent =
-          fullName
+          document.getElementById("welcome-admin-name").textContent = fullName
             ? `Welcome, ${currentAdmin.firstName}`
             : "Welcome back";
+        } catch (error) {
+          if (error.status === 401) {
+            window.location.href = "/login.html";
 
-      } catch (error) {
+            return;
+          }
 
-        if (
-          error.status === 401
-        ) {
-
-          window.location.href =
-            "/login.html";
-
-          return;
-
+          showMessage(
+            "The administrator session could not be verified.",
+            "error",
+          );
         }
-
-        showMessage(
-          "The administrator session could not be verified.",
-          "error"
-        );
-
       }
 
-    }
-
-
-    /* =======================================================
+      /* =======================================================
        NAVIGATION
     ======================================================== */
 
-    navItems.forEach(
-      item => {
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          const panelName = item.dataset.panel;
 
-        item.addEventListener(
-          "click",
-          () => {
+          openPanel(panelName);
+        });
+      });
 
-            const panelName =
-              item.dataset.panel;
+      function openPanel(panelName) {
+        navItems.forEach((item) => {
+          item.classList.toggle("active", item.dataset.panel === panelName);
+        });
 
-            openPanel(
-              panelName
-            );
+        panels.forEach((panel) => {
+          const active = panel.id === `panel-${panelName}`;
 
-          }
-        );
+          panel.hidden = !active;
 
-      }
-    );
-
-
-    function openPanel(
-      panelName
-    ) {
-
-      navItems.forEach(
-        item => {
-
-          item.classList.toggle(
-            "active",
-            item.dataset.panel ===
-              panelName
-          );
-
-        }
-      );
-
-
-      panels.forEach(
-        panel => {
-
-          const active =
-            panel.id ===
-            `panel-${panelName}`;
-
-          panel.hidden =
-            !active;
-
-          panel.classList.toggle(
-            "active",
-            active
-          );
-
+          panel.classList.toggle("active", active);
 
           if (active) {
-
-            pageTitle.textContent =
-              panel.dataset.title ||
-              "Dashboard";
-
+            pageTitle.textContent = panel.dataset.title || "Dashboard";
           }
+        });
 
+        if (window.innerWidth <= 900) {
+          sidebar.classList.remove("open");
         }
-      );
 
-
-      if (
-        window.innerWidth <= 900
-      ) {
-
-        sidebar.classList.remove(
-          "open"
-        );
-
+        handlePanelLoad(panelName);
       }
 
-
-      handlePanelLoad(
-        panelName
-      );
-
-    }
-
-
-    async function handlePanelLoad(
-      panelName
-    ) {
-
-      if (
-        panelName === "members"
-      ) {
-
-        await loadMembers();
-
-      }
-
-
-      if (
-        panelName === "news"
-      ) {
-
-        await loadNews();
-
-      }
-
-
-      if (
-        panelName === "tshirt"
-      ) {
-
-        await loadTshirtStatus();
-
-      }
-
-    }
-
-
-    document
-      .querySelectorAll(
-        "[data-go-to]"
-      )
-      .forEach(
-        button => {
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              openPanel(
-                button.dataset.goTo
-              );
-
-            }
-          );
-
+      async function handlePanelLoad(panelName) {
+        if (panelName === "members") {
+          await loadMembers();
         }
-      );
 
+        if (panelName === "news") {
+          await loadNews();
+        }
 
-    /* =======================================================
+        if (panelName === "tshirt") {
+          await loadTshirtStatus();
+        }
+
+        if (panelName === "calendar") {
+          await loadEvents();
+        }
+      }
+
+      document.querySelectorAll("[data-go-to]").forEach((button) => {
+        button.addEventListener("click", () => {
+          openPanel(button.dataset.goTo);
+        });
+      });
+
+      /* =======================================================
        MEMBERS
     ======================================================== */
 
-    async function loadMembers() {
+      async function loadMembers() {
+        const tableBody = document.getElementById("members-table-body");
 
-      const tableBody =
-        document.getElementById(
-          "members-table-body"
-        );
+        try {
+          const members = await apiRequest("/api/members");
 
+          membersCache = Array.isArray(members) ? members : [];
 
-      try {
+          updateMemberStatistics(membersCache);
 
-        const members =
-          await apiRequest(
-            "/api/members"
-          );
+          renderMembers(membersCache);
 
-        membersCache =
-          Array.isArray(members)
-            ? members
-            : [];
+          renderRecentMembers(membersCache);
+        } catch (error) {
+          if (error.status === 401) {
+            window.location.href = "/login.html";
 
+            return;
+          }
 
-        updateMemberStatistics(
-          membersCache
-        );
-
-
-        renderMembers(
-          membersCache
-        );
-
-
-        renderRecentMembers(
-          membersCache
-        );
-
-
-      } catch (error) {
-
-        if (
-          error.status === 401
-        ) {
-
-          window.location.href =
-            "/login.html";
-
-          return;
-
-        }
-
-
-        if (tableBody) {
-
-          tableBody.innerHTML = `
+          if (tableBody) {
+            tableBody.innerHTML = `
             <tr>
               <td colspan="7">
                 <div class="error-state">
@@ -1776,83 +1164,39 @@
               </td>
             </tr>
           `;
-
+          }
         }
-
       }
 
-    }
+      function updateMemberStatistics(members) {
+        const total = members.length;
 
-
-    function updateMemberStatistics(
-      members
-    ) {
-
-      const total =
-        members.length;
-
-
-      const active =
-        members.filter(
-          member =>
-            member.status ===
-            "Active"
+        const active = members.filter(
+          (member) => member.status === "Active",
         ).length;
 
-
-      const pending =
-        members.filter(
-          member =>
-            member.status ===
-            "Pending Payment"
+        const pending = members.filter(
+          (member) => member.status === "Pending Payment",
         ).length;
 
+        setText("members-total", total);
 
-      setText(
-        "members-total",
-        total
-      );
+        setText("members-active", active);
 
-      setText(
-        "members-active",
-        active
-      );
+        setText("members-pending", pending);
 
-      setText(
-        "members-pending",
-        pending
-      );
+        setText("stat-members", total);
 
-      setText(
-        "stat-members",
-        total
-      );
+        setText("stat-active-members", active);
+      }
 
-      setText(
-        "stat-active-members",
-        active
-      );
+      function renderMembers(members) {
+        const body = document.getElementById("members-table-body");
 
-    }
+        if (!body) return;
 
-
-    function renderMembers(
-      members
-    ) {
-
-      const body =
-        document.getElementById(
-          "members-table-body"
-        );
-
-      if (!body) return;
-
-
-      if (
-        members.length === 0
-      ) {
-
-        body.innerHTML = `
+        if (members.length === 0) {
+          body.innerHTML = `
           <tr>
             <td colspan="7">
 
@@ -1874,25 +1218,16 @@
           </tr>
         `;
 
-        return;
+          return;
+        }
 
-      }
+        body.innerHTML = members
+          .map((member) => {
+            const name = `${escapeHtml(member.name || "")} ${escapeHtml(
+              member.sname || "",
+            )}`.trim();
 
-
-      body.innerHTML =
-        members
-          .map(
-            member => {
-
-              const name =
-                `${escapeHtml(
-                  member.name || ""
-                )} ${escapeHtml(
-                  member.sname || ""
-                )}`.trim();
-
-
-              return `
+            return `
 
                 <tr>
 
@@ -1902,10 +1237,7 @@
 
                       <div class="member-avatar">
 
-                        ${getInitials(
-                          member.name,
-                          member.sname
-                        )}
+                        ${getInitials(member.name, member.sname)}
 
                       </div>
 
@@ -1916,9 +1248,7 @@
                         </strong>
 
                         <span>
-                          ${escapeHtml(
-                            member.email || ""
-                          )}
+                          ${escapeHtml(member.email || "")}
                         </span>
 
                       </div>
@@ -1929,43 +1259,27 @@
 
 
                   <td>
-                    ${escapeHtml(
-                      member.studentId ||
-                      "—"
-                    )}
+                    ${escapeHtml(member.studentId || "—")}
                   </td>
 
 
                   <td>
-                    ${escapeHtml(
-                      member.program ||
-                      "—"
-                    )}
+                    ${escapeHtml(member.program || "—")}
                   </td>
 
 
                   <td>
-                    ${escapeHtml(
-                      String(
-                        member.year ??
-                        "—"
-                      )
-                    )}
+                    ${escapeHtml(String(member.year ?? "—"))}
                   </td>
 
 
                   <td>
 
                     <span
-                      class="status-badge ${getStatusClass(
-                        member.status
-                      )}"
+                      class="status-badge ${getStatusClass(member.status)}"
                     >
 
-                      ${escapeHtml(
-                        member.status ||
-                        "Unknown"
-                      )}
+                      ${escapeHtml(member.status || "Unknown")}
 
                     </span>
 
@@ -1976,14 +1290,11 @@
 
                     <span
                       class="status-badge ${getStatusClass(
-                        member.paymentStatus
+                        member.paymentStatus,
                       )}"
                     >
 
-                      ${escapeHtml(
-                        member.paymentStatus ||
-                        "Pending"
-                      )}
+                      ${escapeHtml(member.paymentStatus || "Pending")}
 
                     </span>
 
@@ -1992,70 +1303,43 @@
 
                   <td>
 
-                    ${formatDate(
-                      member.createdAt
-                    )}
+                    ${formatDate(member.createdAt)}
 
                   </td>
 
                 </tr>
 
               `;
-
-            }
-          )
+          })
           .join("");
+      }
 
-    }
+      function renderRecentMembers(members) {
+        const container = document.getElementById("recent-members");
 
+        if (!container) return;
 
-    function renderRecentMembers(
-      members
-    ) {
+        const recent = members.slice(0, 5);
 
-      const container =
-        document.getElementById(
-          "recent-members"
-        );
-
-      if (!container) return;
-
-
-      const recent =
-        members.slice(
-          0,
-          5
-        );
-
-
-      if (
-        recent.length === 0
-      ) {
-
-        container.innerHTML = `
+        if (recent.length === 0) {
+          container.innerHTML = `
           <div class="empty-small">
             No registrations yet.
           </div>
         `;
 
-        return;
+          return;
+        }
 
-      }
-
-
-      container.innerHTML =
-        recent
+        container.innerHTML = recent
           .map(
-            member => `
+            (member) => `
 
               <div class="mini-list-item">
 
                 <div class="member-avatar">
 
-                  ${getInitials(
-                    member.name,
-                    member.sname
-                  )}
+                  ${getInitials(member.name, member.sname)}
 
                 </div>
 
@@ -2063,19 +1347,13 @@
 
                   <strong>
 
-                    ${escapeHtml(
-                      `${member.name || ""} ${member.sname || ""}`
-                    )}
+                    ${escapeHtml(`${member.name || ""} ${member.sname || ""}`)}
 
                   </strong>
 
                   <span>
 
-                    ${escapeHtml(
-                      member.studentId ||
-                      member.email ||
-                      ""
-                    )}
+                    ${escapeHtml(member.studentId || member.email || "")}
 
                   </span>
 
@@ -2083,289 +1361,134 @@
 
 
                 <span
-                  class="status-badge ${getStatusClass(
-                    member.status
-                  )}"
+                  class="status-badge ${getStatusClass(member.status)}"
                 >
 
-                  ${escapeHtml(
-                    member.status ||
-                    ""
-                  )}
+                  ${escapeHtml(member.status || "")}
 
                 </span>
 
               </div>
 
-            `
+            `,
           )
           .join("");
+      }
 
-    }
-
-
-    function filterMembers() {
-
-      const query =
-        document
-          .getElementById(
-            "member-search"
-          )
-          .value
-          .trim()
+      function filterMembers() {
+        const query = document
+          .getElementById("member-search")
+          .value.trim()
           .toLowerCase();
 
+        const status = document.getElementById("member-status-filter").value;
 
-      const status =
-        document
-          .getElementById(
-            "member-status-filter"
-          )
-          .value;
+        const filtered = membersCache.filter((member) => {
+          const haystack = [
+            member.name,
+            member.sname,
+            member.email,
+            member.studentId,
+            member.program,
+          ]
+            .filter(Boolean)
+            .join(" ")
+            .toLowerCase();
 
+          const matchesSearch = !query || haystack.includes(query);
 
-      const filtered =
-        membersCache.filter(
-          member => {
+          const matchesStatus = !status || member.status === status;
 
-            const haystack =
-              [
-                member.name,
-                member.sname,
-                member.email,
-                member.studentId,
-                member.program
-              ]
-                .filter(Boolean)
-                .join(" ")
-                .toLowerCase();
+          return matchesSearch && matchesStatus;
+        });
 
+        renderMembers(filtered);
+      }
 
-            const matchesSearch =
-              !query ||
-              haystack.includes(
-                query
-              );
+      document
+        .getElementById("member-search")
+        .addEventListener("input", filterMembers);
 
+      document
+        .getElementById("member-status-filter")
+        .addEventListener("change", filterMembers);
 
-            const matchesStatus =
-              !status ||
-              member.status ===
-                status;
+      document
+        .getElementById("refresh-members")
+        .addEventListener("click", loadMembers);
 
-
-            return (
-              matchesSearch &&
-              matchesStatus
-            );
-
-          }
-        );
-
-
-      renderMembers(
-        filtered
-      );
-
-    }
-
-
-    document
-      .getElementById(
-        "member-search"
-      )
-      .addEventListener(
-        "input",
-        filterMembers
-      );
-
-
-    document
-      .getElementById(
-        "member-status-filter"
-      )
-      .addEventListener(
-        "change",
-        filterMembers
-      );
-
-
-    document
-      .getElementById(
-        "refresh-members"
-      )
-      .addEventListener(
-        "click",
-        loadMembers
-      );
-
-
-    /* =======================================================
+      /* =======================================================
        T-SHIRT COMPETITION
     ======================================================== */
 
-    async function loadTshirtStatus() {
+      async function loadTshirtStatus() {
+        try {
+          const status = await apiRequest("/api/tshirt-designs/status");
 
-      try {
+          const submitted = Number(status.submitted || 0);
 
-        const status =
-          await apiRequest(
-            "/api/tshirt-designs/status"
-          );
+          const limit = Number(status.limit || 10);
 
+          const remaining = Math.max(limit - submitted, 0);
 
-        const submitted =
-          Number(
-            status.submitted || 0
-          );
+          const percentage = limit > 0 ? (submitted / limit) * 100 : 0;
 
-        const limit =
-          Number(
-            status.limit || 10
-          );
+          setText("stat-tshirt", submitted);
 
+          setText("tshirt-submitted-count", submitted);
 
-        const remaining =
-          Math.max(
-            limit - submitted,
-            0
-          );
+          setText("overview-tshirt-count", `${submitted} / ${limit}`);
 
+          document.getElementById("tshirt-progress").style.width =
+            `${percentage}%`;
 
-        const percentage =
-          limit > 0
-            ? (
-                submitted /
-                limit
-              ) * 100
-            : 0;
+          document.getElementById("overview-tshirt-progress").style.width =
+            `${percentage}%`;
 
-
-        setText(
-          "stat-tshirt",
-          submitted
-        );
-
-
-        setText(
-          "tshirt-submitted-count",
-          submitted
-        );
-
-
-        setText(
-          "overview-tshirt-count",
-          `${submitted} / ${limit}`
-        );
-
-
-        document.getElementById(
-          "tshirt-progress"
-        ).style.width =
-          `${percentage}%`;
-
-
-        document.getElementById(
-          "overview-tshirt-progress"
-        ).style.width =
-          `${percentage}%`;
-
-
-        const message =
-          status.closed
+          const message = status.closed
             ? "All design slots are filled."
             : `${remaining} submission ${
-                remaining === 1
-                  ? "slot remains"
-                  : "slots remain"
+                remaining === 1 ? "slot remains" : "slots remain"
               }.`;
 
+          setText("tshirt-status-message", message);
 
-        setText(
-          "tshirt-status-message",
-          message
-        );
+          setText("overview-tshirt-message", message);
 
+          setText(
+            "tshirt-form-state",
+            status.closed ? "Submissions closed" : "Submissions open",
+          );
+        } catch (error) {
+          console.error("T-shirt status error:", error);
 
-        setText(
-          "overview-tshirt-message",
-          message
-        );
-
-
-        setText(
-          "tshirt-form-state",
-          status.closed
-            ? "Submissions closed"
-            : "Submissions open"
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "T-shirt status error:",
-          error
-        );
-
-
-        setText(
-          "tshirt-status-message",
-          "Unable to retrieve competition status."
-        );
-
+          setText(
+            "tshirt-status-message",
+            "Unable to retrieve competition status.",
+          );
+        }
       }
 
-    }
+      document
+        .getElementById("refresh-tshirt")
+        .addEventListener("click", loadTshirtStatus);
 
-
-    document
-      .getElementById(
-        "refresh-tshirt"
-      )
-      .addEventListener(
-        "click",
-        loadTshirtStatus
-      );
-
-
-    /* =======================================================
+      /* =======================================================
        NEWS
     ======================================================== */
 
-    async function loadNews() {
+      async function loadNews() {
+        const container = document.getElementById("news-list");
 
-      const container =
-        document.getElementById(
-          "news-list"
-        );
+        try {
+          const news = await apiRequest("/api/news");
 
+          const newsItems = Array.isArray(news) ? news : [];
 
-      try {
+          setText("stat-news", newsItems.length);
 
-        const news =
-          await apiRequest(
-            "/api/news"
-          );
-
-
-        const newsItems =
-          Array.isArray(news)
-            ? news
-            : [];
-
-
-        setText(
-          "stat-news",
-          newsItems.length
-        );
-
-
-        if (
-          newsItems.length === 0
-        ) {
-
-          container.innerHTML = `
+          if (newsItems.length === 0) {
+            container.innerHTML = `
             <div class="empty-data-state">
 
               <i class="fa-regular fa-newspaper"></i>
@@ -2381,22 +1504,17 @@
             </div>
           `;
 
-          return;
+            return;
+          }
 
-        }
-
-
-        container.innerHTML =
-          newsItems
+          container.innerHTML = newsItems
             .map(
-              item => `
+              (item) => `
 
                 <article class="admin-news-item">
 
                   <img
-                    src="${escapeAttribute(
-                      item.image || ""
-                    )}"
+                    src="${escapeAttribute(item.image || "")}"
                     alt=""
                   />
 
@@ -2404,23 +1522,15 @@
                   <div>
 
                     <strong>
-                      ${escapeHtml(
-                        item.title ||
-                        "Untitled"
-                      )}
+                      ${escapeHtml(item.title || "Untitled")}
                     </strong>
 
                     <p>
-                      ${escapeHtml(
-                        item.description ||
-                        ""
-                      )}
+                      ${escapeHtml(item.description || "")}
                     </p>
 
                     <small>
-                      ${formatDate(
-                        item.createdAt
-                      )}
+                      ${formatDate(item.createdAt)}
                     </small>
 
                   </div>
@@ -2429,9 +1539,7 @@
                   <button
                     type="button"
                     class="delete-news-button"
-                    data-news-id="${Number(
-                      item.id
-                    )}"
+                    data-news-id="${Number(item.id)}"
                     aria-label="Delete news"
                   >
 
@@ -2441,541 +1549,854 @@
 
                 </article>
 
-              `
+              `,
             )
             .join("");
-
-
-      } catch (error) {
-
-        container.innerHTML = `
+        } catch (error) {
+          container.innerHTML = `
           <div class="error-state">
             News could not be loaded.
           </div>
         `;
-
+        }
       }
 
-    }
+      document
+        .getElementById("refresh-news")
+        .addEventListener("click", loadNews);
 
-
-    document
-      .getElementById(
-        "refresh-news"
-      )
-      .addEventListener(
-        "click",
-        loadNews
-      );
-
-
-    /* =======================================================
+      /* =======================================================
        NEWS IMAGE PREVIEW
     ======================================================== */
 
-    const newsImageInput =
-      document.getElementById(
-        "news-image-input"
-      );
+      const newsImageInput = document.getElementById("news-image-input");
 
-
-    newsImageInput.addEventListener(
-      "change",
-      () => {
-
-        const file =
-          newsImageInput.files[0];
-
+      newsImageInput.addEventListener("change", () => {
+        const file = newsImageInput.files[0];
 
         if (!file) return;
 
+        const reader = new FileReader();
 
-        const reader =
-          new FileReader();
+        reader.onload = (event) => {
+          const preview = document.getElementById("news-image-preview");
 
+          const content = document.getElementById("news-upload-content");
 
-        reader.onload =
-          event => {
+          preview.src = event.target.result;
 
-            const preview =
-              document.getElementById(
-                "news-image-preview"
-              );
+          preview.hidden = false;
 
+          content.hidden = true;
+        };
 
-            const content =
-              document.getElementById(
-                "news-upload-content"
-              );
+        reader.readAsDataURL(file);
+      });
 
-
-            preview.src =
-              event.target.result;
-
-
-            preview.hidden =
-              false;
-
-
-            content.hidden =
-              true;
-
-          };
-
-
-        reader.readAsDataURL(
-          file
-        );
-
-      }
-    );
-
-
-    /* =======================================================
+      /* =======================================================
        NEWS UPLOAD
     ======================================================== */
 
-    document
-      .getElementById(
-        "news-upload-form"
-      )
-      .addEventListener(
-        "submit",
-        async event => {
-
+      document
+        .getElementById("news-upload-form")
+        .addEventListener("submit", async (event) => {
           event.preventDefault();
 
+          const form = event.currentTarget;
 
-          const form =
-            event.currentTarget;
+          const button = document.getElementById("news-submit-button");
 
+          button.disabled = true;
 
-          const button =
-            document.getElementById(
-              "news-submit-button"
-            );
-
-
-          button.disabled =
-            true;
-
-
-          button.textContent =
-            "Publishing...";
-
+          button.textContent = "Publishing...";
 
           try {
+            const formData = new FormData(form);
 
-            const formData =
-              new FormData(
-                form
-              );
+            await apiRequest("/api/news", {
+              method: "POST",
 
+              body: formData,
+            });
 
-            await apiRequest(
-              "/api/news",
-              {
-                method:
-                  "POST",
-
-                body:
-                  formData
-              }
-            );
-
-
-            showMessage(
-              "News published successfully.",
-              "success"
-            );
-
+            showMessage("News published successfully.", "success");
 
             form.reset();
 
+            document.getElementById("news-image-preview").hidden = true;
 
-            document.getElementById(
-              "news-image-preview"
-            ).hidden =
-              true;
-
-
-            document.getElementById(
-              "news-upload-content"
-            ).hidden =
-              false;
-
+            document.getElementById("news-upload-content").hidden = false;
 
             await loadNews();
-
-
           } catch (error) {
-
-            showMessage(
-              error.message,
-              "error"
-            );
-
+            showMessage(error.message, "error");
           } finally {
+            button.disabled = false;
 
-            button.disabled =
-              false;
-
-
-            button.textContent =
-              "Publish news";
-
+            button.textContent = "Publish news";
           }
+        });
 
-        }
-      );
-
-
-    /* =======================================================
+      /* =======================================================
        NEWS DELETE
     ======================================================== */
 
-    document
-      .getElementById(
-        "news-list"
-      )
-      .addEventListener(
-        "click",
-        async event => {
-
-          const button =
-            event.target.closest(
-              ".delete-news-button"
-            );
-
+      document
+        .getElementById("news-list")
+        .addEventListener("click", async (event) => {
+          const button = event.target.closest(".delete-news-button");
 
           if (!button) return;
 
+          const newsId = button.dataset.newsId;
 
-          const newsId =
-            button.dataset.newsId;
-
-
-          const confirmed =
-            window.confirm(
-              "Remove this news post?"
-            );
-
+          const confirmed = window.confirm("Remove this news post?");
 
           if (!confirmed) return;
 
-
           try {
+            await apiRequest(`/api/news/${newsId}`, {
+              method: "DELETE",
+            });
 
-            await apiRequest(
-              `/api/news/${newsId}`,
-              {
-                method:
-                  "DELETE"
-              }
-            );
-
-
-            showMessage(
-              "News removed.",
-              "success"
-            );
-
+            showMessage("News removed.", "success");
 
             await loadNews();
-
-
           } catch (error) {
-
-            showMessage(
-              error.message,
-              "error"
-            );
-
+            showMessage(error.message, "error");
           }
+        });
 
-        }
-      );
-
-
-    /* =======================================================
+      /* =======================================================
        LOGOUT
     ======================================================== */
 
-    document
-      .getElementById(
-        "logout-button"
-      )
-      .addEventListener(
-        "click",
-        async () => {
-
+      document
+        .getElementById("logout-button")
+        .addEventListener("click", async () => {
           try {
-
-            await apiRequest(
-              "/api/logout",
-              {
-                method:
-                  "POST"
-              }
-            );
-
+            await apiRequest("/api/logout", {
+              method: "POST",
+            });
           } catch (error) {
-
-            console.error(
-              "Logout error:",
-              error
-            );
-
+            console.error("Logout error:", error);
           } finally {
-
-            window.location.href =
-              "/login.html";
-
+            window.location.href = "/login.html";
           }
+        });
 
-        }
-      );
-
-
-    /* =======================================================
+      /* =======================================================
        MOBILE SIDEBAR
     ======================================================== */
 
-    document
-      .getElementById(
-        "mobile-menu-button"
-      )
-      .addEventListener(
-        "click",
-        () => {
+      document
+        .getElementById("mobile-menu-button")
+        .addEventListener("click", () => {
+          sidebar.classList.toggle("open");
+        });
 
-          sidebar.classList.toggle(
-            "open"
-          );
+      /* =======================================================
+   EVENTS / CALENDAR
+======================================================== */
 
-        }
+      const eventModal = document.getElementById("event-modal");
+
+      const eventForm = document.getElementById("event-form");
+
+      const eventModalTitle = document.getElementById("event-modal-title");
+
+      const saveEventButton = document.getElementById("save-event-button");
+
+      const eventPosterInput = document.getElementById("event-poster");
+
+      const eventPosterPreview = document.getElementById(
+        "event-poster-preview",
       );
 
+      const eventPosterPlaceholder = document.getElementById(
+        "event-poster-placeholder",
+      );
 
-    /* =======================================================
+      const removeEventPosterButton = document.getElementById(
+        "remove-event-poster",
+      );
+
+      async function loadEvents() {
+        const container = document.getElementById("events-list");
+
+        container.innerHTML = `
+    <div class="loading-state">
+      Loading events...
+    </div>
+  `;
+
+        try {
+          const events = await apiRequest("/api/admin/events");
+
+          eventsCache = Array.isArray(events) ? events : [];
+
+          updateEventStatistics(eventsCache);
+
+          renderEvents(eventsCache);
+        } catch (error) {
+          console.error("Events loading failed:", error);
+
+          if (error.status === 401) {
+            window.location.href = "/login.html";
+
+            return;
+          }
+
+          container.innerHTML = `
+      <div class="error-state">
+        Could not load events.
+      </div>
+    `;
+        }
+      }
+
+      /* =======================================================
+   EVENT STATISTICS
+======================================================== */
+
+      function updateEventStatistics(events) {
+        const now = new Date();
+
+        const today = new Date(
+          now.getFullYear(),
+          now.getMonth(),
+          now.getDate(),
+        );
+
+        const upcoming = events.filter((event) => {
+          const date = new Date(
+            normalizeEventDate(event.eventDate) + "T00:00:00",
+          );
+
+          return date >= today;
+        }).length;
+
+        const past = events.length - upcoming;
+
+        setText("events-total", events.length);
+
+        setText("events-upcoming", upcoming);
+
+        setText("events-past", past);
+      }
+
+      /* =======================================================
+   RENDER EVENTS
+======================================================== */
+
+      function renderEvents(events) {
+        const container = document.getElementById("events-list");
+
+        if (events.length === 0) {
+          container.innerHTML = `
+      <div class="empty-data-state">
+
+        <i class="fa-regular fa-calendar"></i>
+
+        <h3>
+          No events yet
+        </h3>
+
+        <p>
+          Click "Add event" to create
+          the first CoSISS activity.
+        </p>
+
+      </div>
+    `;
+
+          return;
+        }
+
+        container.innerHTML = events
+          .map((event) => {
+            const eventId = Number(event.id);
+
+            const poster = event.poster
+              ? `
+                <img
+                  src="${escapeAttribute(event.poster)}"
+                  alt="${escapeAttribute(event.title || "Event")}"
+                />
+              `
+              : `
+                <div class="event-poster-fallback">
+                  <i class="fa-regular fa-calendar"></i>
+                </div>
+              `;
+
+            return `
+
+            <article
+              class="event-admin-card"
+              data-event-id="${eventId}"
+            >
+
+              <div class="event-card-poster">
+
+                ${poster}
+
+                <div class="event-date-badge">
+
+                  <strong>
+                    ${getEventDay(event.eventDate)}
+                  </strong>
+
+                  <span>
+                    ${getEventMonth(event.eventDate)}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="event-card-content">
+
+                <div class="event-card-top">
+
+                  <div>
+
+                    <span class="event-time">
+
+                      <i class="fa-regular fa-clock"></i>
+
+                      ${formatEventTime(event.eventTime)}
+
+                    </span>
+
+                    <h3>
+                      ${escapeHtml(event.title || "Untitled event")}
+                    </h3>
+
+                  </div>
+
+                </div>
+
+
+                <div class="event-venue">
+
+                  <i class="fa-solid fa-location-dot"></i>
+
+                  ${escapeHtml(event.venue || "Venue not specified")}
+
+                </div>
+
+
+                <p class="event-description">
+
+                  ${escapeHtml(event.description || "")}
+
+                </p>
+
+
+                <div class="event-card-footer">
+
+                  <span>
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    ${formatDate(event.eventDate)}
+
+                  </span>
+
+
+                  <div class="event-actions">
+
+                    <button
+                      type="button"
+                      class="edit-event-button"
+                      data-event-id="${eventId}"
+                    >
+
+                      <i class="fa-regular fa-pen-to-square"></i>
+
+                      Edit
+
+                    </button>
+
+
+                    <button
+                      type="button"
+                      class="delete-event-button"
+                      data-event-id="${eventId}"
+                    >
+
+                      <i class="fa-regular fa-trash-can"></i>
+
+                      Delete
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </article>
+
+          `;
+          })
+          .join("");
+      }
+
+      /* =======================================================
+   OPEN EVENT MODAL
+======================================================== */
+
+      function openEventModal(eventData = null) {
+        eventForm.reset();
+
+        clearEventPosterPreview();
+
+        editingEventId = null;
+
+        document.getElementById("event-form-message").hidden = true;
+
+        if (eventData) {
+          editingEventId = Number(eventData.id);
+
+          eventModalTitle.textContent = "Edit event";
+
+          saveEventButton.querySelector("span").textContent = "Save changes";
+
+          document.getElementById("event-title").value = eventData.title || "";
+
+          document.getElementById("event-description").value =
+            eventData.description || "";
+
+          document.getElementById("event-venue").value = eventData.venue || "";
+
+          document.getElementById("event-date").value = normalizeEventDate(
+            eventData.eventDate,
+          );
+
+          document.getElementById("event-time").value = normalizeEventTime(
+            eventData.eventTime,
+          );
+
+          if (eventData.poster) {
+            eventPosterPreview.src = eventData.poster;
+
+            eventPosterPreview.hidden = false;
+
+            eventPosterPlaceholder.hidden = true;
+          }
+        } else {
+          eventModalTitle.textContent = "Add event";
+
+          saveEventButton.querySelector("span").textContent = "Create event";
+        }
+
+        eventModal.hidden = false;
+
+        eventModal.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("modal-open");
+
+        document.getElementById("event-title").focus();
+      }
+
+      /* =======================================================
+   CLOSE MODAL
+======================================================== */
+
+      function closeEventModal() {
+        eventModal.hidden = true;
+
+        eventModal.setAttribute("aria-hidden", "true");
+
+        document.body.classList.remove("modal-open");
+
+        editingEventId = null;
+
+        eventForm.reset();
+
+        clearEventPosterPreview();
+      }
+
+      /* =======================================================
+   EVENT FORM SUBMISSION
+======================================================== */
+
+      eventForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const buttonText = saveEventButton.querySelector("span");
+
+        saveEventButton.disabled = true;
+
+        buttonText.textContent = editingEventId ? "Saving..." : "Creating...";
+
+        try {
+          const wasEditing = Boolean(editingEventId);
+
+          const formData = new FormData(eventForm);
+
+          const endpoint = editingEventId
+            ? `/api/events/${editingEventId}`
+            : "/api/events";
+
+          const method = editingEventId ? "PUT" : "POST";
+
+          await apiRequest(endpoint, {
+            method,
+            body: formData,
+          });
+
+          showMessage(
+            editingEventId
+              ? "Event updated successfully."
+              : "Event created successfully.",
+            "success",
+          );
+
+          closeEventModal();
+
+          await loadEvents();
+        } catch (error) {
+          const messageBox = document.getElementById("event-form-message");
+
+          messageBox.textContent = error.message;
+
+          messageBox.className = "form-message error";
+
+          messageBox.hidden = false;
+        } finally {
+          saveEventButton.disabled = false;
+
+          if (editingEventId) {
+            buttonText.textContent = "Save changes";
+          } else {
+            buttonText.textContent = wasEditing
+              ? "Save changes"
+              : "Create event";
+          }
+        }
+      });
+
+      /* =======================================================
+   EVENT LIST ACTIONS
+======================================================== */
+
+      document
+        .getElementById("events-list")
+        .addEventListener("click", async (event) => {
+          const editButton = event.target.closest(".edit-event-button");
+
+          const deleteButton = event.target.closest(".delete-event-button");
+
+          if (editButton) {
+            const eventId = Number(editButton.dataset.eventId);
+
+            const eventData = eventsCache.find(
+              (item) => Number(item.id) === eventId,
+            );
+
+            if (eventData) {
+              openEventModal(eventData);
+            }
+
+            return;
+          }
+
+          if (deleteButton) {
+            const eventId = Number(deleteButton.dataset.eventId);
+
+            await deleteEvent(eventId);
+          }
+        });
+
+      /* =======================================================
+   DELETE EVENT
+======================================================== */
+
+      async function deleteEvent(eventId) {
+        const eventData = eventsCache.find(
+          (item) => Number(item.id) === eventId,
+        );
+
+        const eventName = eventData?.title || "this event";
+
+        const confirmed = window.confirm(
+          `Delete "${eventName}"? This action cannot be undone.`,
+        );
+
+        if (!confirmed) {
+          return;
+        }
+
+        try {
+          await apiRequest(`/api/events/${eventId}`, {
+            method: "DELETE",
+          });
+
+          showMessage("Event deleted successfully.", "success");
+
+          await loadEvents();
+        } catch (error) {
+          showMessage(error.message, "error");
+        }
+      }
+
+      /* =======================================================
+   POSTER PREVIEW
+======================================================== */
+
+      eventPosterInput.addEventListener("change", () => {
+        const file = eventPosterInput.files[0];
+
+        if (!file) {
+          return;
+        }
+
+        if (!file.type.startsWith("image/")) {
+          eventPosterInput.value = "";
+
+          showMessage("Please select an image file.", "error");
+
+          return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+          eventPosterPreview.src = event.target.result;
+
+          eventPosterPreview.hidden = false;
+
+          eventPosterPlaceholder.hidden = true;
+
+          removeEventPosterButton.hidden = false;
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      removeEventPosterButton.addEventListener("click", () => {
+        eventPosterInput.value = "";
+
+        clearEventPosterPreview();
+      });
+
+      function clearEventPosterPreview() {
+        eventPosterPreview.src = "";
+
+        eventPosterPreview.hidden = true;
+
+        eventPosterPlaceholder.hidden = false;
+
+        removeEventPosterButton.hidden = true;
+      }
+
+      /* =======================================================
+   MODAL BUTTONS
+======================================================== */
+
+      document
+        .getElementById("create-event-button")
+        .addEventListener("click", () => {
+          openEventModal();
+        });
+
+      document
+        .getElementById("close-event-modal")
+        .addEventListener("click", closeEventModal);
+
+      document
+        .getElementById("cancel-event-button")
+        .addEventListener("click", closeEventModal);
+
+      document
+        .getElementById("event-modal-backdrop")
+        .addEventListener("click", closeEventModal);
+
+      document
+        .getElementById("refresh-events")
+        .addEventListener("click", loadEvents);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !eventModal.hidden) {
+          closeEventModal();
+        }
+      });
+
+      /* =======================================================
+   EVENT DATE / TIME HELPERS
+======================================================== */
+
+      function normalizeEventDate(value) {
+        if (!value) {
+          return "";
+        }
+
+        const stringValue = String(value);
+
+        if (/^\d{4}-\d{2}-\d{2}$/.test(stringValue)) {
+          return stringValue;
+        }
+
+        const date = new Date(stringValue);
+
+        if (Number.isNaN(date.getTime())) {
+          return "";
+        }
+
+        const year = date.getFullYear();
+
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+
+        const day = String(date.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+      }
+
+      function normalizeEventTime(value) {
+        if (!value) {
+          return "";
+        }
+
+        return String(value).slice(0, 5);
+      }
+
+      function formatEventTime(value) {
+        if (!value) {
+          return "Time not set";
+        }
+
+        const normalized = normalizeEventTime(value);
+
+        const [hour, minute] = normalized.split(":").map(Number);
+
+        if (Number.isNaN(hour) || Number.isNaN(minute)) {
+          return normalized;
+        }
+
+        const date = new Date();
+
+        date.setHours(hour, minute, 0, 0);
+
+        return date.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+
+          minute: "2-digit",
+        });
+      }
+
+      function getEventDay(value) {
+        const normalized = normalizeEventDate(value);
+
+        if (!normalized) {
+          return "—";
+        }
+
+        return normalized.slice(8, 10);
+      }
+
+      function getEventMonth(value) {
+        const normalized = normalizeEventDate(value);
+
+        if (!normalized) {
+          return "";
+        }
+
+        const date = new Date(`${normalized}T00:00:00`);
+
+        return date
+          .toLocaleDateString("en-GB", {
+            month: "short",
+          })
+          .toUpperCase();
+      }
+
+      /* =======================================================
        UI HELPERS
     ======================================================== */
 
-    function showMessage(
-      message,
-      type = "success"
-    ) {
+      function showMessage(message, type = "success") {
+        dashboardMessage.textContent = message;
 
-      dashboardMessage.textContent =
-        message;
+        dashboardMessage.className = `dashboard-message ${type}`;
 
+        dashboardMessage.hidden = false;
 
-      dashboardMessage.className =
-        `dashboard-message ${type}`;
-
-
-      dashboardMessage.hidden =
-        false;
-
-
-      window.setTimeout(
-        () => {
-
-          dashboardMessage.hidden =
-            true;
-
-        },
-        5000
-      );
-
-    }
-
-
-    function setText(
-      id,
-      value
-    ) {
-
-      const element =
-        document.getElementById(
-          id
-        );
-
-
-      if (element) {
-
-        element.textContent =
-          value;
-
+        window.setTimeout(() => {
+          dashboardMessage.hidden = true;
+        }, 5000);
       }
 
-    }
+      function setText(id, value) {
+        const element = document.getElementById(id);
 
-
-    function formatDate(
-      dateValue
-    ) {
-
-      if (!dateValue) {
-
-        return "—";
-
-      }
-
-
-      const date =
-        new Date(
-          dateValue
-        );
-
-
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-
-        return "—";
-
-      }
-
-
-      return date.toLocaleDateString(
-        "en-GB",
-        {
-          day:
-            "2-digit",
-
-          month:
-            "short",
-
-          year:
-            "numeric"
+        if (element) {
+          element.textContent = value;
         }
-      );
+      }
 
-    }
+      function formatDate(dateValue) {
+        if (!dateValue) {
+          return "—";
+        }
 
+        const date = new Date(dateValue);
 
-    function getInitials(
-      firstName,
-      surname
-    ) {
+        if (Number.isNaN(date.getTime())) {
+          return "—";
+        }
 
-      return (
-        `${firstName?.[0] || ""}${surname?.[0] || ""}`
-          .toUpperCase() ||
-        "M"
-      );
+        return date.toLocaleDateString("en-GB", {
+          day: "2-digit",
 
-    }
+          month: "short",
 
+          year: "numeric",
+        });
+      }
 
-    function getStatusClass(
-      status
-    ) {
+      function getInitials(firstName, surname) {
+        return (
+          `${firstName?.[0] || ""}${surname?.[0] || ""}`.toUpperCase() || "M"
+        );
+      }
 
-      const value =
-        String(
-          status || ""
-        )
+      function getStatusClass(status) {
+        const value = String(status || "")
           .trim()
           .toLowerCase();
 
+        if (["active", "paid", "successful", "approved"].includes(value)) {
+          return "status-success";
+        }
 
-      if (
-        [
-          "active",
-          "paid",
-          "successful",
-          "approved"
-        ].includes(
-          value
-        )
-      ) {
+        if (["pending", "pending payment"].includes(value)) {
+          return "status-warning";
+        }
 
-        return "status-success";
+        if (["failed", "inactive", "rejected"].includes(value)) {
+          return "status-danger";
+        }
 
+        return "status-neutral";
       }
 
-
-      if (
-        [
-          "pending",
-          "pending payment"
-        ].includes(
-          value
-        )
-      ) {
-
-        return "status-warning";
-
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
       }
 
-
-      if (
-        [
-          "failed",
-          "inactive",
-          "rejected"
-        ].includes(
-          value
-        )
-      ) {
-
-        return "status-danger";
-
+      function escapeAttribute(value) {
+        return escapeHtml(value);
       }
-
-
-      return "status-neutral";
-
-    }
-
-
-    function escapeHtml(
-      value
-    ) {
-
-      return String(
-        value ?? ""
-      )
-        .replaceAll(
-          "&",
-          "&amp;"
-        )
-        .replaceAll(
-          "<",
-          "&lt;"
-        )
-        .replaceAll(
-          ">",
-          "&gt;"
-        )
-        .replaceAll(
-          '"',
-          "&quot;"
-        )
-        .replaceAll(
-          "'",
-          "&#039;"
-        );
-
-    }
-
-
-    function escapeAttribute(
-      value
-    ) {
-
-      return escapeHtml(
-        value
-      );
-
-    }
-
-  </script>
-
-</body>
-
+    </script>
+  </body>
 </html>

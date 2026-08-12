@@ -118,6 +118,7 @@ const tshirtUpload = multer({
     }
 });
 
+
 const app = express();
 const db = pool;
 
@@ -2018,6 +2019,901 @@ const upload =
     });
 
 
+    /* =========================================================
+   T-SHIRT DESIGN ADMIN MANAGEMENT
+   ========================================================= */
+
+
+/*
+ * ADMIN: Retrieve all submitted T-shirt designs.
+ *
+ * This route contains personal information such as
+ * email, phone number and student ID, therefore it
+ * must remain protected by requireAdmin.
+ */
+app.get(
+    "/api/tshirt-designs",
+    requireAdmin,
+    async (req, res, next) => {
+        try {
+            const [designs] =
+                await db.execute(
+                    `SELECT
+                        design_id AS id,
+                        first_name AS firstName,
+                        surname,
+                        student_id AS studentId,
+                        phone,
+                        email,
+                        design_title AS title,
+                        design_description AS description,
+                        image_path AS image,
+                        status,
+                        submitted_at AS submittedAt
+                     FROM tshirt_designs
+                     ORDER BY submitted_at ASC`
+                );
+
+            return res.json(designs);
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+
+/*
+ * ADMIN: Retrieve one T-shirt design.
+ */
+app.get(
+    "/api/tshirt-designs/:id",
+    requireAdmin,
+    async (req, res, next) => {
+        try {
+            const designId =
+                Number(req.params.id);
+
+            if (
+                !Number.isInteger(designId) ||
+                designId <= 0
+            ) {
+                return res.status(400).json({
+                    error:
+                        "Invalid T-shirt design ID."
+                });
+            }
+
+            const [rows] =
+                await db.execute(
+                    `SELECT
+                        design_id AS id,
+                        first_name AS firstName,
+                        surname,
+                        student_id AS studentId,
+                        phone,
+                        email,
+                        design_title AS title,
+                        design_description AS description,
+                        image_path AS image,
+                        status,
+                        submitted_at AS submittedAt
+                     FROM tshirt_designs
+                     WHERE design_id = ?
+                     LIMIT 1`,
+                    [designId]
+                );
+
+            if (!rows.length) {
+                return res.status(404).json({
+                    error:
+                        "T-shirt design not found."
+                });
+            }
+
+            return res.json(
+                rows[0]
+            );
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+
+/*
+ * ADMIN: Change the status of a T-shirt design.
+ *
+ * Useful later if we want to approve/reject entries
+ * before they are placed on the voting page.
+ */
+app.patch(
+    "/api/tshirt-designs/:id/status",
+    requireAdmin,
+    async (req, res, next) => {
+        try {
+            const designId =
+                Number(req.params.id);
+
+            const status =
+                String(
+                    req.body.status || ""
+                ).trim();
+
+            if (
+                !Number.isInteger(designId) ||
+                designId <= 0
+            ) {
+                return res.status(400).json({
+                    error:
+                        "Invalid T-shirt design ID."
+                });
+            }
+
+            const allowedStatuses = [
+                "Approved",
+                "Rejected"
+            ];
+
+            if (
+                !allowedStatuses.includes(
+                    status
+                )
+            ) {
+                return res.status(400).json({
+                    error:
+                        "Status must be Approved or Rejected."
+                });
+            }
+
+            const [result] =
+                await db.execute(
+                    `UPDATE tshirt_designs
+                     SET status = ?
+                     WHERE design_id = ?`,
+                    [
+                        status,
+                        designId
+                    ]
+                );
+
+            if (
+                result.affectedRows === 0
+            ) {
+                return res.status(404).json({
+                    error:
+                        "T-shirt design not found."
+                });
+            }
+
+            return res.json({
+                ok: true,
+                message:
+                    "T-shirt design status updated.",
+                status
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+
+/*
+ * ADMIN: Delete T-shirt design.
+ */
+app.delete(
+    "/api/tshirt-designs/:id",
+    requireAdmin,
+    async (req, res, next) => {
+        try {
+            const designId =
+                Number(req.params.id);
+
+            if (
+                !Number.isInteger(designId) ||
+                designId <= 0
+            ) {
+                return res.status(400).json({
+                    error:
+                        "Invalid T-shirt design ID."
+                });
+            }
+
+            const [rows] =
+                await db.execute(
+                    `SELECT
+                        image_path
+                     FROM tshirt_designs
+                     WHERE design_id = ?
+                     LIMIT 1`,
+                    [designId]
+                );
+
+            if (!rows.length) {
+                return res.status(404).json({
+                    error:
+                        "T-shirt design not found."
+                });
+            }
+
+            const imagePath =
+                rows[0].image_path;
+
+            const [result] =
+                await db.execute(
+                    `DELETE FROM tshirt_designs
+                     WHERE design_id = ?`,
+                    [designId]
+                );
+
+            /*
+             * Delete local image if we are still using
+             * filesystem storage.
+             */
+            if (
+                result.affectedRows > 0 &&
+                imagePath &&
+                imagePath.startsWith(
+                    "/uploads/"
+                )
+            ) {
+                const relativePath =
+                    imagePath.replace(
+                        /^\/+/,
+                        ""
+                    );
+
+                const fullPath =
+                    path.join(
+                        FRONTEND_DIR,
+                        relativePath
+                    );
+
+                fs.unlink(
+                    fullPath,
+                    error => {
+                        if (
+                            error &&
+                            error.code !== "ENOENT"
+                        ) {
+                            console.error(
+                                "[CoSISS] Could not delete T-shirt image:",
+                                error.message
+                            );
+                        }
+                    }
+                );
+            }
+
+            return res.json({
+                ok: true,
+                message:
+                    "T-shirt design removed successfully."
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+
+/* =========================================================
+   DASHBOARD STATISTICS
+   ========================================================= */
+
+app.get(
+    "/api/dashboard/stats",
+    requireAdmin,
+    async (req, res, next) => {
+        try {
+            const [
+                [memberRows],
+                [activeRows],
+                [pendingRows],
+                [newsRows],
+                [designRows]
+            ] =
+                await Promise.all([
+                    db.execute(
+                        `SELECT
+                            COUNT(*) AS total
+                         FROM members`
+                    ),
+
+                    db.execute(
+                        `SELECT
+                            COUNT(*) AS total
+                         FROM members
+                         WHERE status = 'Active'`
+                    ),
+
+                    db.execute(
+                        `SELECT
+                            COUNT(*) AS total
+                         FROM members
+                         WHERE status = 'Pending Payment'`
+                    ),
+
+                    db.execute(
+                        `SELECT
+                            COUNT(*) AS total
+                         FROM news`
+                    ),
+
+                    db.execute(
+                        `SELECT
+                            COUNT(*) AS total
+                         FROM tshirt_designs
+                         WHERE status = 'Approved'`
+                    )
+                ]);
+
+            return res.json({
+                members:
+                    Number(
+                        memberRows[0].total
+                    ),
+
+                activeMembers:
+                    Number(
+                        activeRows[0].total
+                    ),
+
+                pendingMembers:
+                    Number(
+                        pendingRows[0].total
+                    ),
+
+                news:
+                    Number(
+                        newsRows[0].total
+                    ),
+
+                tshirtDesigns:
+                    Number(
+                        designRows[0].total
+                    ),
+
+                tshirtLimit: 10,
+
+                tshirtRemaining:
+                    Math.max(
+                        10 -
+                        Number(
+                            designRows[0].total
+                        ),
+                        0
+                    ),
+
+                tshirtClosed:
+                    Number(
+                        designRows[0].total
+                    ) >= 10
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+
+/* =========================================================
+   EVENT / CALENDAR ROUTES
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   PUBLIC: GET EVENTS
+   Used by the public calendar page
+   --------------------------------------------------------- */
+
+app.get(
+    "/api/events",
+    async (req, res, next) => {
+        try {
+            const [events] =
+                await db.execute(
+                    `SELECT
+                        event_id AS id,
+                        title,
+                        description,
+                        venue,
+                        event_date AS eventDate,
+                        event_time AS eventTime,
+                        poster,
+                        created_at AS createdAt
+                     FROM events
+                     ORDER BY
+                        event_date ASC,
+                        event_time ASC`
+                );
+
+            return res.json(events);
+
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+
+/* ---------------------------------------------------------
+   ADMIN: GET ALL EVENTS
+   --------------------------------------------------------- */
+
+app.get(
+    "/api/admin/events",
+    requireAdmin,
+    async (req, res, next) => {
+        try {
+            const [events] =
+                await db.execute(
+                    `SELECT
+                        e.event_id AS id,
+                        e.admin_id AS adminId,
+                        e.title,
+                        e.description,
+                        e.venue,
+                        e.event_date AS eventDate,
+                        e.event_time AS eventTime,
+                        e.poster,
+                        e.created_at AS createdAt
+                     FROM events AS e
+                     ORDER BY
+                        e.event_date ASC,
+                        e.event_time ASC`
+                );
+
+            return res.json(events);
+
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+
+/* ---------------------------------------------------------
+   ADMIN: CREATE EVENT
+   --------------------------------------------------------- */
+
+app.post(
+    "/api/events",
+    requireAdmin,
+    upload.single("poster"),
+    async (req, res, next) => {
+
+        try {
+            const {
+                title,
+                description,
+                venue,
+                eventDate,
+                eventTime
+            } = req.body;
+
+
+            const normalizedTitle =
+                String(title || "").trim();
+
+            const normalizedDescription =
+                String(description || "").trim();
+
+            const normalizedVenue =
+                String(venue || "").trim();
+
+            const normalizedDate =
+                String(eventDate || "").trim();
+
+            const normalizedTime =
+                String(eventTime || "").trim();
+
+
+            if (
+                !normalizedTitle ||
+                !normalizedDescription ||
+                !normalizedVenue ||
+                !normalizedDate ||
+                !normalizedTime
+            ) {
+
+                if (req.file) {
+                    fs.unlink(
+                        req.file.path,
+                        () => {}
+                    );
+                }
+
+                return res.status(400).json({
+                    error:
+                        "Title, description, venue, date and time are required."
+                });
+            }
+
+
+            const posterPath =
+                req.file
+                    ? `/uploads/${req.file.filename}`
+                    : null;
+
+
+            const [result] =
+                await db.execute(
+                    `INSERT INTO events
+                    (
+                        admin_id,
+                        title,
+                        description,
+                        venue,
+                        event_date,
+                        event_time,
+                        poster
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?)`,
+                    [
+                        req.session.adminId,
+                        normalizedTitle,
+                        normalizedDescription,
+                        normalizedVenue,
+                        normalizedDate,
+                        normalizedTime,
+                        posterPath
+                    ]
+                );
+
+
+            const [rows] =
+                await db.execute(
+                    `SELECT
+                        event_id AS id,
+                        title,
+                        description,
+                        venue,
+                        event_date AS eventDate,
+                        event_time AS eventTime,
+                        poster,
+                        created_at AS createdAt
+                     FROM events
+                     WHERE event_id = ?
+                     LIMIT 1`,
+                    [
+                        result.insertId
+                    ]
+                );
+
+
+            return res
+                .status(201)
+                .json(rows[0]);
+
+        } catch (error) {
+
+            if (req.file) {
+                fs.unlink(
+                    req.file.path,
+                    () => {}
+                );
+            }
+
+            next(error);
+        }
+    }
+);
+
+
+/* ---------------------------------------------------------
+   ADMIN: UPDATE EVENT
+   --------------------------------------------------------- */
+
+app.put(
+    "/api/events/:id",
+    requireAdmin,
+    upload.single("poster"),
+    async (req, res, next) => {
+
+        try {
+            const eventId =
+                Number(req.params.id);
+
+
+            if (
+                !Number.isInteger(eventId) ||
+                eventId <= 0
+            ) {
+
+                if (req.file) {
+                    fs.unlink(
+                        req.file.path,
+                        () => {}
+                    );
+                }
+
+                return res.status(400).json({
+                    error:
+                        "Invalid event ID."
+                });
+            }
+
+
+            const {
+                title,
+                description,
+                venue,
+                eventDate,
+                eventTime
+            } = req.body;
+
+
+            const normalizedTitle =
+                String(title || "").trim();
+
+            const normalizedDescription =
+                String(description || "").trim();
+
+            const normalizedVenue =
+                String(venue || "").trim();
+
+            const normalizedDate =
+                String(eventDate || "").trim();
+
+            const normalizedTime =
+                String(eventTime || "").trim();
+
+
+            if (
+                !normalizedTitle ||
+                !normalizedDescription ||
+                !normalizedVenue ||
+                !normalizedDate ||
+                !normalizedTime
+            ) {
+
+                if (req.file) {
+                    fs.unlink(
+                        req.file.path,
+                        () => {}
+                    );
+                }
+
+                return res.status(400).json({
+                    error:
+                        "Title, description, venue, date and time are required."
+                });
+            }
+
+
+            const [existingRows] =
+                await db.execute(
+                    `SELECT
+                        poster
+                     FROM events
+                     WHERE event_id = ?
+                     LIMIT 1`,
+                    [eventId]
+                );
+
+
+            if (!existingRows.length) {
+
+                if (req.file) {
+                    fs.unlink(
+                        req.file.path,
+                        () => {}
+                    );
+                }
+
+                return res.status(404).json({
+                    error:
+                        "Event not found."
+                });
+            }
+
+
+            const oldPoster =
+                existingRows[0].poster;
+
+
+            const posterPath =
+                req.file
+                    ? `/uploads/${req.file.filename}`
+                    : oldPoster;
+
+
+            await db.execute(
+                `UPDATE events
+                 SET
+                    title = ?,
+                    description = ?,
+                    venue = ?,
+                    event_date = ?,
+                    event_time = ?,
+                    poster = ?
+                 WHERE event_id = ?`,
+                [
+                    normalizedTitle,
+                    normalizedDescription,
+                    normalizedVenue,
+                    normalizedDate,
+                    normalizedTime,
+                    posterPath,
+                    eventId
+                ]
+            );
+
+
+            /*
+             * Delete old poster if a new one
+             * replaced it.
+             */
+            if (
+                req.file &&
+                oldPoster &&
+                oldPoster.startsWith(
+                    "/uploads/"
+                )
+            ) {
+
+                const relativePath =
+                    oldPoster.replace(
+                        /^\/+/,
+                        ""
+                    );
+
+                const oldFilePath =
+                    path.join(
+                        FRONTEND_DIR,
+                        relativePath
+                    );
+
+                fs.unlink(
+                    oldFilePath,
+                    error => {
+
+                        if (
+                            error &&
+                            error.code !== "ENOENT"
+                        ) {
+                            console.error(
+                                "[CoSISS] Old event poster delete failed:",
+                                error.message
+                            );
+                        }
+
+                    }
+                );
+            }
+
+
+            return res.json({
+                ok: true,
+                message:
+                    "Event updated successfully."
+            });
+
+        } catch (error) {
+
+            if (req.file) {
+                fs.unlink(
+                    req.file.path,
+                    () => {}
+                );
+            }
+
+            next(error);
+        }
+    }
+);
+
+
+/* ---------------------------------------------------------
+   ADMIN: DELETE EVENT
+   --------------------------------------------------------- */
+
+app.delete(
+    "/api/events/:id",
+    requireAdmin,
+    async (req, res, next) => {
+
+        try {
+            const eventId =
+                Number(req.params.id);
+
+
+            if (
+                !Number.isInteger(eventId) ||
+                eventId <= 0
+            ) {
+                return res.status(400).json({
+                    error:
+                        "Invalid event ID."
+                });
+            }
+
+
+            const [rows] =
+                await db.execute(
+                    `SELECT
+                        poster
+                     FROM events
+                     WHERE event_id = ?
+                     LIMIT 1`,
+                    [eventId]
+                );
+
+
+            if (!rows.length) {
+                return res.status(404).json({
+                    error:
+                        "Event not found."
+                });
+            }
+
+
+            const posterPath =
+                rows[0].poster;
+
+
+            await db.execute(
+                `DELETE FROM events
+                 WHERE event_id = ?`,
+                [eventId]
+            );
+
+
+            /*
+             * Delete poster from uploads folder
+             */
+            if (
+                posterPath &&
+                posterPath.startsWith(
+                    "/uploads/"
+                )
+            ) {
+
+                const relativePath =
+                    posterPath.replace(
+                        /^\/+/,
+                        ""
+                    );
+
+                const filePath =
+                    path.join(
+                        FRONTEND_DIR,
+                        relativePath
+                    );
+
+
+                fs.unlink(
+                    filePath,
+                    error => {
+
+                        if (
+                            error &&
+                            error.code !== "ENOENT"
+                        ) {
+                            console.error(
+                                "[CoSISS] Event poster deletion failed:",
+                                error.message
+                            );
+                        }
+
+                    }
+                );
+            }
+
+
+            return res.json({
+                ok: true,
+                message:
+                    "Event deleted successfully."
+            });
+
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
 /* =========================================================
    NEWS ROUTES
    ========================================================= */
@@ -2215,6 +3111,23 @@ app.delete(
         } catch (error) {
             next(error);
         }
+    }
+);
+
+
+
+
+app.get(
+    "/news/:id",
+    (req, res) => {
+
+        res.sendFile(
+            path.join(
+                FRONTEND_DIR,
+                "news-details.html"
+            )
+        );
+
     }
 );
 

@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>News | CoSISS</title>
+
+  <meta
+    name="description"
+    content="Latest news, achievements and updates from CoSISS at MUBAS."
+  />
+
+  <meta
+    name="robots"
+    content="index, follow"
+  />
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/images/cosiss_logo.png"
+  />
+
+  <link
+    rel="stylesheet"
+    href="/css/news-details.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  />
+</head>
+
+<body>
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="site-header">
+
+    <a
+      href="/"
+      class="news-brand"
+      aria-label="CoSISS homepage"
+    >
+      <img
+        src="/images/cosiss_logo.png"
+        alt="CoSISS logo"
+      />
+
+      <div>
+        <strong>CoSISS</strong>
+        <span>
+          Computing & Information Sciences Students Society
+        </span>
+      </div>
+    </a>
+
+
+    <nav class="news-nav">
+
+      <a href="/">
+        Home
+      </a>
+
+      <a
+        href="/events.html"
+      >
+        Events
+      </a>
+
+      <a
+        href="/#news"
+      >
+        News
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <!-- ===================================================
+         LOADING STATE
+    ==================================================== -->
+
+    <section
+      id="article-loading"
+      class="article-loading"
+    >
+
+      <div class="loading-line loading-small"></div>
+      <div class="loading-line loading-title"></div>
+      <div class="loading-line loading-title short"></div>
+
+      <div class="loading-image"></div>
+
+    </section>
+
+
+    <!-- ===================================================
+         ARTICLE
+    ==================================================== -->
+
+    <article
+      id="news-article"
+      class="news-story"
+      hidden
+    >
+
+      <!-- ARTICLE HEADER -->
+
+      <header class="story-header">
+
+        <a
+          href="/"
+          class="story-back"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+
+          Latest news
+        </a>
+
+
+        <p
+          class="story-category"
+          id="news-category"
+        >
+          CoSISS News
+        </p>
+
+
+        <h1 id="news-title">
+          News title
+        </h1>
+
+
+        <p
+          class="story-summary"
+          id="news-summary"
+        ></p>
+
+
+        <div class="story-meta">
+
+          <div class="story-author">
+
+            <div class="author-icon">
+
+              <i class="fa-solid fa-pen-nib"></i>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Published by
+              </span>
+
+              <strong id="news-author">
+                CoSISS
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <div class="story-date">
+
+            <i class="fa-regular fa-calendar"></i>
+
+            <span id="news-date"></span>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- HERO IMAGE -->
+
+      <figure
+        class="story-hero"
+        id="news-image-container"
+      >
+
+        <img
+          id="news-image"
+          src=""
+          alt=""
+        />
+
+
+        <figcaption id="news-image-caption">
+        </figcaption>
+
+      </figure>
+
+
+      <!-- ARTICLE LAYOUT -->
+
+      <div class="story-layout">
+
+
+        <!-- SOCIAL / INFO SIDE -->
+
+        <aside class="story-aside">
+
+          <div class="share-card">
+
+            <span>
+              Share story
+            </span>
+
+
+            <div class="share-buttons">
+
+              <button
+                type="button"
+                id="share-facebook"
+                aria-label="Share on Facebook"
+              >
+                <i class="fa-brands fa-facebook-f"></i>
+              </button>
+
+
+              <button
+                type="button"
+                id="share-whatsapp"
+                aria-label="Share on WhatsApp"
+              >
+                <i class="fa-brands fa-whatsapp"></i>
+              </button>
+
+
+              <button
+                type="button"
+                id="copy-news-link"
+                aria-label="Copy article link"
+              >
+                <i class="fa-solid fa-link"></i>
+              </button>
+
+            </div>
+
+          </div>
+
+        </aside>
+
+
+        <!-- ARTICLE BODY -->
+
+        <section
+          id="news-content"
+          class="story-content"
+        >
+        </section>
+
+      </div>
+
+    </article>
+
+
+    <!-- ===================================================
+         ARTICLE ERROR
+    ==================================================== -->
+
+    <section
+      id="article-error"
+      class="article-error"
+      hidden
+    >
+
+      <div class="error-icon">
+
+        <i class="fa-regular fa-newspaper"></i>
+
+      </div>
+
+      <p class="eyebrow">
+        News
+      </p>
+
+      <h1>
+        We couldn't find this story.
+      </h1>
+
+      <p>
+        The article may have been removed or
+        the link may be incorrect.
+      </p>
+
+
+      <a
+        href="/"
+        class="return-button"
+      >
+        Return home
+      </a>
+
+    </section>
+
+
+    <!-- ===================================================
+         LATEST NEWS
+    ==================================================== -->
+
+    <section
+      id="more-news-section"
+      class="more-news-section"
+      hidden
+    >
+
+      <div class="section-header">
+
+        <div>
+
+          <p class="eyebrow">
+            More from CoSISS
+          </p>
+
+          <h2>
+            Latest stories
+          </h2>
+
+        </div>
+
+
+        <a href="/#news">
+          View all
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+      </div>
+
+
+      <div
+        id="more-news-grid"
+        class="more-news-grid"
+      >
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="news-footer">
+
+    <div class="footer-brand">
+
+      <img
+        src="/images/cosiss_logo.png"
+        alt="CoSISS"
+      />
+
+      <div>
+
+        <strong>
+          CoSISS
+        </strong>
+
+        <p>
+          Computing & Information Sciences Students Society
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <p>
+      © 2026 CoSISS. All rights reserved.
+    </p>
+
+  </footer>
+
+
+  <script src="/js/news-details.js"></script>
+
+</body>
+</html>

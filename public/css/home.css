@@ -1125,6 +1125,10 @@ footer {
     cursor: pointer;
   }
 
+  #animation {
+    display: none;
+  }
+
   .nav-burger span,
   .nav-burger::before,
   .nav-burger::after {
